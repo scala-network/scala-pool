@@ -36,11 +36,12 @@
         <h4><i class="fa fa-money"></i>&nbsp; <span tkey="payments">Payments</span></h4>
         <div class="row card">
             <div class="col-sm-6 stats push-up-10">
-                <div><i class="fa fa-bank"></i> <span tkey="pendingBalance">Pending Balance</span>: <span id="yourPendingBalance"></span></div>
-                <div><i class="fa fa-money"></i> <span tkey="totalPaid">Total Paid</span>: <span id="yourPaid"></span></div>
-                <div><i class="fa fa-star"></i> <span>Round contribution</span>: <span id="yourRoundShareProportion"></span>%
+                <div><i class="fas fa-money-check-alt"></i> <span tkey="pendingBalance">Pending Balance</span>: <span id="yourPendingBalance"></span></div>
+                <div><i class="fas fa-money-bill-alt"></i> <span tkey="totalPaid">Total Paid</span>: <span id="yourPaid"></span></div>
+                <div><i class="fas fa-star"></i> <span>Round contribution</span>: <span id="yourRoundShareProportion"></span>%
                     <span id="slush_round_info"> (shares), <span id="yourRoundScoreProportion"></span>% (<a target="_blank" href="#payments">score</a>)</span></span></div>
-                <div><i class="fa fa-money"></i> <span tkey="payoutEstimate">Current Payout Estimate</span>: <span id="yourPayoutEstimate"></span></div>
+                <div><i class="fas fa-money-bill-alt"></i> <span tkey="payoutEstimate">Current Payout Estimate</span>: <span id="yourPayoutEstimate"></span></div>
+                <div><a href="#settings" class="btn btn-info"><i class="fas fa-cog"></i>&nbsp;<span tkey="settings">Settings</span></a></div>
             </div>
             <div class="col-sm-6 userChart">
                 <div class="chart">
@@ -511,9 +512,11 @@ function getPaymentRowElement(payment, jsonString){
 
 // Get payment cells
 function getPaymentCells(payment){
+    
+    console.log(getReadableCoins(payment.amount,2,false));
     return '<td class="col1">' + formatDate(payment.time) + '</td>' +
            '<td class="col2">' + formatPaymentLink(payment.hash) + '</td>' +
-           '<td class="col3">' + getReadableCoins(payment.amount) + '</td>' +
+           '<td class="col3">' + getReadableCoins(payment.amount,2,false) + '</td>' +
            '<td class="col4">' + payment.mixin + '</td>';
 }
 
@@ -621,3 +624,4 @@ $('#loadMorePayments').click(function(){
     });
 });
 </script>
+

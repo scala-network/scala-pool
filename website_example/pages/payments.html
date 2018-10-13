@@ -236,8 +236,7 @@ function renderPayments(paymentsResults){
 
         if (existingRow && existingRow.getAttribute('data-json') !== paymentJson){
             $(existingRow).replaceWith(getPaymentRowElement(payment, paymentJson));
-        }
-        else if (!existingRow){
+        }else if (!existingRow){
             var paymentElement = getPaymentRowElement(payment, paymentJson);
 
             var inserted = false;
