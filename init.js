@@ -159,14 +159,13 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	
 	    var i = 0;
 	    var spawnInterval = setInterval(function(){
-	        createPoolWorker(i.toString());
 			i++;
 	        if (i -1 === numForks){
 	        	log('info', logSystem, 'Pool spawned on %d thread(s)', [numForks]);
 	            clearInterval(spawnInterval);
 				return;
 	        }
-	        
+	       	createPoolWorker(i.toString());
 	    }, 10);
 	}
 	

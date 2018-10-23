@@ -108,7 +108,7 @@
 		                <th class="col2 sort font12"><span tkey="miner">Miner</span></th>
 		                <th class="col3 sort font12"><span tkey="hashRate">Hash Rate</span></th>
 		                <th class="col4 sort font12"><span tkey="totalHashes">Total Hashes Submitted</span></th>
-						<th class="col5 sort font12"><span tkey="roundShare">Round Shares (%)</span></th>
+				<th class="col5 sort font12"><span tkey="roundShare">Round Shares (%)</span></th>
 		            </tr>
 		            </thead>
 		            <tbody id="currentBlockMiners"></tbody>
@@ -122,7 +122,7 @@
 		        <table class="table table-hover table-striped">
 		            <thead>
 		            <tr>
-						<th class="col1"><span tkey="height">Height</span></th>
+				<th class="col1"><span tkey="height">Height</span></th>
 		                <th class="col2"><span tkey="timeFound">Time Found</span></th>
 		                <th class="col3"><span tkey="reward">Reward</span></th>
 		                <th class="col4"><span tkey="difficulty">Difficulty</span></th>
@@ -292,10 +292,9 @@ function parseBlock(height, serializedBlock){
         difficulty: parseInt(parts[2]),
         shares: parseInt(parts[3]),
         orphaned: parts[4],
-        reward: parts[5]
+        reward: parts[5],
+	miner: (parts.length >= 6)?parts[6]:"xxxxxxx....xxxxxx"
     };
-    
-    block.miner = (parts.length > 6 && block.reward !== parts[parts.length-1])?parts[parts.length-1]:"xxxx...xxxx";
 
     var toGo = lastStats.config.depth - (lastStats.network.height - block.height) + 1;
     if(toGo > 1){
@@ -319,9 +318,13 @@ function parseBlock(height, serializedBlock){
             block.reward = 0;
             break;
         default:
+            block.miner = parts[5];
             block.status = 'pending';
             block.reward = false;
             break;
+    }
+    if(typeof(block.miner) === 'undefined'){
+	block.miner= "xxxxxxx....xxxxxx";
     }
     return block;
 }

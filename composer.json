@@ -1,0 +1,6 @@
+{
+    "name": "stellitecoin/xtl-nodejs-pool",
+    "require": {
+        "stellitecoin/stellitephp": "^0.2.0"
+    }
+}

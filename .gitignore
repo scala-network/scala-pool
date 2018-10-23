@@ -6,3 +6,6 @@ website/
 *.log
 public/
 package-lock.json
+vendor
+._*
+composer.lock
