@@ -133,7 +133,9 @@ currentPage = {
     	}
     	clearTimeout(varTop10);
     },
-    update: updateTop10
+    update: function(){
+
+    }
 };
 
 // Get miner cells
@@ -213,5 +215,7 @@ function updateTop10() {
             varTop10 = setTimeout(updateTop10, (30*1000));
         }
     });
+
 }
+updateTop10();
 </script>
