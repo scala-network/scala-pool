@@ -74,7 +74,11 @@ function loadLiveStats(reload) {
 
 // Fetch live statistics
 var xhrLiveStats;
+var timerFetchLiveStats;
 function fetchLiveStats() {
+    if(timerFetchLiveStats && xhrLiveStats){
+        return;
+    }
     var apiURL = api + '/live_stats';
 
     var address = getCurrentAddress();
@@ -87,7 +91,8 @@ function fetchLiveStats() {
     }).done(function(data){
         updateLiveStats(data);
     }).always(function(){
-        fetchLiveStats();
+        xhrLiveStats = null;
+        timerFetchLiveStats = setTimeout(fetchLiveStats,5000);
     });
 }
 

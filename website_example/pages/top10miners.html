@@ -124,6 +124,8 @@ $('.tab-link > a').click(function(e){
 	
 	e.preventDefault();	
 });
+var varTop10 = false;
+var xhrGetTOP;
 // Update current page
 currentPage = {
     destroy: function(){
@@ -159,7 +161,7 @@ function getMinerCells(position, data){
 }
 
 // Update top10 miners report
-var varTop10 = false;
+
 function updateTop10() {
 	if(varTop10){
 		clearTimeout(varTop10);
