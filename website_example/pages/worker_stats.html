@@ -549,7 +549,7 @@ function getSummaryCells(summary){
     text = text.replace(/%DATE%/g, summary.date);
     text = text.replace(/%COUNT%/g, summary.count);
     text = text.replace(/%AMOUNT%/g, getReadableCoins(summary.amount));
-    return '<td colspan="4">' + text + '</td>';
+    return '<td colspan="5">' + text + '</td>';
 }
 
 // Render payments
