@@ -124,14 +124,14 @@ $('.tab-link > a').click(function(e){
 	
 	e.preventDefault();	
 });
-var intervalUpdateTop10;
 // Update current page
 currentPage = {
     destroy: function(){
-        if (varTop10) {
-            clearTimeout(intervalUpdateTop10);
-            varTop10 = undefined;
-        }
+    	
+    	if(xhrGetTOP){
+    		xhrGetTOP.destroy();
+    	}
+    	clearTimeout(varTop10);
     },
     update: updateTop10
 };
