@@ -2,7 +2,7 @@
 <div id="paymentsStats" class="row">
 
     <!-- Total Payments -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-money-bill-alt"></span>
@@ -14,24 +14,52 @@
         </div>
     </div>
 
-    <!-- Minimum Payment Threshold -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-hand-holding-usd"></span>
             </div>
             <div class="content">
-                <div class="text"><span tkey="paymentsMinimum">Minimum Payout</span><br />(Integrated Address)</div>
+                <div class="text"><span tkey="maximumPayout">Maximum Payout</span></div>
                 <div class="value">
-                	<span id="paymentsMinimum">N/A</span>
-                	<span class="smallText">(<strong><span id="paymentsMinimumIntegratedAddress">N/A</span></strong>)</span>
+                    <span id="maximumTransactionPayout">N/A</span>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Minimum Payment Threshold -->
+    <div class="col-lg-3 col-md-4 col-sm-5">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-hand-holding-usd"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="paymentsMinimum">Minimum Payout</span><br /></div>
+                <div class="value">
+                	<span id="paymentsMinimum">N/A</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minimum Payment Threshold -->
+    <div class="col-lg-3 col-md-4 col-sm-5">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-hand-holding-usd"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="paymentsMinimum">Minimum Payout</span><small>(Integrated Address)</small></div>
+                <div class="value">
+                    <span id="paymentsMinimumIntegratedAddress">N/A</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     
     <!-- Payment Interval -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-history"></span>
@@ -44,7 +72,7 @@
     </div>
     
     <!-- Denomination Unit -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-hashtag"></span>
@@ -56,7 +84,7 @@
         </div>
     </div>
     
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-people-carry"></span>
@@ -69,7 +97,7 @@
     </div>
     
     <!-- Pool Fee -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-people-carry"></span>
@@ -150,25 +178,9 @@ currentPage = {
         if (xhrGetPayments) xhrGetPayments.abort();
     },
     update: function(){
-    	var totalFee = 0;
-    	var contributionsLists = "";
-        if (Object.keys(lastStats.config.contributions).length) {
-            var totalDonation = 0;
-            for(var i in lastStats.config.contributions) {
-            	contributionsLists+="<li>";
-            	const contributor =  lastStats.config.contributions[i];
-                totalDonation += contributor.percent;
-                contributionsLists+=i;
-				if('wallet' in contributor){
-					contributionsLists+="&nbsp;<small>(%)</small>".replace('%',contributor.wallet);
-				}
-				contributionsLists+="&nbsp;=&nbsp;"+contributor.percent+"%";
-				contributionsLists+="</li>";
-            }
-            totalFee += totalDonation;
-        }
-        document.getElementById("contributionsLists").innerHTML = contributionsLists;
-        updateText('poolContributions', (totalFee > 0 && totalFee != 100 ? floatToString(totalFee) : (totalFee == 100 ? '100' : '0')) + '%');
+    	
+    	
+        renderContributionLists();
         
 		updateText('poolDonations',getReadableCoins(lastStats.pool.totalDonations));
         updateText('paymentsTotal', lastStats.pool.totalPayments.toString());
@@ -176,6 +188,8 @@ currentPage = {
         updateText('paymentsInterval', getReadableTime(lastStats.config.paymentsInterval));
         updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold));
         updateText('paymentsMinimumIntegratedAddress', getReadableCoins(lastStats.config.minPaymentIntegratedAddressThreshold));
+        updateText('maximumTransactionPayout', getReadableCoins(lastStats.config.maxPaymentThreshold));
+        
         updateText('paymentsDenomination', getReadableCoins(lastStats.config.denominationUnit, 3));
         if (!lastStats.config.slushMiningEnabled)
             $('#slush_description').hide()
@@ -184,11 +198,25 @@ currentPage = {
 };
 
 function renderContributionLists(){
-	for(var desc in contributions){
-		
-	}
-	
-	return output;
+    var totalFee = 0;
+    var contributionsLists = "";
+	if (Object.keys(lastStats.config.contributions).length) {
+        var totalDonation = 0;
+        for(var i in lastStats.config.contributions) {
+            contributionsLists+="<li style='word-break: break-all;'>";
+            const contributor =  lastStats.config.contributions[i];
+            totalDonation += contributor.percent;
+            contributionsLists+=i;
+            if('wallet' in contributor){
+                contributionsLists+="&nbsp;<small>(%)</small>".replace('%',contributor.wallet);
+            }
+            contributionsLists+="&nbsp;=&nbsp;"+contributor.percent+"%";
+            contributionsLists+="</li>";
+        }
+        totalFee += totalDonation;
+    }
+    document.getElementById("contributionsLists").innerHTML = contributionsLists;
+    updateText('poolContributions', (totalFee > 0 && totalFee != 100 ? floatToString(totalFee) : (totalFee == 100 ? '100' : '0')) + '%');
 }
 
 // Parse payment data

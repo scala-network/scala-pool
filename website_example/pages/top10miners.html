@@ -177,6 +177,7 @@ function updateTop10() {
             if (!data) {
             	return;
             }
+            data = data.data;
             var minerrows;
             if(data.miner){
 	            minerrows = $("#top10miners_rows");

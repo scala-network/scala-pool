@@ -23,13 +23,14 @@ var fs = require('fs');
 var cluster = require('cluster');
 var os = require('os');
 
-const args = require("args-parser")(process.argv);
 
 // Initialize log system
 var logSystem = 'init';
 /**
  * Load pool configuration
  **/
+const args = require("args-parser")(process.argv);
+
 global.config = require('./lib/bootstrap')(args.config || 'config.json');
 
 require('./lib/logger.js');
@@ -78,16 +79,16 @@ if (cluster.isWorker){
         case 'pool':
             require('./lib/pool.js');
             break;
-        case 'blockUnlocker':
+        case 'unlocker':
             require('./lib/blockUnlocker.js');
             break;
-        case 'paymentProcessor':
+        case 'payments':
             require('./lib/paymentProcessor.js');
             break;
         case 'api':
             require('./lib/api.js');
             break;
-        case 'chartsDataCollector':
+        case 'charts':
             require('./lib/chartsDataCollector.js');
             break;
     }
@@ -178,7 +179,7 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	    }
 	
 	    var worker = cluster.fork({
-	        workerType: 'blockUnlocker'
+	        workerType: 'unlocker'
 	    });
 	    worker.on('exit', function(code, signal){
 	        log('error', logSystem, 'Block unlocker died, spawning replacement...');
@@ -197,7 +198,7 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	    }
 	
 	    var worker = cluster.fork({
-	        workerType: 'paymentProcessor'
+	        workerType: 'payments'
 	    });
 	    worker.on('exit', function(code, signal){
 	        log('error', logSystem, 'Payment processor died, spawning replacement...');
@@ -233,7 +234,7 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	    if (!config.charts) return;
 	
 	    var worker = cluster.fork({
-	        workerType: 'chartsDataCollector'
+	        workerType: 'charts'
 	    });
 	    worker.on('exit', function(code, signal){
 	        log('error', logSystem, 'chartsDataCollector died, spawning replacement...');
@@ -244,53 +245,55 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	}
 	
 	
-	var init = function(){
     	 
-		// Run a single module ?
-		var singleModule = (function(){
-		    var validModules = ['pool', 'api', 'unlocker', 'payments', 'chartsDataCollector'];
-		
-		    for (var i = 0; i < process.argv.length; i++){
-		        if (process.argv[i].indexOf('-module=') === 0){
-		            var moduleName = process.argv[i].split('=')[1];
-		            if (validModules.indexOf(moduleName) > -1){
-		                return moduleName.toLowerCase();
-		            }
-		            log('error', logSystem, 'Invalid module "%s", valid modules: %s', [moduleName, validModules.join(', ')]);
-		            process.exit();
-		        }
+	const init = function(){
+    	const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts'];
+		const reqModules = (function(){
+			if(!args.module){
+				return validModules;
+			}
+			const modules = args.module.split(",");
+			const loadModules = [];
+		    for (let i in modules){
+		    	const moduleName = modules[i].toLowerCase();
+	            if (validModules.indexOf(moduleName) === -1){
+	            	log('error', logSystem, 'Invalid module "%s", valid modules: %s', [moduleName, validModules.join(', ')]);
+	            	process.exit();
+	            	return;
+	            }
+	            loadModules.push(moduleName);
 		    }
+		    return loadModules;
 		})();
 
-        if (!singleModule){
-        	spawnPoolWorkers();
-	        spawnBlockUnlocker();
-	        spawnPaymentProcessor();
-	        spawnApi();
-	        spawnChartsDataCollector();
-	        return;
+	            
+        if (reqModules.length === 0){
+        	reqModules = validModules;
         }
-        log('info', logSystem, 'Running in single module mode: %s', [singleModule]);
 
-        switch(singleModule){
-            case 'pool':
-                spawnPoolWorkers();
-                break;
-            case 'unlocker':
-                spawnBlockUnlocker();
-                break;
-            case 'payments':
-                spawnPaymentProcessor();
-                break;
-            case 'api':
-                spawnApi();
-                break;
-            case 'chartsDataCollector':
-                spawnChartsDataCollector();
-                break;
-            default:
-            	break;
+        
+        for(let i in reqModules){
+        	switch(reqModules[i]){
+	            case 'pool':
+	                spawnPoolWorkers();
+	                break;
+	            case 'unlocker':
+	                spawnBlockUnlocker();
+	                break;
+	            case 'payments':
+	                spawnPaymentProcessor();
+	                break;
+	            case 'api':
+	                spawnApi();
+	                break;
+	            case 'charts':
+	                spawnChartsDataCollector();
+	                break;
+	            default:
+	            	break;
+	        }
         }
+    
     };
     
     /**

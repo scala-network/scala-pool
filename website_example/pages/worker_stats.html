@@ -86,11 +86,11 @@
             <table class="table table-hover table-striped">
                 <thead>
                 <tr>
-                    <th class="col1"><span tkey="timeSent">Time Sent</span></th>
-                    <th class="col2"><span tkey="transactionHash">Transaction Hash</span></th>
-                    <th class="col3"><span tkey="amount">Amount</span></th>
-                    <th class="col4"><span tkey="fee">Fee</span></th>
-                    <th class="col5"><span tkey="mixin">Mixin</span></th>
+                    <th class="text-center"><span tkey="timeSent">Time Sent</span></th>
+                    <th class="text-center"><span tkey="transactionHash">Transaction Hash</span></th>
+                    <th class="text-center"><span tkey="amount">Amount</span></th>
+                    <th class="text-center"><span tkey="fee">Fee</span></th>
+                    <th class="text-center"><span tkey="mixin">Mixin</span></th>
                 </tr>
                 </thead>
                 <tbody id="paymentsReport_rows">
@@ -182,8 +182,8 @@ function fetchAddressStats(longpoll){
 
             updateText('yourPendingBalance', getReadableCoins(data.stats.balance,5));
             updateText('yourMinPayout', getReadableCoins(data.stats.minPayoutLevel));
-            updateText('yourDonationLevel', data.stats.donation_level||0);
-            
+            updateText('yourDonationLevel', Math.round(data.stats.donation_level)   ||0);
+            console.log(data.stats.donate_level);
 
             var userRoundHashes = parseInt(data.stats.roundHashes || 0);
             var poolRoundHashes = parseInt(lastStats.pool.roundHashes || 0);
@@ -522,11 +522,11 @@ function getPaymentRowElement(payment, jsonString){
 // Get payment cells
 function getPaymentCells(payment){
     
-    return '<td class="col1">' + formatDate(payment.time) + '</td>' +
-           '<td class="col2">' + formatPaymentLink(payment.hash) + '</td>' +
-           '<td class="col3">' + getReadableCoins(payment.amount,2,false) + '</td>' +
-           '<td class="col4">' + getReadableCoins(payment.fee,2,false) + '</td>' +
-           '<td class="col5">' + payment.mixin + '</td>';
+    return '<td class="text-center">' + formatDate(payment.time) + '</td>' +
+           '<td class="text-center">' + formatPaymentLink(payment.hash) + '</td>' +
+           '<td class="text-center">' + getReadableCoins(payment.amount,2,false) + '</td>' +
+           '<td class="text-center">' + getReadableCoins(payment.fee,2,false) + '</td>' +
+           '<td class="text-center">' + payment.mixin + '</td>';
 }
 
 // Get summary row element

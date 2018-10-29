@@ -19,7 +19,18 @@
         </div>
     </div>
 </div>
-
+<!-- Minimum payout level -->
+<h3><span tkey="setMinimumPayout">Reset Donation Level</span></h3>
+<div class="card padding-15 padding-b-10">
+    <p><span tkey="resetDonationLevel">Make sure that all rigs have remove donation level before you want to reset your donation level to 0%</span></p>
+    <div class="row">
+        <div class="col-sm-4 push-down-5">
+            <button class="btn btn-default" type="button" id="resetDonationButton">
+                <span><i class="fa fa-check"></i>&nbsp; <span tkey="reset">Reset</span></span>
+            </button>
+        </div>
+    </div>
+</div>
 <!-- Minimum payout level -->
 <h3><span tkey="setMinimumPayout">Set your minimal payout level</span></h3>
 <div class="card padding-15 padding-b-10">
@@ -107,16 +118,54 @@ function setPayoutLevel(address, ip, level) {
         dataType: 'json',
         cache: 'false'
     }).done(function(data){
-        if (data.status == 'done') {
+        if (data.status == 'success') {
             showSuccess('minerPayoutSet', 'Done! Your minimum payout level was set');
         } else {
-            showError('error', 'Error:', data.status);
+            showError('error', 'Error:', data.message);
         }
     });
 }
 
+// Set payout level
+function resetDonationLevel(address, ip) {
+    $.ajax({
+        url: api + '/reset_donation_level',
+        data: {
+            address: address,
+            ip: ip
+        },
+        dataType: 'json',
+        cache: 'false'
+    }).done(function(data){
+        if (data.status == 'success') {
+            showSuccess('minerResetDonation', 'Done! Your donation level is reset to 0%');
+        } else {
+            showError('error', 'Error:', data.message);
+        }
+    });
+}
+
+$('#resetDonationButton').click(function(e){
+    e.preventDefault();
+    var address = $('#yourAddress').val().trim();
+    if (!address || address == '') {
+        showError('noMinerAddress', 'No miner address specified');
+        return;
+    }
+
+    var ip = $('#yourIP').val().trim();
+    if (!ip || ip == '') {
+        showError('noMinerIP', 'No miner IP address specified');
+        return;
+    }
+
+
+    resetDonationLevel(address, ip);
+});
+
 // Handle click on Set button
-$('#payoutSetButton').click(function(){
+$('#payoutSetButton').click(function(e){
+    e.preventDefault();
     var address = $('#yourAddress').val().trim();
     if (!address || address == '') {
         showError('noMinerAddress', 'No miner address specified');
@@ -136,21 +185,6 @@ $('#payoutSetButton').click(function(){
     }
 
     setPayoutLevel(address, ip, level);
-});
-
-
-// Handle click on Enable button
-$('#enableButton').click(function(){
-    var address = $('#yourAddress').val().trim();
-    var ip = $('#yourIP').val().trim();
-    var email = $('#yourEmail').val();
-});
-
-// Handle click on Disable button
-$('#disableButton').click(function(){
-    var address = $('#yourAddress').val().trim();
-    var ip = $('#yourIP').val().trim();
-    var email = $('#yourEmail').val();
 });
 </script>
 

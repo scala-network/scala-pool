@@ -1,4 +1,4 @@
-var api="http://testnet.xtlpool.com:8118";
+var api="http://localhost:8118";
 var poolHost="testnet.xtlpool.com";
 var email="support@xtlpool.com";
 var telegram="";
