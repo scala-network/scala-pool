@@ -2,7 +2,7 @@
 <div id="blocksStats" class="row">
 
     <!-- Total Blocks Mined -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-cubes"></span>
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Maturity Depth Requirement -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-unlock-alt"></span>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Average Luck -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -41,7 +41,7 @@
     </div>
     
      <!-- Current Effort -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -54,7 +54,7 @@
     </div>
     
     <!-- Avg Block -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -67,7 +67,7 @@
     </div>
     
     <!-- Average Income -->
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -78,6 +78,19 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-5">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-trophy"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="unlockReward">Unlock Reward</span></div>
+                <div class="value"><span id="unlockReward">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- Chart -->
@@ -407,7 +420,9 @@ function renderBlocks(blocksResults){
     	incomeCount++;
     	incomeValue+=v;
     }
+	
     updateText("averageIncomeDay",parseFloat(getReadableCoins(incomeValue/incomeCount, null, true)).toFixed(2)+" XTL");
+    updateText("unlockReward",lastStats.config.unlockBlockReward +"%");
 }
 
 // Load more blocks button

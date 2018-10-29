@@ -176,19 +176,6 @@ var renderLockedBlocks = function(data){
     tr.html(html);
 };
 
-function sortByPercentage(data, limit) {
-    limit = limit || 10;
-    data.sort(function(a,b){
-        var v1 = a.blocksFound ? parseInt(a.blocksFound) : 0;
-        var v2 = b.blocksFound ? parseInt(b.blocksFound) : 0;
-        if (v1 > v2) return -1;
-        if (v1 < v2) return 1;
-        return 0;   
-    });
-
-    return data.slice(0,limit);
-}
-
 function updateScoresheet() {
     var xhrGetTOP = $.ajax({
         url: api + '/pool_scoresheet',
@@ -218,12 +205,12 @@ function updateScoresheet() {
                 return;
             }
             var i = 0;
+            const dataminers = [];
             for(var miner in miners){
                 var data = miners[miner];
 
                 if(miner == "Info"){
                     var block = data.split(":");
-                    console.log(block);
                     var sum = "<b>HEIGHT:</b> %HEIGHT% <b>TIME:</b> %TIME% <b>TOTAL HASHES:</b> %TOTAL_HASHES% <b>DIFFICULTY:</b> %DIFFICULTY% <b>REWARD:</b> %REWARD% <b>UNLOCKER:</b> %UNLOCKER%";
                     sum = sum.replace("%HEIGHT%",currentSelectedHeight);
                     sum = sum.replace("%TIME%",formatDate(block[1]));
@@ -236,10 +223,19 @@ function updateScoresheet() {
                 }
                 
                 data.miner = miner;
-                i++;
-                html+=renderCells(i,data);
+                dataminers.push(miner);
+                
             }
-
+            dataminers.sort(function(a,b){
+                var v1 = a.blocksFound ? parseInt(a.blocksFound) : 0;
+                var v2 = b.blocksFound ? parseInt(b.blocksFound) : 0;
+                if (v1 > v2) return -1;
+                if (v1 < v2) return 1;
+                return 0;   
+            });
+            for(var i =0;i<dataminers.length;i++){
+                html+=renderCells(i+1,dataminers[i]);
+            }
             $('#scoresheet_rows').html(html);
             $('#currentScores').hide();
             $('#scoresheetCard').show();
