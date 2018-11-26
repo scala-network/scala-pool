@@ -44,14 +44,14 @@
 	<meta name="twitter:image" content="https://xtlpool.com/img/logo-large.png" />
 
 
-   <link rel="icon" type="image/png" sizes="32x32" href="img/logo-large.png">
-   <link rel="icon" type="image/png" sizes="16x16" href="img/logo-large.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/logo-large.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/logo-large.png">
 
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
+    	<link href="css/style.css?v1.4.6" rel="stylesheet">
+    	<link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
 
@@ -93,7 +93,7 @@
                 </a></li>
 
                  <li><a class="hot_link" data-page="scoresheets.html" href="#scoresheets">
-                    <i class="fa fa-trophy"></i> <span tkey="scoresheets">Scroresheets</span>
+                    <i class="fa fa-futbol"></i> <span tkey="scoresheets">Scroresheets</span>
                 </a></li>
 
                 <li><a class="hot_link" data-page="faq.html" href="#faq">
@@ -129,7 +129,7 @@
     <!-- Page content -->
     <div id="page-wrapper">
         <div id="page"></div>
-        <p id="loading" class="text-center"><i class="fa fa-circle-o-notch fa-spin"></i></p>
+        <p id="loading" class="text-center"><i class="fas fa-spinner fa-spin"></i></p>
     </div>
     
 </div>
@@ -143,20 +143,19 @@
         <span>Sound by </span><a target='_blank' href="https://notificationsounds.com">Notification Sounds</a>
     </div>
 </footer>
-<div style='display:none'>
-	 <audio id='blockAudioAlert' src="audio/gentle-alarm.ogg" type="audio/ogg" preload="auto" muted></audio>
-</div>
+
+<audio id='blockAudioAlert' src="audio/gentle-alarm.ogg" type="audio/ogg" preload="auto" mutmuted="muted" autoplay="true"></audio>
+<button type="button" style="z-index:-1;opacity:0;position: absolute;left:-1000px;" id="btnBlockAudioAlert"></button>
 <!-- Javascript -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.3/jquery.timeago.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	
 <script src="config.js"></script>
 <script src="lang/languages.js"></script>
-<script src="js/common.js"></script>
+<script src="js/common.js?v1.4.6"></script>
 <script src="js/custom.js"></script>
-<script src='js/script.js?v1.4.1'></script>
+<script src='js/script.js?v1.4.6'></script>
 
 </body>
 </html>

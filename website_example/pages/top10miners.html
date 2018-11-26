@@ -4,71 +4,57 @@
 	cursor:pointer;
 }
 </style>
-<ul class="nav nav-tabs">
-  <li class="active tab-link"><a data-tab='tabTopHashes'><span tkey="top10hashes">Top 25 Miners</span> (All Time)</a></li>
-  <li class="tab-link"><a data-tab='tabTopHashrates'><span tkey="top10hashrates">Top 25 Hashrate Miners</span>(Current)</a></li>
-  <li class="tab-link"><a data-tab='tabTopBlocks'><span tkey="top10unblocks">Top 25 Block Founders</span></a></li>
-  <li class="tab-link"><a data-tab='tabTopDonators'><span tkey="top10donators">Top 25 donators</span></a></li>
-</ul>
 
-<div class='row'>
-	<div class='col-md-12' id='tabTopHashes'>
-		<h3><span tkey="top10hashes">Top 25 Miners</span> (All Time)</h3>
-		<div class="card">
+
+<ul class="nav nav-pills card" role="tablist" id='navigationMenu'>
+	  <li role="presentation"  class="active">
+	  	<a class='user_navigate btn' data-tab='tabTopHashes'>
+	  		<i class="fas fa-chart-bar"></i>&nbsp;
+	  		<span tkey="top10hashes">Top 25 Miners</span> (All Time)
+	  	</a>
+	  </li>
+	  <li role="presentation">
+		<a class='user_navigate btn' data-tab='tabTopBlocks'>
+	  		<i class="fas fa-money-bill-alt"></i>&nbsp;
+	  		<span tkey="top10unblocks">Top 25 Block Founders</span>
+	  	</a>	
+	  </li>
+	  <li role="presentation">
+		<a class='user_navigate btn' data-tab='tabTopDonators'>
+	  		<i class="fas fa-futbol"></i>&nbsp;
+	  		<span tkey="top10donators">Top 25 donators</span>
+	  	</a>
+	  </li>
+	</ul>
+
+	<div class='col-md-12 card' id='tabTopHashes'>
 		    <div id="top10hashes" class="table-responsive">
 		        <table class="table table-striped">
 		            <thead>
 		            <tr>
-		                <th class="col1 sort text-center">#</th>
-		                <th class="col2 sort text-center"><span tkey="miner">Miner</span></th>
-		                <th class="col3 sort text-center"><span tkey="hashrates">Hashrates</span></th>
-		                <th class="col4 sort text-center"><span tkey="hashes">Hashes</span></th>
-		                <th class="col5 sort text-center"><span tkey="shares">Last Share Submitted</span></th>
-		                <th class="col6 sort text-center"><span tkey="donations">Donations</span></th>
-		                <th class="col7 sort text-center"><span tkey="donationLevel">Donation Level</span></th>
-		                <th class="col8 sort text-center"><span tkey="totalBlocks">Total Blocks</span></th>
+		                <th class="text-center">#</th>
+		                <th class="text-center"><span tkey="miner">Miner</span></th>
+		                <th class="text-center"><span tkey="hashes">Hashes</span></th>
+		                <th class="text-center"><span tkey="shares">Last Share Submitted</span></th>
+		                <th class="text-center"><span tkey="donations">Donations</span></th>
+		                <th class="text-center"><span tkey="donationLevel">Donation Level</span></th>
+		                <th class="text-center"><span tkey="totalBlocks">Total Blocks</span></th>
 
 		            </tr>
 		            </thead>
 		            <tbody id="top10hashes_rows"></tbody>
 		        </table>
 		    </div>
-		</div>
-	</div>
-	<div class='col-md-12' id='tabTopHashrates'  style='display:none'>
-		<h3><span tkey="top10hashrates">Top 25 Hashrate Miners</span>(Current)</h3>
-		<div class="card">
-		    <div id="top10miner" class="table-responsive">
-		        <table class="table table-striped">
-		            <thead>
-		            <tr>
-		                <th class="col1 sort text-center">#</th>
-		                <th class="col2 sort text-center"><span tkey="miner">Miner</span></th>
-		                <th class="col3 sort text-center"><span tkey="hashrates">Hashrates</span></th>
-		                <th class="col4 sort text-center"><span tkey="hashes">Hashes</span></th>
-		                <th class="col5 sort text-center"><span tkey="shares">Last Share Submitted</span></th>
-		                <th class="col6 sort text-center"><span tkey="donations">Donations</span></th>
-		                <th class="col7 sort text-center"><span tkey="donationLevel">Donation Level</span></th>
-		                <th class="col8 sort text-center"><span tkey="totalBlocks">Total Blocks</span></th>
-
-		            </tr>
-		            </thead>
-		            <tbody id="top10miners_rows"></tbody>
-		        </table>
-		    </div>
-		</div>
 	</div>
 	
-	<div class='col-md-12' id='tabTopBlocks' style='display:none'>
-		<h3><span tkey="top10unblocks">Top 25 Block Founders</span></h3>
-		<div class="card">
+	
+	<div class='col-md-12 card' id='tabTopBlocks' style='display:none'>
 		    <div id="top10unblockers" class="table-responsive">
 		        <table class="table table-striped">
 		            <thead>
 		            <tr>
 		                <th class="col1 sort text-center">#</th>
 		                <th class="col2 sort text-center"><span tkey="miner">Miner</span></th>
-		                <th class="col3 sort text-center"><span tkey="hashrates">Hashrates</span></th>
 		                <th class="col4 sort text-center"><span tkey="hashes">Hashes</span></th>
 		                <th class="col5 sort text-center"><span tkey="shares">Last Share Submitted</span></th>
 		                <th class="col6 sort text-center"><span tkey="donations">Donations</span></th>
@@ -81,18 +67,14 @@
 		            </tbody>
 		        </table>
 		    </div>
-		</div>
 	</div>
-	<div class='col-md-12' id='tabTopDonators' style='display:none'>
-		<h3><span tkey="top10donators">Top 25 donators</span></h3>
-		<div class="card">
+	<div class='col-md-12 card' id='tabTopDonators' style='display:none'>
 		    <div id="top10donators" class="table-responsive">
 		        <table class="table table-striped">
 		            <thead>
 		            <tr>
 		                <th class="col1 sort text-center">#</th>
 		                <th class="col2 sort text-center"><span tkey="miner">Miner</span></th>
-		                <th class="col3 sort text-center"><span tkey="hashrates">Hashrates</span></th>
 		                <th class="col4 sort text-center"><span tkey="hashes">Hashes</span></th>
 		                <th class="col5 sort text-center"><span tkey="shares">Last Share Submitted</span></th>
 		                <th class="col6 sort text-center"><span tkey="donations">Donations</span></th>
@@ -105,17 +87,35 @@
 		            </tbody>
 		        </table>
 		    </div>
-		</div>
 	</div>
-</div>
+
 
 <!-- Javascript -->
 <script>
 
-$('.tab-link > a').click(function(e){
-	console.log();
+
+var varTop10 = false;
+var xhrGetTOP;
+// Update current page
+currentPage = {
+    destroy: function(){
+    	
+    	if(xhrGetTOP){
+    		xhrGetTOP.abort();
+    	}
+    	clearTimeout(varTop10);
+    	
+    	$('.user_navigate').off('click');
+    },
+    update: function(){
+
+    }
+};
+
+$('.user_navigate').on('click',function(e){
+
 	const id = $(this).data('tab');
-	const prev = $('.nav-tabs .active a').data('tab');
+	const prev = $('#navigationMenu .active .user_navigate').data('tab');
 	
 	$('#'+prev).hide();
 	$('#'+id).show();
@@ -124,22 +124,6 @@ $('.tab-link > a').click(function(e){
 	
 	e.preventDefault();	
 });
-var varTop10 = false;
-var xhrGetTOP;
-// Update current page
-currentPage = {
-    destroy: function(){
-    	
-    	if(xhrGetTOP){
-    		xhrGetTOP.destroy();
-    	}
-    	clearTimeout(varTop10);
-    },
-    update: function(){
-
-    }
-};
-
 // Get miner cells
 function getMinerCells(position, data){
     var miner = data.miner;
@@ -152,7 +136,6 @@ function getMinerCells(position, data){
 
     return '<td class="col1 font12 text-center" data-sort="' + position + '">' + position + '</td>' +
            '<td class="col2 font12 text-center" data-sort="' + miner + '">' + miner + '</td>' +
-           '<td class="col3 font12 text-center" data-sort="' + hashrate + '">' + getReadableHashRateString(hashrate) + '/sec</td>'+
            '<td class="col4 font12 text-center" data-sort="' + hashes + '">' + hashes + '</td>'+
            '<td class="col5 font12 text-center" data-sort="' + lastShare + '">' + (lastShare ? $.timeago(new Date(parseInt(lastShare) * 1000).toISOString()) : 'Never') + '</td>'+
            '<td class="col6 font12 text-center" data-sort="' + donations + '">' + getReadableCoins(donations) + '</td>' +
@@ -166,7 +149,8 @@ function updateTop10() {
 	if(varTop10){
 		clearTimeout(varTop10);
 	}
-    var xhrGetTOP = $.ajax({
+	
+    xhrGetTOP = $.ajax({
         url: api + '/get_top10',
         data: {
             time: $('#top10_rows').children().last().data('time')
@@ -179,13 +163,7 @@ function updateTop10() {
             }
             data = data.data;
             var minerrows;
-            if(data.miner){
-	            minerrows = $("#top10miners_rows");
-	            minerrows.empty();
-	            for (var i=0; i<data.miner.length; ++i) {
-	                minerrows.append('<tr>' + getMinerCells(i+1, data.miner[i]) + '</tr>');
-	            }
-            }
+           
             
             if(data.donate){
 	            minerrows = $("#top10donators_rows");

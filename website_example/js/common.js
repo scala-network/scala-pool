@@ -84,7 +84,6 @@ function routePage(loadedCallback) {
     }
     
     
-
     
     loadTranslations();
 

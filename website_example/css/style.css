@@ -826,9 +826,12 @@ table th.sort:hover{
 #workerPayments table .col4 {
   text-align: center;
 }
-#workerPayments table .summary {
+table .summary {
   font-weight: 700;
+  text-align:center;
 }
+
+
 @media (min-width: 768px) {
   #workerPayments table  {
     table-layout:fixed;
@@ -1432,4 +1435,12 @@ ol li{
 
 .timeline .panel-body{
 	background:#FFF;
+}
+
+table .summary td{
+	background-color:#f1ebff !important;
+}
+
+#navigationMenu {
+	margin-top:10px;
 }

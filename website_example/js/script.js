@@ -31,13 +31,18 @@ function updateLiveStats(data) {
     }
     updateIndex();
     if (currentPage) currentPage.update();
-    if(data.pool.blocks.length > 0){
     
-        if(previousBlock !== false && previousBlock !==  parseInt(data.pool.blocks[1]) ){ // We found new block
-            playSound();
-        }
-    previousBlock = parseInt(data.pool.blocks[1]);
+    if(
+    	(
+	    	data.pool.blocks.length <= 0 || 
+	    	previousBlock === false || 
+	    	previousBlock ===  parseInt(data.pool.blocks[1])
+    	) === false
+    ){ // We found new block
+     playSound();
     }
+    
+    previousBlock = parseInt(data.pool.blocks[1]);
 }
 
 // Update global informations
@@ -113,7 +118,21 @@ $(function(){
         $('#menu-content').append('<div id="mLangSelector"></div>');
 		renderLangSelector();
     }
+    
+
+	var afterTest = function(e){
+		if(e && e.hasOwnProperty('preventDefault')) e.preventDefault();
+		$('#blockAudioAlert').attr('muted',false);
+		loadLiveStats();
+	};
 	
-    // Load live statistics for the first time
-    loadLiveStats();
+	$('#btnBlockAudioAlert').on('click',afterTest); 
+	
+	$(document).ready(function(){
+		var playbutts = document.querySelector('#blockAudioAlert').play();
+		if (playbutts) playbutts.then(()=>afterTest).catch(error => {$('#btnBlockAudioAlert').click();});
+		else afterTest();
+	});
+	
+    
 });

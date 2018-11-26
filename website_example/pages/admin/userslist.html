@@ -1,6 +1,27 @@
-<h3>Users List (<span id="totalUsers">0</span> users)</h3>
+<h3>Users List </h3>
+<div class="col-lg-2 col-md-3 col-sm-4">
+<div class="infoBox hoverExpandEffect">
+<div class="icon">
+<span class="fa fa-heartbeat"></span>
+</div>
+<div class="content">
+<div class="text"><span tkey="totalPending">Total Pending</span></div>
+<div class="value"><span id="totalPending">0.00 XTL</span></div>
+</div>
+</div>
+</div>
+<div class="col-lg-2 col-md-3 col-sm-4">
+<div class="infoBox hoverExpandEffect">
+<div class="icon">
+<span class="fa fa-users"></span>
+</div>
+<div class="content">
+<div class="text"><span tkey="totalUsers">Total Users</span></div>
+<div class="value"><span id="totalUsers">0</span></div>
+</div>
+</div>
+</div>
 
-<!-- Handlebars template -->
 <script id="usersListTable" type="text/x-handlebars-template">
     {{#each users}}
     <tr>
@@ -14,34 +35,31 @@
     {{/each}}
 </script>
 
-<!-- Users list -->
 <div class="card">
-    <div class="table-responsive">
-        <table class="table table-hover table-striped usersList">
-            <thead>
-            <tr>
-                <th class="col1">Wallet</th>
-                <th class="col2 sort">Hashrate <i class="fa fa-sort"></i></th>
-                <th class="col3 sort">Hashes <i class="fa fa-sort"></i></th>
-                <th class="col4 sort">Pending <i class="fa fa-sort"></i></th>
-                <th class="col5 sort">Paid <i class="fa fa-sort"></i></th>
-                <th class="col6 sort">Last share <i class="fa fa-sort"></i></th>
-            </tr>
-            </thead>
-            <tbody id="template">
-
-            </tbody>
-        </table>
-    </div>
+<div class="table-responsive">
+<table class="table table-hover table-striped usersList">
+<thead>
+<tr>
+<th class="col1">Wallet</th>
+<th class="col2 sort">Hashrate <i class="fa fa-sort"></i></th>
+<th class="col3 sort">Hashes <i class="fa fa-sort"></i></th>
+<th class="col4 sort">Pending <i class="fa fa-sort"></i></th>
+<th class="col5 sort">Paid <i class="fa fa-sort"></i></th>
+<th class="col6 sort">Last share <i class="fa fa-sort"></i></th>
+</tr>
+</thead>
+<tbody id="template">
+</tbody>
+</table>
+</div>
 </div>
 
-<!-- Javascript -->
 <script>
 function parseUsers(wallets) {
     var totalUsers = 0;
     var walletsArray = [];
     var properObject = {};
-
+    var pendingPayments = 0;
     for(var wallet in wallets) {
         if(wallets.hasOwnProperty(wallet)) {
             var userData = wallets[wallet];
@@ -49,14 +67,19 @@ function parseUsers(wallets) {
                 miner: wallet,
                 wallet: userData,
                 timeago: $.timeago(new Date(userData.lastShare * 1000).toISOString()),
-                readablePending: getReadableCoins(userData.pending, null, true),
+                readablePending: getReadableCoins(userData.pending, 5, true),
                 readablePaid: getReadableCoins(userData.paid, null, true),
                 readableHashrate: getReadableHashRateString(userData.hashrate) + '/s',
                 readableHashes: getReadableHashRateString(userData.hashes)
             });
+	
+	    var pending =  Math.ceil(userData.pending);
+	    pendingPayments+=pending;
 	    totalUsers++;
         }
+
     }
+    $('#totalPending').text(getReadableCoins(pendingPayments,null));
     $('#totalUsers').html(totalUsers);
 
     properObject['users'] = walletsArray.sort(function(a, b) {
