@@ -129,9 +129,13 @@ $(function(){
 	$('#btnBlockAudioAlert').on('click',afterTest); 
 	
 	$(document).ready(function(){
-		var playbutts = document.querySelector('#blockAudioAlert').play();
-		if (playbutts) playbutts.then(()=>afterTest).catch(error => {$('#btnBlockAudioAlert').click();});
-		else afterTest();
+		if($('#blockAudioAlert').attr('muted') == true){
+			var playbutts = document.querySelector('#blockAudioAlert').play();
+			if (playbutts) playbutts.then(afterTest).catch(error => {$('#btnBlockAudioAlert').click();});
+			else afterTest();	
+		} else {
+			loadLiveStats();
+		}
 	});
 	
     
