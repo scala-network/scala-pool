@@ -123,19 +123,18 @@ $(function(){
 	var afterTest = function(e){
 		if(e && e.hasOwnProperty('preventDefault')) e.preventDefault();
 		$('#blockAudioAlert').attr('muted',false);
-		loadLiveStats();
 	};
 	
 	$('#btnBlockAudioAlert').on('click',afterTest); 
 	
 	$(document).ready(function(){
-		if($('#blockAudioAlert').attr('muted') == true){
-			var playbutts = document.querySelector('#blockAudioAlert').play();
-			if (playbutts) playbutts.then(afterTest).catch(error => {$('#btnBlockAudioAlert').click();});
-			else afterTest();	
-		} else {
-			loadLiveStats();
-		}
+		$('#blockAudioAlert').attr('muted',true);
+		var playbutts = document.querySelector('#blockAudioAlert').play();
+
+		if (playbutts) playbutts.then(afterTest).catch(error => {$('#btnBlockAudioAlert').click();});
+		else afterTest();	
+		
+		loadLiveStats();
 	});
 	
     
