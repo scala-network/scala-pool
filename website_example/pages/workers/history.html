@@ -42,7 +42,7 @@
                 <th class="text-center"><span tkey="blockHash">Block Hash</span></th>
 		<th class="text-center"><span tkey="score">Score</span></th>
 		<th class="text-center"><span tkey="totalScore">Total Score</span></th>
-                <th class="text-center"><span tkey="effort">Percent</span></th>
+                <th class="text-center"><span tkey="percent">Percent</span></th>
             </tr>
             </thead>
             <tbody id="blocksReport_rows">
@@ -136,18 +136,17 @@ function getBlockRowElement(block){
 
     var row = document.createElement('tr');
     row.setAttribute('id', id);
-
                 
     var reward = parseFloat(getReadableCoins(block.reward, null, true)).toFixed(2);
-    var percent = parseFloat(block.shares / block.totalShares).toFixed(5);
+    var percent = parseFloat( 100 * block.shares / block.totalShares).toFixed(5);
     var columns =
     	'<td class="col1">' + block.height + '</td>' +
         '<td class="col2">' + formatDate(block.time) + '</td>' +
         '<td class="col3">' + reward + '</td>' +
         '<td class="col4">' + block.difficulty + '</td>' +
         '<td class="col5">' + formatBlockLink(block.hash) + '</td>' +
-	'<td class="col5">' + block.score + '</td>' +
-	'<td class="col5">' + block.totalScore + '</td>' +
+	'<td class="col6">' + block.score + '</td>' +
+	'<td class="col6">' + block.totalScore + '</td>' +
         '<td class="col6" title="' + percent + ' shares">' + percent + '</td>';
     row.innerHTML = columns;
     
@@ -206,7 +205,7 @@ function renderPayments(paymentsResults){
     			var pymntcontent = getPaymentCells(payment);
     			$paymentsRows.append('<tr id="'+dateId+"_"+pTime+'">'+pymntcontent+'</tr>');
     		}
-    		summaryData.amount += payment.amount;
+    		summaryData.amount += parseFloat(payment.amount);
     		summaryData.count++;
     		if(!lastTimeDisplay || payment.time < lastTimeDisplay){
     			lastTimeDisplay = payment.time;
