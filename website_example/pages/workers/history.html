@@ -163,8 +163,17 @@ function renderPayments(paymentsResults){
        
         var paymentDate = new Date(parseInt(payment.time) * 1000).toLocaleDateString();
         var paymentDates = paymentDate.split('/');
-        var dateId = paymentDates[2]+paymentDates[1]+paymentDates[0];
-        
+        var dateId = (parseInt(paymentDates[2]) < 10) ?"0"+paymentDates[2]:paymentDates[2];
+
+	if(parseInt(paymentDates[0]) < 10){
+                dateId += "0";
+        }
+	dateId+=paymentDates[0];
+	if(parseInt(paymentDates[1]) < 10){
+		dateId += "0";
+	}
+	dateId+=paymentDates[1];
+       	dateId = parseInt(dateId); 
         if(!paymentDisplayObjects.hasOwnProperty(dateId)){
         	paymentDisplayObjects[dateId] = {
         		date:paymentDate
@@ -182,7 +191,7 @@ function renderPayments(paymentsResults){
     for(var i=0,il=dateIds.length;i<il;i++){
     	var dateId = dateIds[i];
     	var paymentDisplayObject = paymentDisplayObjects[dateId];
-    	var elS = $('#'+dateId);
+    	var elS = $('#p'+dateId);
     	var summaryData = {
     		date:paymentDisplayObject.date,
     		count:0,
@@ -190,7 +199,7 @@ function renderPayments(paymentsResults){
     	};
     	
     	if(elS.length <= 0){
-    		$paymentsRows.append('<tr id="'+dateId+'" class="summary"></tr>');
+    		$paymentsRows.append('<tr id="p'+dateId+'" class="summary"></tr>');
     	}
     	var pTimes = Object.keys(paymentDisplayObject).reverse();
     	for(var o=0,ol=pTimes.length;o<ol;o++){
@@ -200,10 +209,10 @@ function renderPayments(paymentsResults){
     			continue;
     		}
     		var payment = paymentDisplayObject[pTime];
-    		var el = $('#'+dateId+"_"+pTime);
+    		var el = $('#p'+dateId+"_"+pTime);
     		if(el.length <= 0){
     			var pymntcontent = getPaymentCells(payment);
-    			$paymentsRows.append('<tr id="'+dateId+"_"+pTime+'">'+pymntcontent+'</tr>');
+    			$paymentsRows.append('<tr id="p'+dateId+"_"+pTime+'">'+pymntcontent+'</tr>');
     		}
     		summaryData.amount += parseFloat(payment.amount);
     		summaryData.count++;
@@ -212,7 +221,7 @@ function renderPayments(paymentsResults){
     		}
     		
     	}
-    	var elS = $('#'+dateId);
+    	var elS = $('#p'+dateId);
     	elS.html(getSummaryCells(summaryData));
     }
 }
