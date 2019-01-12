@@ -1,6 +1,6 @@
 # Tests
 Implementation of test will be within test folder. To run test
 
-``bash
+```bash
 npm run test
 ```
