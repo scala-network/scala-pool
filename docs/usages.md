@@ -16,13 +16,12 @@ Usage
 
 #### Requirements
 * Coin daemon(s) (find the coin's repo and build latest version from source)
-  * [List of Cryptonote coins](https://github.com/dvandal/cryptonote-nodejs-pool/wiki/Cryptonote-Coins)
 * [Node.js](http://nodejs.org/) v8.0+
   * For Ubuntu: 
  ```
 	sudo apt-get update
 	sudo apt-get install build-essential libssl-dev
-	curl https://raw.githubusercontent.com/creationix/nvm/0.33.11/install.sh | bash
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 	source ~/.profile
 	nvm install 8
 	nvm alias default 8
@@ -79,7 +78,7 @@ Copy the `default/config.default.json` file of your choice to `config.json` then
 The file `config.json` is used by default but a file can be specified using the `-config=file` command argument, for example:
 
 ```bash
-	node init.js --config=config_backup.json
+	node init.js -config=config_backup.json
 ```
 
 This software contains four distinct modules:
@@ -93,7 +92,12 @@ By default, running the `init.js` script will start up all four modules. You can
 only start a specific module by using the `-module=name` command argument, for example:
 
 ```bash
-	node init.js --module=api
+	node init.js -module=api
+```
+or running multiple certain module
+
+```bash
+	node init.js -module=api,charts,payments
 ```
 
 [Example screenshot](http://i.imgur.com/SEgrI3b.png) of running the pool in single module mode with tmux.
@@ -226,7 +230,7 @@ the Node.js modules, and any config files that may have been changed.
 #### JSON-RPC
 
 Documentation for JSON-RPC commands can be found here:
-* Daemon https://wiki.bytecoin.org/wiki/JSON_RPC_API
+* Daemon https://xtlpool.com/daemon.html
 * Wallet https://wiki.bytecoin.org/wiki/Wallet_JSON_RPC_API
 
 

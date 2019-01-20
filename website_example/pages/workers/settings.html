@@ -155,7 +155,7 @@ routeApp = {
     init:function(){
     	$('#resetDonationButton').on('click',function(e){
 		    e.preventDefault();
-		    var address = $('#yourAddress').val().trim();
+		    var address = $('#yourStatsInput').val().trim();
 		    if (!address || address == '') {
 		        showError('noMinerAddress', 'No miner address specified');
 		        return;
@@ -174,7 +174,7 @@ routeApp = {
 		// Handle click on Set button
 		$('#payoutSetButton').on('click',function(e){
 		    e.preventDefault();
-		    var address = $('#yourAddress').val().trim();
+		    var address = $('#yourStatsInput').val().trim();
 		    if (!address || address == '') {
 		        showError('noMinerAddress', 'No miner address specified');
 		        return;
@@ -200,7 +200,4 @@ routeApp = {
 		$('#yourPayoutRate').val(getPayoutLevel());
     }
 };
-
-
 </script>
-

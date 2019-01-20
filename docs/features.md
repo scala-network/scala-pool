@@ -5,7 +5,7 @@ Features
 * TCP (stratum-like) protocol for server-push based jobs
   * Compared to old HTTP protocol, this has a higher hash rate, lower network/CPU server load, lower orphan
     block percent, and less error prone
-* Support for Cryptonight Stellite v7 algorithms.
+* Support for Cryptonight v8 half algorithms.
 * IP banning to prevent low-diff share attacks
 * Socket flooding detection
 * Share trust algorithm to reduce share validation hashing CPU load
@@ -28,11 +28,12 @@ Features
 * Blocks found (pending, confirmed, and orphaned)
 * Historic charts of pool's hashrate, miners count and coin difficulty
 * Historic charts of users's hashrate and payments
+* Scoresheet allow for users's to verify each mined block shares
 
 #### Mined blocks explorer
 * Mined blocks table with block status (pending, confirmed, and orphaned)
 * Blocks luck (shares/difficulty) statistics
-* Universal blocks and transactions explorer based on [chainradar.com](http://chainradar.com)
+* Stellite blocks and transactions explorer based on [explorer.stellite.cash](http://explorer.stellite.cash)
 
 #### Smart payment processing
 * Splintered transactions to deal with max transaction size
@@ -43,6 +44,8 @@ Features
 * Control transactions priority with config.payments.priority (default: 0).
 * Set payment ID on miner client when using "[address].[paymentID]" login
 * Integrated payment ID addresses support for Exchanges
+* Options to set donation mining when using "[address]%[donate_level]%" login
+* Additional rewards for unlocking on each block miner unlocked
 
 #### Admin panel
 * Aggregated pool statistics

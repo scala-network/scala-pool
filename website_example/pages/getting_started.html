@@ -149,16 +149,16 @@
         
 
 <!-- XMRig -->
-            <tr class="appInfo">
+            <tr class="appInfo" style='display:none'>
                 <td class="miningAppTitle">XTLAndrig</td>
                 <td>CPU (android)</td>
                 <td>An android classic cpu miner</td>
                 <td><a class="btn btn-success" target="_blank" href="https://github.com/stellitecoin/xtlandrig/releases/latest"><span tkey="download">Download</span></a></td>
-                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#xtlig" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
+                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#xtlandrig" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
             </tr>
             <tr class="appConfig">
                 <td colspan="5">
-                    <div class="collapse" id="xtlig">
+                    <div class="collapse" id="xtlandrig">
         
 <pre><code>xtlandrig -o <span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span> -u <span class="exampleLogin">YOUR_WALLET_ADDRESS</span> -p <span class="examplePassword">YOUR_WORKER_NAME</span> 
 </code></pre>
@@ -217,7 +217,7 @@
         "pass": "<span class="examplePassword">YOUR_WORKER_NAME</span>",
         "keepalive": true,
         "nicehash": false,
-        "variant": "xtl"
+        "variant": "cn/2"
     }
 ],</code></pre>
 
@@ -244,7 +244,7 @@
         "pass": "<span class="examplePassword">YOUR_WORKER_NAME</span>"
         "keepalive": true,
         "nicehash": false,
-        "variant": "xtl"
+        "algo": "cn/half"
     }
 ],</code></pre>
 
@@ -271,7 +271,7 @@
         "pass": "<span class="examplePassword">YOUR_WORKER_NAME</span>"
         "keepalive": true,
         "nicehash": false,
-        "variant": "xtl"
+        "algo": "cn/half"
     }
 ],</code></pre>
 
@@ -319,7 +319,7 @@
                     <h4>config.txt</h4>
 <pre><code>"pools": [
     {
-        "cryptonight_type" : "stellitev4",
+        "cryptonight_type" : "stellitev8",
         "intensity" : 0,
         "double_threads" : true,
         "target_temperature" : 0
@@ -348,11 +348,11 @@
                 <td>OpenCL (AMD)</td>
                 <td>HighSpeed AMD CryptoNight Miner</td>
                 <td><a class="btn btn-success" target="_blank" href="https://bitcointalk.org/index.php?topic=3167363.0"><span tkey="download">Download</span></a></td>
-                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#srbminer" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
+                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#castxmr" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
             </tr>
             <tr class="appConfig">
                 <td colspan="5">
-                    <div class="collapse" id="srbminer">
+                    <div class="collapse" id="castxmr">
                     <h4>run.bat</h4>
         "wallet" :  "<span class="exampleLogin">YOUR_WALLET_ADDRESS</span>",
 <pre><code>cast_xmr-vega.exe -S <span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span> -u YOUR_WALLET_ADDRESS -p "<span class="examplePassword">YOUR_WORKER_NAME</span>" --algo 6 -R -O -1 --maxmem --nonicehash --fastjobswitch 
@@ -419,11 +419,9 @@ currentPage = {
 
         var coin = lastStats.config.coin.toLowerCase() || null;
         var cnAlgorithm ="cryptonight";
-        var cnVariant = 3;
+        var cnVariant = 8;
 
-        algorithm = 'Cryptonight (Stellite v7)';
-        xtlstakAlgo = 'cryptonight_v7_stellite';
-        
+        algorithm = 'Cryptonight (Half Iterations)';        
         xtlstakAlgo = 'stellite';
 
         updateText('cnAlgorithm', algorithm);

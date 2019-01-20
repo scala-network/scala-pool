@@ -140,6 +140,7 @@ Module that monitors the submitted block maturities and manages rounds. Confirme
 | blockUnlocker.poolFee | The pool fee. |
 | blockUnlocker.devDonation | The developper donation. Thanks for supporting me! |
 | blockUnlocker.networkFee | The network/Governance fee (used by some coins like Loki). |
+| blockUnlocker.reward | Percent of reward to miner who helped unlock a block |
 
 ### Application Programming Interface (API)
 AJAX API used for front-end website
@@ -199,6 +200,16 @@ For each parameters group you can set the following parameters:
 | --------- | ------- |
 | checkInterval | Interval of sending rpcMethod request. |
 | rpcMethod | The RPC method name. |
+
+### StellitePay Integrations
+Integrate mining directly to StellitePay.
+
+| Parameter | Details |
+| --------- | ------- |
+| stellitepay.enable | Enable integrations |
+| stellitepay.merchant_key | Key obtain from StellitePay Administrator |
+| stellitepay.url | URL for StellitePay API (default: https://api.stellitepay.com). |
+| stellitepay.version | API version |
 
 ### Market prices
 Prices settings for market and price charts.

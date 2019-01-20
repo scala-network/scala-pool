@@ -2,11 +2,10 @@
     "coin": "Stellitecoin",
     "symbol": "XTL",
     "coinUnits":100,
-    "coinDifficultyTarget": 60,
-
+    "coinDifficultyTarget": 300,
     "logging": {
         "files": {
-        	"enabled":false,
+        "enabled":false,
             "level": "error",
             "directory": "logs",
             "flushInterval": 5
@@ -16,7 +15,6 @@
             "colors": true
         }
     },
-
     "poolServer": {
     	"timeout":1000,
         "enabled": true,
@@ -79,7 +77,7 @@
     "payments": {
         "enabled": true,
         "interval": 900,
-        "maxAddresses": 100,
+        "maxAddresses": 15,
         "mixin": 1,
         "priority": 0,
         "transferFee": 15,
@@ -93,17 +91,21 @@
     },
 	"contributions":{
 		"Se2ef2vWfM5je9M9p9RXnb3YG1Bxm7eLJb4np1TdJmbTfo5VAo43g2EFikEG7wenV2BihjyWmoDL1efXafFfDJoE2GcxJtvH7": {
-
-			"percent":0.5,
+			"percent":0.3,
 			"desc":"Pool Contributions",
+			"hidden":false
+		},
+		"Se3dRf8ZTUXKYivaTFU4KYczPcmMcwPZWEQ5HZmj3RRviFJ3w1mNhtgCWkn6VsnQcMBX1hyCUjZVuSo8X7yJTSYj1joP84WoT": {
+			"percent":0.1,
+			"desc":"Foundation Contributions",
 			"hidden":false
 		}
 	},
     "blockUnlocker": {
         "enabled": true,
         "interval": 60,
-        "depth": 20
-        
+        "depth": 5,
+       	"reward":0.1
     },
 
     "api": {
