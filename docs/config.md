@@ -128,6 +128,8 @@ Module that sends payments to miners according to their submitted shares.
 | payments.minPayment | Miner balance required before sending payment. |
 | payments.maxTransactionAmount | Split transactions by this amount (to prevent "too big transaction" error). |
 | payments.denomination | Truncate to this precision and store remainder. |
+| payments.minPaymentIntegratedAddress | Miner balance required before sending payment (Integrated Address). |
+| payments.minPaymentStellitePay | Miner balance required before sending payment (Stellite Pay default: 10000.00 XTL). |
 
 ### Blocks Unlocker module
 Module that monitors the submitted block maturities and manages rounds. Confirmed blocks mark the end of a round where workers' balances are increased in proportion to their shares.
