@@ -228,6 +228,9 @@ function renderPayments(paymentsResults){
 
 function renderBlocks(data){
 	var $blocksReport_rows = $('#blocksReport_rows');
+	if(!data){
+		return;
+	}
 	for(var i=0,il=data.length;i<il;i++){
 		var block = data[i];
 		var html = getBlockRowElement(block);
