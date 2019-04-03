@@ -33,7 +33,7 @@ Features
 #### Mined blocks explorer
 * Mined blocks table with block status (pending, confirmed, and orphaned)
 * Blocks luck (shares/difficulty) statistics
-* Stellite blocks and transactions explorer based on [explorer.stellite.cash](http://explorer.stellite.cash)
+* Torque blocks and transactions explorer based on [explorer.stellite.cash](http://explorer.stellite.cash)
 
 #### Smart payment processing
 * Splintered transactions to deal with max transaction size

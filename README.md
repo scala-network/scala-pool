@@ -1,7 +1,7 @@
-xtl-nodejs-pool
+xtc-nodejs-pool
 ======================
 
-High performance Node.js (with native C addons) mining pool for Stellite coin. Comes with lightweight example front-end script which uses the pool's AJAX API. Support for Cryptonight Stellite v7 algorithms.
+High performance Node.js (with native C addons) mining pool for Torque coin. Comes with lightweight example front-end script which uses the pool's AJAX API. Support for Cryptonight Torque v7 algorithms.
 
 
 #### Table of Contents

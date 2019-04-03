@@ -70,10 +70,10 @@
             <div class="card padding-l-10 padding-r-10 community-donations">
             <div class="stats">
                 <div><i class="fa fa-hand-holding-heart"></i> Community donations (selected by <code><span class="customDonationDelimiter">%</span>percent<span class="customDonationDelimiter">%</span></code> tag described)
-                    go to a Stellite community donation pool which uses the funds to advance Stellite (view more at <a href='https://donations.stellite.cash/'>project funding</a>).
+                    go to a Torque community donation pool which uses the funds to advance Torque (view more at <a href='https://donations.stellite.cash/'>project funding</a>).
 
                     <br /><br />
-                    While we encourage donations to support the Stellite community, you are <b><i>not</i></b> required to donate to use this pool.
+                    While we encourage donations to support the Torque community, you are <b><i>not</i></b> required to donate to use this pool.
 
                     <br /><br />
                     Note that donation levels are set per <i>address</i>, not per <i>worker</i>: if
@@ -127,7 +127,7 @@
             </div>
         </div>
         <div class="col-md-12 push-up-5">
-            <input id="generateConf" type="submit" tvalue="generateConfig" value="Generate configuration" class="btn btn-default"  data-toggle="collapse" href="#xtlstak" />
+            <input id="generateConf" type="submit" tvalue="generateConfig" value="Generate configuration" class="btn btn-default"  data-toggle="collapse" href="#xtcstak" />
         </div>
     </div>
 </div>
@@ -148,37 +148,17 @@
             <tbody id="miningApps_rows">
         
 
-<!-- XMRig -->
-            <tr class="appInfo" style='display:none'>
-                <td class="miningAppTitle">XTLAndrig</td>
-                <td>CPU (android)</td>
-                <td>An android classic cpu miner</td>
-                <td><a class="btn btn-success" target="_blank" href="https://github.com/stellitecoin/xtlandrig/releases/latest"><span tkey="download">Download</span></a></td>
-                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#xtlandrig" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
-            </tr>
-            <tr class="appConfig">
-                <td colspan="5">
-                    <div class="collapse" id="xtlandrig">
-        
-<pre><code>xtlandrig -o <span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span> -u <span class="exampleLogin">YOUR_WALLET_ADDRESS</span> -p <span class="examplePassword">YOUR_WORKER_NAME</span> 
-</code></pre>
-
-                    </div>
-                </td>
-            </tr>
-
-
         <!-- XMR Stak -->
             <tr class="appInfo">
-                <td class="miningAppTitle">XTL Stak</td>
+                <td class="miningAppTitle">XTC Stak</td>
                 <td>CPU & GPU (AMD/NVIDIA)</td>
                 <td>Easy to use CPU + GPU Mining App</td>
-                <td><a class="btn btn-success" target="_blank" href="https://github.com/stellitecoin/xtl-stak/releases/latest"><span tkey="download">Download</span></a></td>
-                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#xtlstak" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
+                <td><a class="btn btn-success" target="_blank" href="https://github.com/contribute-torque/xtc-stak/releases/latest"><span tkey="download">Download</span></a></td>
+                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#xtcstak" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
             </tr>
             <tr class="appConfig">
                 <td colspan="5">
-                    <div class="collapse" id="xtlstak">
+                    <div class="collapse" id="xtcstak">
         
 <pre><code>"pool_list": [
     {
@@ -192,7 +172,7 @@
         "pool_weight": 1
     },
 ],
-"currency": "<span id="xtlstakAlgo"></span>",</code></pre>
+"currency": "<span id="xtcstakAlgo"></span>",</code></pre>
 
                     </div>
                 </td>
@@ -203,12 +183,12 @@
                 <td class="miningAppTitle">XTLrig</td>
                 <td>CPU</td>
                 <td>Ligthweight but powerful CPU Mining App</td>
-                <td><a class="btn btn-success" target="_blank" href="https://github.com/stellitecoin/xtlig/releases/latest"><span tkey="download">Download</span></a></td>
-                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#xtlig" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
+                <td><a class="btn btn-success" target="_blank" href="https://github.com/contribute-torque/xtcig/releases/latest"><span tkey="download">Download</span></a></td>
+                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#xtcig" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
             </tr>
             <tr class="appConfig">
                 <td colspan="5">
-                    <div class="collapse" id="xtlig">
+                    <div class="collapse" id="xtcig">
         
 <pre><code>"pools": [
     {
@@ -422,10 +402,10 @@ currentPage = {
         var cnVariant = 8;
 
         algorithm = 'Cryptonight (Half Iterations)';        
-        xtlstakAlgo = 'stellite';
+        xtcstakAlgo = 'stellite';
 
         updateText('cnAlgorithm', algorithm);
-        updateText('xtlstakAlgo', xtlstakAlgo);
+        updateText('xtcstakAlgo', xtcstakAlgo);
     }
 };
 

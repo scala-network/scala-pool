@@ -1,11 +1,11 @@
 [Unit]
-Description=Stellite Daemon
+Description=Torque Daemon
 After=network.target
 
 [Service]
 Type=forking
 GuessMainPID=no
-ExecStart=/home/stellite/Stellite/build/release/bin/stellited \
+ExecStart=/home/stellite/Torque/build/release/bin/stellited \
 --rpc-bind-ip 127.0.0.1 \
 --rpc-bind-port 20189 \
 --p2p-bind-ip 0.0.0.0 \
@@ -14,7 +14,6 @@ ExecStart=/home/stellite/Stellite/build/release/bin/stellited \
 --confirm-external-bind --detach
 
 Restart=always
-User=stellite
-
+User=torque
 [Install]
 WantedBy=multi-user.target

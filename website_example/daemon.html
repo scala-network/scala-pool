@@ -11,26 +11,26 @@
 	<meta name="mobile-web-app-capable" content="yes">
 
 	
-	<link rel="manifest" href="https://xtlpool.com/manifest.json">
-	<link rel="icon" type="image/png" href="https://xtlpool.com/favicon/icon-16x16.png" sizes="16x16">
-	<link rel="icon" type="image/png" href="https://xtlpool.com/favicon/icon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="https://xtlpool.com/favicon/icon-96x96.png" sizes="96x96">
-	<link rel="icon" type="image/png" href="https://xtlpool.com/favicon/icon-144x144.png" sizes="128x128">
-	<link rel="icon" type="image/png" href="https://xtlpool.com/favicon/icon-144x144.png" sizes="144x144">
-	<link rel="icon" type="image/png" href="https://xtlpool.com/favicon/icon-192x192.png" sizes="192x192">
-	<link rel="icon" type="image/png" href="https://xtlpool.com/favicon/icon-196x196.png" sizes="196x196">
-	<link rel="apple-touch-icon" href="https://xtlpool.com/favicon/icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="https://xtlpool.com/favicon/icon-180x180.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="https://xtlpool.com/favicon/icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="167x167" href="https://xtlpool.com/favicon/icon-167x167.png">
+	<link rel="manifest" href="https://xtcpool.com/manifest.json">
+	<link rel="icon" type="image/png" href="https://xtcpool.com/favicon/icon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="https://xtcpool.com/favicon/icon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="https://xtcpool.com/favicon/icon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="https://xtcpool.com/favicon/icon-144x144.png" sizes="128x128">
+	<link rel="icon" type="image/png" href="https://xtcpool.com/favicon/icon-144x144.png" sizes="144x144">
+	<link rel="icon" type="image/png" href="https://xtcpool.com/favicon/icon-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="https://xtcpool.com/favicon/icon-196x196.png" sizes="196x196">
+	<link rel="apple-touch-icon" href="https://xtcpool.com/favicon/icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="https://xtcpool.com/favicon/icon-180x180.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="https://xtcpool.com/favicon/icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="167x167" href="https://xtcpool.com/favicon/icon-167x167.png">
 	
 	<meta name="theme-color" content="#06071D" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta property="og:title" content="Stellite Pool" />
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Stellite Pool" />
-	<meta property="og:url" content="https://xtlpool.com" />
-	<meta property="og:image" content="https://xtlpool.com/img/logo-large.png" />
+	<meta property="og:url" content="https://xtcpool.com" />
+	<meta property="og:image" content="https://xtcpool.com/img/logo-large.png" />
 	<meta property="og:image:type" content="image/png" />
 	<meta property="og:image:alt" content="Stellite Pool Logo" />
 	<meta property="og:image:width" content="332" />
@@ -41,7 +41,7 @@
 	<meta name="twitter:creator" content="@ahmyi" />
 	<meta name="twitter:title" content="Stellite Pool" />
 	<meta name="twitter:description" content="Community driven mining pool for the Stellite communities" />
-	<meta name="twitter:image" content="https://xtlpool.com/img/logo-large.png" />
+	<meta name="twitter:image" content="https://xtcpool.com/img/logo-large.png" />
 
 
    <link rel="icon" type="image/png" sizes="32x32" href="img/logo-large.png">
@@ -144,8 +144,8 @@
 
 <p>Many RPC calls use the daemon's JSON RPC interface while others use their own interfaces, as demonstrated below.</p>
 
-<p>We will be using online RPC catered by XTL Pool at <code>http://node.xtlpool.com:20190</code></p>
-<p>There is a secure connection address via https at <code>https://nodes.xtlpool.com</code></p>
+<p>We will be using online RPC catered by XTL Pool at <code>http://node.xtcpool.com:20190</code></p>
+<p>There is a secure connection address via https at <code>https://nodes.xtcpool.com</code></p>
 
 <p>Note: "<a href="#" data-toggle="tooltip" title="Atomic Units refer to the smallest fraction of an XTL.">atomic units</a>" refer to the smallest
 fraction of 1 XTL according to the stellited implementation. <strong>1 XTL = 0.01 atomic units.</strong></p> 
@@ -226,7 +226,7 @@ fraction of 1 XTL according to the stellited implementation. <strong>1 XTL = 0.0
 
 <p>The majority of monerod RPC calls use the daemon's <code class="highlighter-rouge">json_rpc</code> interface to request various bits of information. These methods all follow a similar structure, for example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>IP=node.xtlpool.com
+<div class="highlighter-rouge"><pre class="highlight"><code>IP=node.xtcpool.com
 PORT=20190
 METHOD='get_block_header_by_height'
 ALIAS='getblockheaderbyheight'
@@ -257,7 +257,7 @@ curl \
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_count"}' -H 'Content-Type: application/json'  
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_count"}' -H 'Content-Type: application/json'  
 
 {  
   "id": "0",  
@@ -290,7 +290,7 @@ curl \
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"on_get_block_hash","params":[912345]}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"on_get_block_hash","params":[912345]}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -329,7 +329,7 @@ curl \
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_template","params":{"wallet_address":"44GBHzv6ZyQdJkjqZje6KLZ3xSyN1hBSFAnLP6EAqJtCRVzMzZmeXTC2AHKDS9aEDTRKmo6a6o9r9j86pYfhCWDkKjbtcns","reserve_size":60}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_template","params":{"wallet_address":"44GBHzv6ZyQdJkjqZje6KLZ3xSyN1hBSFAnLP6EAqJtCRVzMzZmeXTC2AHKDS9aEDTRKmo6a6o9r9j86pYfhCWDkKjbtcns","reserve_size":60}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -401,7 +401,7 @@ curl \
 
 <p>In this example, the most recent block (1562023 at the time) is returned:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_last_block_header"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_last_block_header"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -451,7 +451,7 @@ curl \
 
 <p>In this example, block 912345 is looked up by its hash:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_header_by_hash","params":{"hash":"e22cf75f39ae720e8b71b3d120a5ac03f0db50bba6379e2850975b4859190bc6"}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_header_by_hash","params":{"hash":"e22cf75f39ae720e8b71b3d120a5ac03f0db50bba6379e2850975b4859190bc6"}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -501,7 +501,7 @@ curl \
 
 <p>In this example, block 912345 is looked up by its height (notice that the returned information is the same as in the previous example):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_header_by_height","params":{"height":912345}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_header_by_height","params":{"height":912345}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -552,7 +552,7 @@ curl \
 
 <p>In this example, blocks range from height 1545999 to 1546000 is looked up (notice that the returned informations are ascending order and that it is at the April 2018 network upgrade time):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_headers_range","params":{"start_height":1545999,"end_height":1546000}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block_headers_range","params":{"start_height":1545999,"end_height":1546000}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -657,7 +657,7 @@ curl \
 
 <p>In the following example, block 912345 is looked up by its height. Note that block 912345 does not have any non-coinbase transactions. (See the next example for a block with extra transactions):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block","params":{"height":912345}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block","params":{"height":912345}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -692,7 +692,7 @@ curl \
 
 <p>In the following example, block 993056 is looked up by its hash. Note that block 993056 has 3 non-coinbase transactions:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block","params":{"hash":"510ee3c4e14330a7b96e883c323a60ebd1b5556ac1262d0bc03c24a3b785516f"}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_block","params":{"hash":"510ee3c4e14330a7b96e883c323a60ebd1b5556ac1262d0bc03c24a3b785516f"}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -764,7 +764,7 @@ curl \
 
 <p>Following is an example of <code class="highlighter-rouge">get_connections</code> and it's return:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_connections"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_connections"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -850,7 +850,7 @@ curl \
 
 <p>Following is an example <code class="highlighter-rouge">get_info</code> call and its return:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -912,7 +912,7 @@ curl \
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"hard_fork_info"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"hard_fork_info"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -963,7 +963,7 @@ curl \
 
 <p>In the following example, host is banned with its IP address string-formatted as A.B.C.D:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"set_bans","params":{"bans":[{"host":"192.168.1.51","ban":true,"seconds":30}]}}' -H  'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"set_bans","params":{"bans":[{"host":"192.168.1.51","ban":true,"seconds":30}]}}' -H  'Content-Type: application/json'
 
 {
   "id": "0",
@@ -979,7 +979,7 @@ curl \
 
 <p>In the following example, integer-formatted IP is banned:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"set_bans","params":{"bans":[{"ip":838969536,"ban":true,"seconds":30}]}}' -H  'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"set_bans","params":{"bans":[{"ip":838969536,"ban":true,"seconds":30}]}}' -H  'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1014,7 +1014,7 @@ curl \
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_bans"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_bans"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1055,7 +1055,7 @@ curl \
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"flush_txpool","params":{"txids":["dc16fa8eaffe1484ca9014ea050e13131d3acf23b419f33bb4cc0b32b6c49308",""]}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"flush_txpool","params":{"txids":["dc16fa8eaffe1484ca9014ea050e13131d3acf23b419f33bb4cc0b32b6c49308",""]}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1099,7 +1099,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_output_histogram","params":{"amounts":[20000000000]}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_output_histogram","params":{"amounts":[20000000000]}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1141,7 +1141,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_coinbase_tx_sum","params":{"height":1563078,"count":2}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_coinbase_tx_sum","params":{"height":1563078,"count":2}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1173,7 +1173,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_version"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_version"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1209,7 +1209,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_fee_estimate"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_fee_estimate"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1247,7 +1247,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_alternate_chains"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_alternate_chains"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1285,7 +1285,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"relay_tx","params":{"txids":[9fd75c429cbe52da9a52f2ffc5fbd107fe7fd2099c0d8de274dc8a67e0c98613]}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"relay_tx","params":{"txids":[9fd75c429cbe52da9a52f2ffc5fbd107fe7fd2099c0d8de274dc8a67e0c98613]}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1331,7 +1331,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"sync_info"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"sync_info"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1404,7 +1404,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_txpool_backlog"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_txpool_backlog"}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1447,7 +1447,7 @@ RingCT outputs counts as 0 amount.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_output_distribution","params":{"amounts":[628780000],"from_height":1462078}}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_output_distribution","params":{"amounts":[628780000],"from_height":1462078}}' -H 'Content-Type: application/json'
 
 {
   "id": "0",
@@ -1504,7 +1504,7 @@ curl \
   <li><em>untrusted</em> - boolean; States if the result is obtained using the bootstrap mode, and is therefore not trusted (<code class="highlighter-rouge">true</code>), or when the daemon is fully synced (<code class="highlighter-rouge">false</code>).</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_height -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_height -H 'Content-Type: application/json'
 
 {
   "height": 1564055,
@@ -1551,7 +1551,7 @@ curl \
 Example:
 
 ```
-$ curl -X POST http://node.xtlpool.com:20190/get_blocks.bin -d '{"block_ids":["d109a406528a7b44fef8bc03e75eaabb0f919f852884b43b550b8b3be80a49e7"],"start_height":1562062}' -H 'Content-Type: application/json'
+$ curl -X POST http://node.xtcpool.com:20190/get_blocks.bin -d '{"block_ids":["d109a406528a7b44fef8bc03e75eaabb0f919f852884b43b550b8b3be80a49e7"],"start_height":1562062}' -H 'Content-Type: application/json'
 
 ```
 --->
@@ -1580,9 +1580,9 @@ $ curl -X POST http://node.xtlpool.com:20190/get_blocks.bin -d '{"block_ids":["d
 Example:
 
 ```
-$ echo -e '\x7B\x22\x68\x65\x69\x67\x68\x74\x73\x22\x3A\x5B\x31\x35\x36\x34\x32\x34\x36\x5D\x7D\x' | curl -X POST --data-binary @- http://node.xtlpool.com:20190/get_blocks_by_height.bin
-$ echo -e '1564246' | curl -X POST --data-binary @- http://node.xtlpool.com:20190/get_blocks_by_height.bin
-curl -X POST http://node.xtlpool.com:20190/get_blocks_by_height.bin --data-binary '{"heights":[1564246]}'
+$ echo -e '\x7B\x22\x68\x65\x69\x67\x68\x74\x73\x22\x3A\x5B\x31\x35\x36\x34\x32\x34\x36\x5D\x7D\x' | curl -X POST --data-binary @- http://node.xtcpool.com:20190/get_blocks_by_height.bin
+$ echo -e '1564246' | curl -X POST --data-binary @- http://node.xtcpool.com:20190/get_blocks_by_height.bin
+curl -X POST http://node.xtcpool.com:20190/get_blocks_by_height.bin --data-binary '{"heights":[1564246]}'
 
 ```
 --->
@@ -1614,7 +1614,7 @@ curl -X POST http://node.xtlpool.com:20190/get_blocks_by_height.bin --data-binar
 Example:
 
 ```
-$ curl -X POST http://node.xtlpool.com:20190/get_hashes.bin -d '{"block_ids":["d109a406528a7b44fef8bc03e75eaabb0f919f852884b43b550b8b3be80a49e7"],"start_height":1562062}' -H 'Content-Type: application/json'
+$ curl -X POST http://node.xtcpool.com:20190/get_hashes.bin -d '{"block_ids":["d109a406528a7b44fef8bc03e75eaabb0f919f852884b43b550b8b3be80a49e7"],"start_height":1562062}' -H 'Content-Type: application/json'
 
 ```
 --->
@@ -1643,7 +1643,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_hashes.bin -d '{"block_ids":["d
 Example:
 
 ```
-$ curl -X POST http://node.xtlpool.com:20190/get_o_indexes.bin --data-binary '{"txid":"d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"}'
+$ curl -X POST http://node.xtcpool.com:20190/get_o_indexes.bin --data-binary '{"txid":"d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"}'
 
 ```
 --->
@@ -1683,7 +1683,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_o_indexes.bin --data-binary '{"
 Example:
 
 ```
-$ curl -X POST http://node.xtlpool.com:20190/get_o_indexes.bin -d '{"txid":"d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"}' -H 'Content-Type: application/json'
+$ curl -X POST http://node.xtcpool.com:20190/get_o_indexes.bin -d '{"txid":"d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"}' -H 'Content-Type: application/json'
 
 ```
 --->
@@ -1726,7 +1726,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_o_indexes.bin -d '{"txid":"d6e4
 Example:
 
 ```
-$ curl -X POST http://node.xtlpool.com:20190/get_o_indexes.bin --data-binary '{"txid":"d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"}'
+$ curl -X POST http://node.xtcpool.com:20190/get_o_indexes.bin --data-binary '{"txid":"d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"}'
 
 ```
 --->
@@ -1762,7 +1762,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_o_indexes.bin --data-binary '{"
 Example:
 
 ```
-$ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_count":7}' -H 'Content-Type: application/json'
+$ curl -X POST http://node.xtcpool.com:20190/get_random_rctouts.bin -d '{"outs_count":7}' -H 'Content-Type: application/json'
 
 ```
 --->
@@ -1832,7 +1832,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example 1: Return transaction information in binary format.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_transactions -d '{"txs_hashes":["d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"]}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_transactions -d '{"txs_hashes":["d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"]}' -H 'Content-Type: application/json'
 
 {
   "status": "OK",
@@ -1854,7 +1854,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example 2: Decode returned transaction information in JSON format. Note: the "vin", "vout" and "signatures" list have been truncated in the displayed return for space considerations.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_transactions -d '{"txs_hashes":["d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"],"decode_as_json":true}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_transactions -d '{"txs_hashes":["d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090408"],"decode_as_json":true}' -H 'Content-Type: application/json'
 
 {
   "status": "OK",
@@ -1877,7 +1877,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example 3: Returned a missed (unexisting) transaction.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl -X POST http://node.xtlpool.com:20190/get_transactions -d '{"txs_hashes":["d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090409"]}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>curl -X POST http://node.xtcpool.com:20190/get_transactions -d '{"txs_hashes":["d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090409"]}' -H 'Content-Type: application/json'
 
 {
   "missed_tx": ["d6e48158472848e6687173a91ae6eebfa3e1d778e65252ee99d7515d63090409"],
@@ -1905,7 +1905,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_alt_blocks_hashes -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_alt_blocks_hashes -H 'Content-Type: application/json'
 
 {
   "blks_hashes": ["9c2277c5470234be8b32382cdf8094a103aba4fcd5e875a6fc159dc2ec00e011","637c0e0f0558e284493f38a5fcca3615db59458d90d3a5eff0a18ff59b83f46f","6f3adc174a2e8082819ebb965c96a095e3e8b63929ad9be2d705ad9c086a6b1c","697cf03c89a9b118f7bdf11b1b3a6a028d7b3617d2d0ed91322c5709acf75625","d99b3cf3ac6f17157ac7526782a3c3b9537f89d07e069f9ce7821d74bd9cad0e","e97b62109a6303233dcd697fa8545c9fcbc0bf8ed2268fede57ddfc36d8c939c","70ff822066a53ad64b04885c89bbe5ce3e537cdc1f7fa0dc55317986f01d1788","b0d36b209bd0d4442b55ea2f66b5c633f522401f921f5a85ea6f113fd2988866"],
@@ -1937,7 +1937,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/is_key_image_spent -d '{"key_images":["8d1bd8181bf7d857bdb281e0153d84cd55a3fcaa57c3e570f4a49f935850b5e3","7319134bfc50668251f5b899c66b005805ee255c136f0e1cecbb0f3a912e09d4"]}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/is_key_image_spent -d '{"key_images":["8d1bd8181bf7d857bdb281e0153d84cd55a3fcaa57c3e570f4a49f935850b5e3","7319134bfc50668251f5b899c66b005805ee255c136f0e1cecbb0f3a912e09d4"]}' -H 'Content-Type: application/json'
 
 {
   "spent_status": [1,2],
@@ -1979,7 +1979,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example (No return information included here.):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/send_raw_transaction -d '{"tx_as_hex":"de6a3...", "do_not_relay":false}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/send_raw_transaction -d '{"tx_as_hex":"de6a3...", "do_not_relay":false}' -H 'Content-Type: application/json'
 </code></pre>
 </div>
 
@@ -2006,7 +2006,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/start_mining -d '{"do_background_mining":false,"ignore_battery":true,"miner_address":"47xu3gQpF569au9C2ajo5SSMrWji6xnoE5vhr94EzFRaKAGw6hEGFXYAwVADKuRpzsjiU1PtmaVgcjUJF89ghGPhUXkndHc","threads_count":1}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/start_mining -d '{"do_background_mining":false,"ignore_battery":true,"miner_address":"47xu3gQpF569au9C2ajo5SSMrWji6xnoE5vhr94EzFRaKAGw6hEGFXYAwVADKuRpzsjiU1PtmaVgcjUJF89ghGPhUXkndHc","threads_count":1}' -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2030,7 +2030,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/stop_mining -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/stop_mining -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2059,7 +2059,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example while mining:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/mining_status -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/mining_status -H 'Content-Type: application/json'
 
 {
   "active": true,
@@ -2074,7 +2074,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example while not mining:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/mining_status -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/mining_status -H 'Content-Type: application/json'
 
 {
   "active": false,
@@ -2103,7 +2103,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/save_bc -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/save_bc -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2137,7 +2137,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example (truncated lists):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_peer_list -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_peer_list -H 'Content-Type: application/json'
 
 {
   "gray_list": [{
@@ -2193,7 +2193,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Example while mining:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/set_log_hash_rate -d '{"visible":true}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/set_log_hash_rate -d '{"visible":true}' -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2203,7 +2203,7 @@ $ curl -X POST http://node.xtlpool.com:20190/get_random_rctouts.bin -d '{"outs_c
 
 <p>Error while not mining:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/set_log_hash_rate -d '{"visible":true}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/set_log_hash_rate -d '{"visible":true}' -H 'Content-Type: application/json'
 
 {
   "status": "NOT MINING"
@@ -2232,7 +2232,7 @@ By default, log level is set to <code class="highlighter-rouge">0</code>.</p>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/set_log_level -d '{"level":1}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/set_log_level -d '{"level":1}' -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2322,7 +2322,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example to set all facilities to Security Level <code class="highlighter-rouge">Info</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/set_log_categories -d '{"categories": "*:INFO"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/set_log_categories -d '{"categories": "*:INFO"}' -H 'Content-Type: application/json'
 
 {
   "categories": "*:INFO",
@@ -2333,7 +2333,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example without input to set the default categories:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/set_log_categories -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/set_log_categories -H 'Content-Type: application/json'
 
 {
   "categories": "*:WARNING,net:FATAL,net.p2p:FATAL,net.cn:FATAL,global:INFO,verify:FATAL,stacktrace:INFO,logging:INFO,msgwriter:INFO",
@@ -2439,7 +2439,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example (Note: Some lists in the returned information have been truncated for display reasons):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_transaction_pool -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_transaction_pool -H 'Content-Type: application/json'
 
 {
   "spent_key_images": [{
@@ -2492,7 +2492,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_transaction_pool_hashes.bin -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_transaction_pool_hashes.bin -H 'Content-Type: application/json'
 
 {
   "status": "OK",
@@ -2540,7 +2540,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_transaction_pool_stats -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_transaction_pool_stats -H 'Content-Type: application/json'
 
 {
   "pool_stats": {
@@ -2580,7 +2580,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/stop_daemon -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/stop_daemon -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2618,7 +2618,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/get_limit -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/get_limit -H 'Content-Type: application/json'
 
 {
   "limit_down": 8192,
@@ -2652,7 +2652,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/set_limit -d '{"limit_down": 1024}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/set_limit -d '{"limit_down": 1024}' -H 'Content-Type: application/json'
 
 {
   "limit_down": 1024,
@@ -2682,7 +2682,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/out_peers -d '{"out_peers": 3232235535}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/out_peers -d '{"out_peers": 3232235535}' -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2710,7 +2710,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/out_peers -d '{"in_peers": 3232235535}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/out_peers -d '{"in_peers": 3232235535}' -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2734,7 +2734,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/start_save_graph -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/start_save_graph -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2758,7 +2758,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/stop_save_graph -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/stop_save_graph -H 'Content-Type: application/json'
 
 {
   "status": "OK"
@@ -2826,7 +2826,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtlpool.com:20190/update -d '{"command":"check"}' -H 'Content-Type: application/json'
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -X POST http://node.xtcpool.com:20190/update -d '{"command":"check"}' -H 'Content-Type: application/json'
 
 {
   "auto_uri": "",
@@ -2855,7 +2855,7 @@ Setting the categories to "" prevent any logs to be outputed.</li>
 <!-- Footer -->
 <footer>
     <div class="text-muted">
-        <span tkey="poweredBy">Powered by</span> <a target="_blank" href="https://github.com/stellitecoin/xtl-nodejs-pool"><i class="fab fa-github"></i>&nbsp;xtl-nodejs-pool</a>
+        <span tkey="poweredBy">Powered by</span> <a target="_blank" href="https://github.com/contribute-torque/xtc-nodejs-pool"><i class="fab fa-github"></i>&nbsp;xtc-nodejs-pool</a>
         <span id="poolVersion"></span>
         <span class="hidden-xs"><span tkey="openSource">open sourced under the</span> <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL</a></span>
 	    <span>Sound by </span><a target='_blank' href="https://notificationsounds.com">Notification Sounds</a>

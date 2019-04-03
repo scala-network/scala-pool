@@ -203,14 +203,14 @@ For each parameters group you can set the following parameters:
 | checkInterval | Interval of sending rpcMethod request. |
 | rpcMethod | The RPC method name. |
 
-### StellitePay Integrations
-Integrate mining directly to StellitePay.
+### TorquePay Integrations
+Integrate mining directly to TorquePay.
 
 | Parameter | Details |
 | --------- | ------- |
 | stellitepay.enable | Enable integrations |
-| stellitepay.merchant_key | Key obtain from StellitePay Administrator |
-| stellitepay.url | URL for StellitePay API (default: https://api.stellitepay.com). |
+| stellitepay.merchant_key | Key obtain from TorquePay Administrator |
+| stellitepay.url | URL for TorquePay API (default: https://api.stellitepay.com). |
 | stellitepay.version | API version |
 
 ### Market prices

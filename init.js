@@ -1,5 +1,5 @@
-/* Stellite Nodejs Pool
- * Copyright StelliteCoin	<https://github.com/stellitecoin/cryptonote-stellite-pool>
+/* Torque Nodejs Pool
+ * Copyright TorqueCoin	<https://github.com/contribute-torque/xtc-nodejs-pool>
  * Copyright Ahmyi			<https://github.com/ahmyi/cryptonote-stellite-pool>
  * Copyright Dvandal    	<https://github.com/dvandal/cryptonote-nodejs-pool>
  * Copyright Fancoder   	<https://github.com/fancoder/cryptonote-universal-pool>
@@ -98,7 +98,7 @@ if (cluster.isWorker){
 require('./lib/exceptionWriter.js')(logSystem);
 
 // Pool informations
-log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.version]);
+log('info', logSystem, 'Starting Torque Node.JS pool version %s', [global.version]);
 
 /**
  * Start modules

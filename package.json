@@ -1,11 +1,11 @@
 {
-    "name": "xtl-nodjes-pool",
+    "name": "xtc-nodjes-pool",
     "version": "2.1.0",
     "license": "GPL-2.0",
-    "author": "@stellitecoin",
+    "author": "@contribute-torque",
     "repository": {
         "type": "git",
-        "url": "https://github.com/stellitecoin/xtl-nodejs-pool.git"
+        "url": "https://github.com/contribute-torque/xtc-nodejs-pool.git"
     },
     "dependencies": {
         "async": "1",

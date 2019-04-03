@@ -59,7 +59,7 @@ To login with this user :
 Clone the repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
-	git clone https://github.com/stellitecoin/xtl-nodejs-pool.git pool
+	git clone https://github.com/contribute-torque/xtc-nodejs-pool.git pool
 	cd pool
 	npm update
 ```
@@ -103,12 +103,12 @@ or running multiple certain module
 [Example screenshot](http://i.imgur.com/SEgrI3b.png) of running the pool in single module mode with tmux.
 
 To keep your pool up, on operating system with systemd, you can create add your pool software as a service.  
-Use default/service to create the systemd service `/lib/systemd/system/xtl-nodejs-pool.service`
+Use default/service to create the systemd service `/lib/systemd/system/xtc-nodejs-pool.service`
 Then enable and start the service with the following commands : 
 
 ```
-sudo systemctl enable xtl-nodejs-pool.service
-sudo systemctl start xtl-nodejs-pool.service
+sudo systemctl enable xtc-nodejs-pool.service
+sudo systemctl start xtc-nodejs-pool.service
 ```
 
 #### 4) Host the front-end
@@ -230,7 +230,7 @@ the Node.js modules, and any config files that may have been changed.
 #### JSON-RPC
 
 Documentation for JSON-RPC commands can be found here:
-* Daemon https://xtlpool.com/daemon.html
+* Daemon https://xtcpool.com/daemon.html
 * Wallet https://wiki.bytecoin.org/wiki/Wallet_JSON_RPC_API
 
 
