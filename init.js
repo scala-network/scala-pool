@@ -1,40 +1,23 @@
-/* Stellite Nodejs Pool
- * Copyright StelliteCoin	<https://github.com/stellitecoin/cryptonote-stellite-pool>
- * Copyright Ahmyi			<https://github.com/ahmyi/cryptonote-stellite-pool>
- * Copyright Dvandal    	<https://github.com/dvandal/cryptonote-nodejs-pool>
- * Copyright Fancoder   	<https://github.com/fancoder/cryptonote-universal-pool>
- * Copyright zone117x		<https://github.com/zone117x/node-cryptonote-pool>
+/**
+ * Cryptonite Node.JS Pool
+ * https://github.com/dvandal/cryptonote-nodejs-pool
  *
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+ * Pool initialization script
+ **/
 
+// Load needed modules
 var fs = require('fs');
 var cluster = require('cluster');
 var os = require('os');
-
-
-// Initialize log system
-var logSystem = 'init';
-/**
- * Load pool configuration
- **/
 const args = require("args-parser")(process.argv);
 
-global.config = require('./lib/bootstrap')(args.config || 'config.json');
+// Load configuration
+require('./lib/configReader.js');
 
+// Load log system
 require('./lib/logger.js');
 
+// Initialize redis database client
 
 global.redisClient = require('redis').createClient((function(){
 	var options = { 
@@ -69,185 +52,45 @@ global.redisClient = require('redis').createClient((function(){
 	return options;
 })());
 
-global.redisClient.on('error', function (err) {
-    log('error', logSystem, "Error on redis with code : %s",[err.code]);
-});
-
 // Load pool modules
 if (cluster.isWorker){
     switch(process.env.workerType){
         case 'pool':
             require('./lib/pool.js');
             break;
-        case 'unlocker':
+        case 'blockUnlocker':
             require('./lib/blockUnlocker.js');
             break;
-        case 'payments':
+        case 'paymentProcessor':
             require('./lib/paymentProcessor.js');
             break;
         case 'api':
             require('./lib/api.js');
             break;
-        case 'charts':
+        case 'chartsDataCollector':
             require('./lib/chartsDataCollector.js');
+            break;
+        case 'telegramBot':
+            require('./lib/telegramBot.js');
             break;
     }
     return;
 }
 
+// Initialize log system
+var logSystem = 'master';
 require('./lib/exceptionWriter.js')(logSystem);
 
 // Pool informations
-log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.version]);
-
+log('info', logSystem, 'Starting Scala Node.JS pool version %s', [version]);
+ 
 /**
  * Start modules
  **/
-(function(){
-	/**
-	 * Spawn pool workers module
-	 **/
-	function spawnPoolWorkers(){
-	    if (!config.poolServer || !config.poolServer.enabled) {
-	    	return;
-	    }
-	    
-	    if (!config.poolServer.ports || config.poolServer.ports.length === 0){
-	        log('error', logSystem, 'Pool server enabled but no ports specified');
-	        return;
-	    }
-	
-	    var numForks = (function(){
-	        if (!config.poolServer.clusterForks){
-	            return 1;
-	        }
-	        if (config.poolServer.clusterForks === 'auto'){
-	            return os.cpus().length;
-	        }
-	        if (isNaN(config.poolServer.clusterForks)){
-	            return 1;
-	        }
-	        return config.poolServer.clusterForks;
-	    })();
-	
-	    var poolWorkers = {};
-	
-	    var createPoolWorker = function(forkId){
-	        var worker = cluster.fork({
-	            workerType: 'pool',
-	            forkId: forkId
-	        });
-	        worker.forkId = forkId;
-	        worker.type = 'pool';
-	        poolWorkers[forkId] = worker;
-	        worker.on('exit', function(code, signal){
-	            log('error', logSystem, 'Pool fork %s died, spawning replacement worker...', [forkId]);
-	            setTimeout(function(){
-	                createPoolWorker(forkId);
-	            }, global.config.poolServer.timeout || 2000);
-	        }).on('message', function(msg){
-	            switch(msg.type){
-	                case 'banIP':
-	                    Object.keys(cluster.workers).forEach(function(id) {
-	                        if (cluster.workers[id].type === 'pool'){
-	                            cluster.workers[id].send({type: 'banIP', ip: msg.ip});
-	                        }
-	                    });
-	                    break;
-	            }
-	        });
-	    };
-	
-	    var i = 0;
-	    var spawnInterval = setInterval(function(){
-			i++;
-	        if (i -1 === numForks){
-	        	log('info', logSystem, 'Pool spawned on %d thread(s)', [numForks]);
-	            clearInterval(spawnInterval);
-				return;
-	        }
-	       	createPoolWorker(i.toString());
-	    }, 10);
-	}
-	
-	/**
-	 * Spawn block unlocker module
-	 **/
-	function spawnBlockUnlocker(){
-	    if (!config.blockUnlocker || !config.blockUnlocker.enabled) {
-	    	return;
-	    }
-	
-	    var worker = cluster.fork({
-	        workerType: 'unlocker'
-	    });
-	    worker.on('exit', function(code, signal){
-	        log('error', logSystem, 'Block unlocker died, spawning replacement...');
-	        setTimeout(function(){
-	            spawnBlockUnlocker();
-	        }, 2000);
-	    });
-	}
-	
-	/**
-	 * Spawn payment processor module
-	 **/
-	function spawnPaymentProcessor(){
-	    if (!config.payments || !config.payments.enabled) {
-	    	return;
-	    }
-	
-	    var worker = cluster.fork({
-	        workerType: 'payments'
-	    });
-	    worker.on('exit', function(code, signal){
-	        log('error', logSystem, 'Payment processor died, spawning replacement...');
-	        setTimeout(function(){
-	            spawnPaymentProcessor();
-	        }, 2000);
-	    });
-	}
-	
-	/**
-	 * Spawn API module
-	 **/
-	function spawnApi(){
-	    if (!config.api || !config.api.enabled) {
-	    	return;
-	    }
-	
-	    var worker = cluster.fork({
-	        workerType: 'api'
-	    });
-	    worker.on('exit', function(code, signal){
-	        log('error', logSystem, 'API died, spawning replacement...');
-	        setTimeout(function(){
-	            spawnApi();
-	        }, 2000);
-	    });
-	}
-	
-	/**
-	 * Spawn charts data collector module
-	 **/
-	function spawnChartsDataCollector(){
-	    if (!config.charts) return;
-	
-	    var worker = cluster.fork({
-	        workerType: 'charts'
-	    });
-	    worker.on('exit', function(code, signal){
-	        log('error', logSystem, 'chartsDataCollector died, spawning replacement...');
-	        setTimeout(function(){
-	            spawnChartsDataCollector();
-	        }, 2000);
-	    });
-	}
-	
-	
-    	 
-	const init = function(){
-    	const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts'];
+
+(function init(){
+    checkRedisVersion(function(){
+	const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts', 'telegram'];
 		const reqModules = (function(){
 			if(!args.module){
 				return validModules;
@@ -289,17 +132,23 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	            case 'charts':
 	                spawnChartsDataCollector();
 	                break;
+		    case 'telegram':
+			spawnTelegramBot();
+			break;
 	            default:
+			throw "Invalid module";
 	            	break;
 	        }
         }
     
-    };
-    
-    /**
-	 * Check redis database version
-	 **/
-	redisClient.info(function(error, response){
+    });
+})();
+
+/**
+ * Check redis database version
+ **/
+function checkRedisVersion(callback){
+    redisClient.info(function(error, response){
         if (error){
             log('error', logSystem, 'Redis version check failed');
             return;
@@ -317,13 +166,161 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
                 }
             }
         }
-        
         if (!version){
             log('error', logSystem, 'Could not detect redis version - must be super old or broken');
-        } else if (version < 2.6){
-            log('error', logSystem, "You're using redis version %s the minimum required version is 2.6. Follow the damn usage instructions...", [versionString]);
-        } else {
-        	init();
+            return;
         }
+        else if (version < 2.6){
+            log('error', logSystem, "You're using redis version %s the minimum required version is 2.6. Follow the damn usage instructions...", [versionString]);
+            return;
+        }
+        callback();
     });
-})();
+}
+
+/**
+ * Spawn pool workers module
+ **/
+function spawnPoolWorkers(){
+    if (!config.poolServer || !config.poolServer.enabled || !config.poolServer.ports || config.poolServer.ports.length === 0) return;
+
+    if (config.poolServer.ports.length === 0){
+        log('error', logSystem, 'Pool server enabled but no ports specified');
+        return;
+    }
+
+    const numForks = (function(){
+        if (!config.poolServer.clusterForks || isNaN(config.poolServer.clusterForks))
+            return 1;
+	const cpulength = os.cpus().length;
+        if (config.poolServer.clusterForks === 'auto')
+            return cpulength;
+        if (config.poolServer.clusterForks > cpulength)
+            return 1;
+	
+        return config.poolServer.clusterForks;
+    })();
+
+    var poolWorkers = {};
+
+    var createPoolWorker = function(forkId){
+        var worker = cluster.fork({
+            workerType: 'pool',
+            forkId: forkId
+        });
+        worker.forkId = forkId;
+        worker.type = 'pool';
+        poolWorkers[forkId] = worker;
+        worker.on('exit', function(code, signal){
+            log('error', logSystem, 'Pool fork %s died, spawning replacement worker...', [forkId]);
+            setTimeout(function(){
+                createPoolWorker(forkId);
+            }, 2000);
+        }).on('message', function(msg){
+            switch(msg.type){
+                case 'banIP':
+                    Object.keys(cluster.workers).forEach(function(id) {
+                        if (cluster.workers[id].type === 'pool'){
+                            cluster.workers[id].send({type: 'banIP', ip: msg.ip});
+                        }
+                    });
+                    break;
+            }
+        });
+    };
+
+    var i = 1;
+    var spawnInterval = setInterval(function(){
+        createPoolWorker(i.toString());
+        if (i  >= numForks){
+            clearInterval(spawnInterval);
+            log('info', logSystem, 'Pool spawned on %d thread(s)', [numForks]);
+        }
+        i++;
+    }, 10);
+}
+
+/**
+ * Spawn block unlocker module
+ **/
+function spawnBlockUnlocker(){
+    if (!config.blockUnlocker || !config.blockUnlocker.enabled) return;
+
+    var worker = cluster.fork({
+        workerType: 'blockUnlocker'
+    });
+    worker.on('exit', function(code, signal){
+        log('error', logSystem, 'Block unlocker died, spawning replacement...');
+        setTimeout(function(){
+            spawnBlockUnlocker();
+        }, 2000);
+    });
+}
+
+/**
+ * Spawn payment processor module
+ **/
+function spawnPaymentProcessor(){
+    if (!config.payments || !config.payments.enabled) return;
+
+    var worker = cluster.fork({
+        workerType: 'paymentProcessor'
+    });
+    worker.on('exit', function(code, signal){
+        log('error', logSystem, 'Payment processor died, spawning replacement...');
+        setTimeout(function(){
+            spawnPaymentProcessor();
+        }, 2000);
+    });
+}
+
+/**
+ * Spawn API module
+ **/
+function spawnApi(){
+    if (!config.api || !config.api.enabled) return;
+
+    var worker = cluster.fork({
+        workerType: 'api'
+    });
+    worker.on('exit', function(code, signal){
+        log('error', logSystem, 'API died, spawning replacement...');
+        setTimeout(function(){
+            spawnApi();
+        }, 2000);
+    });
+}
+
+/**
+ * Spawn charts data collector module
+ **/
+function spawnChartsDataCollector(){
+    if (!config.charts) return;
+
+    var worker = cluster.fork({
+        workerType: 'chartsDataCollector'
+    });
+    worker.on('exit', function(code, signal){
+        log('error', logSystem, 'chartsDataCollector died, spawning replacement...');
+        setTimeout(function(){
+            spawnChartsDataCollector();
+        }, 2000);
+    });
+}
+
+/**
+ * Spawn telegram bot module
+ **/
+function spawnTelegramBot(){
+    if (!config.telegram || !config.telegram.enabled || !config.telegram.token) return;
+
+    var worker = cluster.fork({
+        workerType: 'telegramBot'
+    });
+    worker.on('exit', function(code, signal){
+        log('error', logSystem, 'telegramBot died, spawning replacement...');
+        setTimeout(function(){
+            spawnTelegramBot();
+        }, 2000);
+    });
+}
