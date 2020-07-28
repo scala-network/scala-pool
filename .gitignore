@@ -2,9 +2,7 @@ node_modules/
 .idea/
 config.json
 logs/
-website/
 *.log
-public/
 package-lock.json
 vendor
 ._*
