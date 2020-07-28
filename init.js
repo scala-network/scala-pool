@@ -19,25 +19,27 @@
  *   along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var fs = require('fs');
-var cluster = require('cluster');
-var os = require('os');
-
+const fs = require('fs');
+const cluster = require('cluster');
+const os = require('os');
 
 // Initialize log system
-var logSystem = 'init';
+const logSystem = 'init';
 /**
  * Load pool configuration
  **/
 const args = require("args-parser")(process.argv);
 
 global.config = require('./lib/bootstrap')(args.config || 'config.json');
-
 require('./lib/logger.js');
+const em = require('./lib/event_manager');
+global.EventManager = new em();
 
+const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts','rpcbalancer'];
+//,'rpcbalancer'];
 
 global.redisClient = require('redis').createClient((function(){
-	var options = { 
+	const options = { 
 		host:global.config.redis.host || "127.0.0.1",
 		socket_keepalive:true,
 		port:global.config.redis.port || 6379, 
@@ -79,6 +81,11 @@ if (cluster.isWorker){
         case 'pool':
             require('./lib/pool.js');
             break;
+        case 'poolWorker':
+            require('./lib/pool/worker.js');
+            break;
+        case 'listener':
+            break;
         case 'unlocker':
             require('./lib/blockUnlocker.js');
             break;
@@ -87,10 +94,12 @@ if (cluster.isWorker){
             break;
         case 'api':
             require('./lib/api.js');
-            break;
+	    break;
         case 'charts':
             require('./lib/chartsDataCollector.js');
             break;
+        default:
+        	console.error(`Invalid worker type ${process.env.workerType}`)
     }
     return;
 }
@@ -98,8 +107,54 @@ if (cluster.isWorker){
 require('./lib/exceptionWriter.js')(logSystem);
 
 // Pool informations
-log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.version]);
+log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.config.version]);
 
+
+const createWorker = function(workerType, forkId){
+    const worker = cluster.fork({
+        workerType: workerType,
+        forkId: forkId
+    });
+    worker.forkId = forkId;
+    worker.type = 'pool';
+    worker.on('exit', function(code, signal){
+        log('error', logSystem, '%s fork %s died, spawning replacement worker...', [workerType, forkId]);
+        setTimeout(function(){
+            createWorker(workerType, forkId);
+        }, global.config.poolServer.timeout || 2000);
+    }).on('message', function(msg){
+        switch(msg.type){
+        	case 'statsCollector':
+        		Object.keys(cluster.workers).forEach(function(id) {
+                    if (cluster.workers[id].type === 'api'){
+                        cluster.workers[id].send({type: 'statsCollector', data: msg.data});
+                    }
+                });	
+        	break
+            case 'banIP':
+                Object.keys(cluster.workers).forEach(function(id) {
+                    if (cluster.workers[id].type === 'pool'){
+                        cluster.workers[id].send({type: 'banIP', ip: msg.ip});
+                    }
+                });
+                break;
+            case 'blockTemplate':
+            	Object.keys(cluster.workers).forEach(function(id) {
+                    if (cluster.workers[id].type === 'pool'){
+                        cluster.workers[id].send({type: 'blockTemplate', block: msg.block});
+                    }
+                });
+               break;
+            case 'jobRefresh':
+            	Object.keys(cluster.workers).forEach(function(id) {
+                    if (cluster.workers[id].type === 'poolWorker'){
+                        cluster.workers[id].send({type: 'jobRefresh'});
+                    }
+                });
+            	break;
+        }
+    });
+};
 /**
  * Start modules
  **/
@@ -117,57 +172,34 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	        return;
 	    }
 	
-	    var numForks = (function(){
+	    const numForks = (function(){
 	        if (!config.poolServer.clusterForks){
 	            return 1;
 	        }
-	        if (config.poolServer.clusterForks === 'auto'){
+	        if (global.config.poolServer.clusterForks === 'auto'){
 	            return os.cpus().length;
 	        }
 	        if (isNaN(config.poolServer.clusterForks)){
 	            return 1;
 	        }
-	        return config.poolServer.clusterForks;
+	        return global.config.poolServer.clusterForks;
 	    })();
 	
-	    var poolWorkers = {};
 	
-	    var createPoolWorker = function(forkId){
-	        var worker = cluster.fork({
-	            workerType: 'pool',
-	            forkId: forkId
-	        });
-	        worker.forkId = forkId;
-	        worker.type = 'pool';
-	        poolWorkers[forkId] = worker;
-	        worker.on('exit', function(code, signal){
-	            log('error', logSystem, 'Pool fork %s died, spawning replacement worker...', [forkId]);
-	            setTimeout(function(){
-	                createPoolWorker(forkId);
-	            }, global.config.poolServer.timeout || 2000);
-	        }).on('message', function(msg){
-	            switch(msg.type){
-	                case 'banIP':
-	                    Object.keys(cluster.workers).forEach(function(id) {
-	                        if (cluster.workers[id].type === 'pool'){
-	                            cluster.workers[id].send({type: 'banIP', ip: msg.ip});
-	                        }
-	                    });
-	                    break;
-	            }
-	        });
-	    };
-	
-	    var i = 0;
-	    var spawnInterval = setInterval(function(){
-			i++;
-	        if (i -1 === numForks){
-	        	log('info', logSystem, 'Pool spawned on %d thread(s)', [numForks]);
-	            clearInterval(spawnInterval);
-				return;
-	        }
-	       	createPoolWorker(i.toString());
-	    }, 10);
+	    let i = 0;
+	    createWorker('poolWorker', 0);
+	    setTimeout(() => {
+	    	let spawnInterval = setInterval(function(){
+				i++;
+		        if (i -1 === numForks){
+		        	log('info', logSystem, 'Pool spawned on %d thread(s)', [numForks]);
+		            clearInterval(spawnInterval);
+					return;
+		        }
+		       	createWorker('pool', i.toString());
+		    }, 10);
+	    },20)
+	    
 	}
 	
 	/**
@@ -212,19 +244,39 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	 * Spawn API module
 	 **/
 	function spawnApi(){
-	    if (!config.api || !config.api.enabled) {
+		if (!global.config.api || !global.config.api.enabled) {
 	    	return;
 	    }
+	    
+	    const numForks = (function(){
+	        if (!global.config.api.clusterForks){
+	            return 1;
+	        }
+	        if (global.config.api.clusterForks === 'auto'){
+	            return os.cpus().length;
+	        }
+	        if (isNaN(config.api.clusterForks)){
+	            return 1;
+	        }
+	        return global.config.api.clusterForks;
+	    })();
 	
-	    var worker = cluster.fork({
-	        workerType: 'api'
-	    });
-	    worker.on('exit', function(code, signal){
-	        log('error', logSystem, 'API died, spawning replacement...');
-	        setTimeout(function(){
-	            spawnApi();
-	        }, 2000);
-	    });
+	
+	    
+	    let i = 0;
+	 // createWorker('apiWorker',0);
+	    setTimeout(() => {
+	    	let spawnInterval = setInterval(function(){
+				i++;
+		        if (i -1 === numForks){
+		        	log('info', logSystem, 'Api spawned on %d thread(s)', [numForks]);
+		            clearInterval(spawnInterval);
+					return;
+		        }
+		       	createWorker('api', i.toString());
+		    }, 10);
+	    },20)
+
 	}
 	
 	/**
@@ -247,7 +299,6 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	
     	 
 	const init = function(){
-    	const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts'];
 		const reqModules = (function(){
 			if(!args.module){
 				return validModules;
@@ -256,7 +307,7 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 			const loadModules = [];
 		    for (let i in modules){
 		    	const moduleName = modules[i].toLowerCase();
-	            if (validModules.indexOf(moduleName) === -1){
+	            if (!~validModules.indexOf(moduleName)){
 	            	log('error', logSystem, 'Invalid module "%s", valid modules: %s', [moduleName, validModules.join(', ')]);
 	            	process.exit();
 	            	return;
@@ -271,7 +322,8 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
         	reqModules = validModules;
         }
 
-        
+        const listenersKey = [];
+        let key = true;
         for(let i in reqModules){
         	switch(reqModules[i]){
 	            case 'pool':
@@ -290,9 +342,16 @@ log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.vers
 	                spawnChartsDataCollector();
 	                break;
 	            default:
+	            	key = false;
 	            	break;
 	        }
+	        if(key) {
+	        	listenersKey.push(reqModules[i]);
+	        }
         }
+        
+	global.config.listenerKey = listenersKey;
+
     
     };
     

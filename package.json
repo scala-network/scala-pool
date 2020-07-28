@@ -1,33 +1,38 @@
 {
-    "name": "xtl-nodjes-pool",
-    "version": "2.1.0",
+    "name": "scala-pool",
+    "version": "1.5.0",
     "license": "GPL-2.0",
-    "author": "@stellitecoin",
+    "author": "@scalahq",
     "repository": {
         "type": "git",
-        "url": "https://github.com/stellitecoin/xtl-nodejs-pool.git"
+        "url": "https://github.com/scalaproject/scala-pool.git"
     },
     "dependencies": {
-        "async": "1",
+        "args-parser": "*",
+        "async": "*",
         "base58-native": "*",
         "bignum": "*",
         "cli-color": "*",
-        "args-parser": "*",
-        "cryptonight-hashing": "git+https://github.com/hayzamjs/node-cryptonight-hashing.git",
-        "cryptoforknote-util": "git://github.com/MoneroOcean/node-cryptoforknote-util.git",
+        "cryptoforknote-util": "git+https://github.com/scala-network/node-cryptoforknote-util#ced6084d73553751851d8a89b8eee9e45f1fbfb7",
+        "cryptonight-hashing": "git+https://github.com/scala-network/scala-hashing.git#e7ff439815457f3f0cba174d0243ca038d833a59",
         "dateformat": "*",
+        "read-package-json": "^2.1.1",
         "redis": "*"
     },
     "engines": {
-        "node": ">=8.0"
+        "node": ">=12.0"
     },
     "devDependencies": {
-        "jest": "^23.6.0"
+        "ava": "^3.10.1"
     },
     "scripts": {
-        "test": "jest"
-    },
-    "jest": {
-        "testRegex": "tests/.*\\.js$"
+        "api": "node init.js --module=api",
+        "comms": "node init.js --module=comms",
+        "lint": "npx eslint --config .eslint.js",
+        "payments": "node init.js --module=payments",
+        "pool": "node init.js --module=pool",
+        "remote": "node init.js --module=remote",
+        "test": "npx ava",
+        "unlocker": "node init.js --module=unlocker"
     }
 }
