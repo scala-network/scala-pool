@@ -1,11 +1,11 @@
 [Unit]
-Description=Stellite Daemon
+Description=Scala Daemon
 After=network.target
 
 [Service]
 Type=forking
 GuessMainPID=no
-ExecStart=/home/stellite/Stellite/build/release/bin/stellited \
+ExecStart=/home/scala/Scala/build/release/bin/scalad \
 --rpc-bind-ip 127.0.0.1 \
 --rpc-bind-port 20189 \
 --p2p-bind-ip 0.0.0.0 \

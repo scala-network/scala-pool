@@ -1,8 +1,8 @@
 {
-    "coin": "Stellitecoin",
-    "symbol": "XTL",
+    "coin": "Scala",
+    "symbol": "XLA",
     "coinUnits":100,
-    "coinDifficultyTarget": 300,
+    "coinDifficultyTarget": 600,
     "logging": {
         "files": {
         "enabled":false,
@@ -52,7 +52,6 @@
         "donations":{
 			"enabled": true,
 			"addressSeparator":"%",
-			"address":"Se3dRf8ZTUXKYivaTFU4KYczPcmMcwPZWEQ5HZmj3RRviFJ3w1mNhtgCWkn6VsnQcMBX1hyCUjZVuSo8X7yJTSYj1joP84WoT"
 		},
         "shareTrust": {
             "enabled": true,
@@ -84,23 +83,16 @@
         "dynamicTransferFee": true,
         "minerPayFee" : true,
         "minPayment": 1000,
+        "minPaymentSubAddress": 1000,
 		"networkFee":0,
-        "minPaymentIntegratedAddress":100000,
+        "minPaymentExchangeAddress":100000,
         "maxTransactionAmount": 1000000,
-        "denomination": 100
+        "denomination": 100,
+        "poolFees" : {
+            "props" : 0,
+            "solo" :0
+        }
     },
-	"contributions":{
-		"Se2ef2vWfM5je9M9p9RXnb3YG1Bxm7eLJb4np1TdJmbTfo5VAo43g2EFikEG7wenV2BihjyWmoDL1efXafFfDJoE2GcxJtvH7": {
-			"percent":0.3,
-			"desc":"Pool Contributions",
-			"hidden":false
-		},
-		"Se3dRf8ZTUXKYivaTFU4KYczPcmMcwPZWEQ5HZmj3RRviFJ3w1mNhtgCWkn6VsnQcMBX1hyCUjZVuSo8X7yJTSYj1joP84WoT": {
-			"percent":0.1,
-			"desc":"Foundation Contributions",
-			"hidden":false
-		}
-	},
     "blockUnlocker": {
         "enabled": true,
         "interval": 60,

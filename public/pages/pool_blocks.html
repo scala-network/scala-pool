@@ -148,10 +148,10 @@ currentPage = {
         if (xhrGetBlocks) xhrGetBlocks.abort();
     },
     update: function(){
-    	updateText('currentEffort', (lastStats.pool.roundHashes / lastStats.network.difficulty * 100).toFixed(1) + '%');
-        updateText('blocksTotal', lastStats.pool.totalBlocks.toString());
-        if (lastStats.pool.lastBlockFound) {
-            var d = new Date(parseInt(lastStats.pool.lastBlockFound)).toISOString();
+    	updateText('currentEffort', (lastStats.pool.stats.roundShares / lastStats.network.difficulty * 100).toFixed(1) + '%');
+        updateText('blocksTotal', lastStats.pool.stats.blocksFound.toString());
+        if (lastStats.pool.stats.lastBlockFound) {
+            var d = new Date(parseInt(lastStats.pool.stats.lastBlockFound)).toISOString();
             $('#lastBlockFound').timeago('update', d);
         }
         else {

@@ -181,7 +181,7 @@ currentPage = {
         renderContributionLists();
         
 		updateText('poolDonations',getReadableCoins(lastStats.pool.totalDonations));
-        updateText('paymentsTotal', lastStats.pool.totalPayments.toString());
+        updateText('paymentsTotal', (lastStats.pool.totalPayments || 0).toString());
         updateText('paymentsTotalPaid', lastStats.pool.totalMinersPaid.toString());
         updateText('paymentsInterval', getReadableTime(lastStats.config.paymentsInterval));
         updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold));
