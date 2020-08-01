@@ -128,6 +128,11 @@ Module that sends payments to miners according to their submitted shares.
 | payments.minPayment | Miner balance required before sending payment. |
 | payments.maxTransactionAmount | Split transactions by this amount (to prevent "too big transaction" error). |
 | payments.denomination | Truncate to this precision and store remainder. |
+| payments.minPaymentExchangeAddress | Miner balance required before sending payment (Integrated Address or with Payment ID). |
+| payments.minPaymentSubAddress | Miner balance required before sending payment (Sub Address). |
+| payments.poolFees | The pool fee. |
+| payments.devFee | The developper donation. Thanks for supporting me! |
+| payments.networkFee | The network/Governance fee (used by some coins like Loki). |
 
 ### Blocks Unlocker module
 Module that monitors the submitted block maturities and manages rounds. Confirmed blocks mark the end of a round where workers' balances are increased in proportion to their shares.
@@ -137,9 +142,6 @@ Module that monitors the submitted block maturities and manages rounds. Confirme
 | blockUnlocker.enabled | Enable the block unlocker module. |
 | blockUnlocker.interval | How often to check block statuses in seconds |
 | blockUnlocker.depth | Block depth required for a block to unlocked/mature. Found in daemon source as the variable CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW. |
-| blockUnlocker.poolFee | The pool fee. |
-| blockUnlocker.devDonation | The developper donation. Thanks for supporting me! |
-| blockUnlocker.networkFee | The network/Governance fee (used by some coins like Loki). |
 | blockUnlocker.reward | Percent of reward to miner who helped unlock a block |
 
 ### Application Programming Interface (API)

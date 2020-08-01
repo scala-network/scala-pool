@@ -21,10 +21,10 @@ Usage
  ```
 	sudo apt-get update
 	sudo apt-get install build-essential libssl-dev
-	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh | bash
 	source ~/.profile
-	nvm install 8
-	nvm alias default 8
+	nvm install stable
+	nvm alias default stable
 	nvm use default
 ```
 * [Redis](http://redis.io/) key-value store v2.6+ 
@@ -59,9 +59,9 @@ To login with this user :
 Clone the repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
-	git clone https://github.com/stellitecoin/xtl-nodejs-pool.git pool
+	git clone https://github.com/scala-network/scala-pool.git pool
 	cd pool
-	npm update
+	npm install
 ```
 
 #### 2) Configuration
@@ -94,6 +94,10 @@ only start a specific module by using the `-module=name` command argument, for e
 ```bash
 	node init.js -module=api
 ```
+alternatively you can run `npm run <module>`
+```bash
+  npm run api
+```
 or running multiple certain module
 
 ```bash
@@ -102,21 +106,23 @@ or running multiple certain module
 
 [Example screenshot](http://i.imgur.com/SEgrI3b.png) of running the pool in single module mode with tmux.
 
+
+
 To keep your pool up, on operating system with systemd, you can create add your pool software as a service.  
-Use default/service to create the systemd service `/lib/systemd/system/xtl-nodejs-pool.service`
+Use default/service to create the systemd service `/lib/systemd/system/scala-pool.service`
 Then enable and start the service with the following commands : 
 
 ```
-sudo systemctl enable xtl-nodejs-pool.service
-sudo systemctl start xtl-nodejs-pool.service
+sudo systemctl enable scala-pool.service
+sudo systemctl start scala-pool.service
 ```
 
 #### 4) Host the front-end
 
-Simply host the contents of the `website_example` directory on file server capable of serving simple static files.
+Simply host the contents of the `public` directory on file server capable of serving simple static files.
 
 
-Edit the variables in the `website_example/config.js` file to use your pool's specific configuration.
+Edit the variables in the `public/config.js` file to use your pool's specific configuration.
 Variable explanations:
 
 ```javascript
