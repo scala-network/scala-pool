@@ -151,14 +151,14 @@ currentPage = {
     update: function(){
     	
     	
-        renderContributionLists();
+        //renderContributionLists();
         
 		updateText('poolDonations',getReadableCoins(lastStats.pool.totalDonations));
         updateText('paymentsTotal', (lastStats.pool.totalPayments || 0).toString());
         updateText('paymentsTotalPaid', lastStats.pool.totalMinersPaid.toString());
         updateText('paymentsInterval', getReadableTime(lastStats.config.paymentsInterval));
         updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold));
-        updateText('paymentsMinimumIntegratedAddress', getReadableCoins(lastStats.config.minPaymentIntegratedAddressThreshold));
+        updateText('paymentsMinimumIntegratedAddress', getReadableCoins(lastStats.config.minPaymentExchangedAddressThreshold));
         updateText('maximumTransactionPayout', getReadableCoins(lastStats.config.maxPaymentThreshold));
         
         updateText('paymentsDenomination', getReadableCoins(lastStats.config.denominationUnit, 3));

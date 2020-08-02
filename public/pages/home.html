@@ -325,12 +325,13 @@ currentPage = {
         }
         
         updateText('lastHash', lastStats.lastblock.hash).setAttribute('href', getBlockchainUrl(lastStats.lastblock.hash));
-
+     
+	var reward = lastStats.pool.stats.lastblock_lastMinerReward || lastStats.pool.stats.lastblock_lastReward
         if (lastStats.config.networkFee) {
             var networkFeePercent = lastStats.config.networkFee / 100;
-            updateText('networkLastReward', getReadableCoins(lastStats.lastblock.reward - (lastStats.lastblock.reward * networkFeePercent)));
+            updateText('networkLastReward', getReadableCoins(reward - (eward * networkFeePercent)));
         } else {
-            updateText('networkLastReward', getReadableCoins(lastStats.lastblock.reward));
+            updateText('networkLastReward', getReadableCoins(reward));
         }
 
         updateText('poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/sec');
@@ -491,7 +492,7 @@ function calcEstimateProfit(){
         var rateUnit = Math.pow(1000,parseInt($('#calcHashUnit').data('mul')));
         var hashRate = parseFloat($('#calcHashRate').val()) * rateUnit;
 
-        var profit = (hashRate * 86400 / lastStats.network.difficulty) * lastStats.lastblock.reward;
+        var profit = (hashRate * 86400 / lastStats.network.difficulty) * lastStats.pool.stats.lastblock_lastMinerReward;
         
         if (profit) {
             updateText('calcHashAmount1', getReadableCoins(profit));

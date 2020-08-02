@@ -28,7 +28,7 @@
                         <td class="col1"><span class="miningPort"></span></td>
                         <td class="col2"><span class="miningPortDiff"></span></td>
                         <td class="col3"><span class="miningPortDesc"></span></td>
-                        <td class="col4"><span class="miningPortDesc"></span></td>
+                        <td class="col4"><span class="miningPoolType"></span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -221,6 +221,7 @@ currentPage = {
                 $portChild.find('.miningPort').text(portData.port);
                 $portChild.find('.miningPortDiff').text(formatDifficulty(portData.difficulty));
                 $portChild.find('.miningPortDesc').text(portData.desc);
+                $portChild.find('.miningPoolType').text(portData.poolType);
                 $miningPortChildren.push($portChild);
                 $miningPortOptions.push('<option value="'+portData.port+'">'+portData.port+' &ndash; '+portData.desc+'</option>');
             }
