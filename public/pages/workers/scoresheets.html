@@ -8,7 +8,7 @@
     		            <tr>
                             <th class="text-center"><span tkey='Height'>Height</span></th>
     		                <th class="text-center"><span tkey="hashes">Unlock Reward</span></th>
-    		                <th class="text-center"><span tkey="donations">Credited</span></th>
+    		                <th class="text-center"><span tkey="donations">Debited</span></th>
     		                <th class="text-center"><span tkey="donationLevel">Total Hashes Submitted</span></th>
     		                <th class="text-center"><span tkey="totalBlocks">Round Shares (%)</span></th>
     		            </tr>
@@ -29,10 +29,11 @@ var xhrGetTOP;
 var xhrGetBlocks;
 var lastHeight = false;
 function renderCells(height,data){
+	console.log(data);
     return  '<td class="col1 text-center" >' + height + '</td>' +
             '<td class="col4 text-center">' + getReadableCoins(data.bonus,5,true) + '</td>'+
             '<td class="col5 text-center">' + getReadableCoins(data.earn,5,true) + '</td>'+
-            '<td class="col3 text-center">' + formatDifficulty(data.score) + '</td>'+
+            '<td class="col3 text-center">' + formatDifficulty(data.shares) + '</td>'+
             '<td class="col6 text-center">' + parseFloat(data.percent * 100).toFixed(5) + '%</td>';
 }
 var blockObjects = {};
