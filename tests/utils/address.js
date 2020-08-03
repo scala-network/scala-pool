@@ -12,16 +12,16 @@ const subAddress = "SEiStP7SMy1bvjkWc9dd1t2v1Et5q2DrmaqLqFTQQ9H7JKdZuATcPHUbUL3b
 
 const utils = require('../../lib/utils.js');
 
-test('Test is valid main address', t => {
-	t.true(utils.validateMinerAddress(mainAddress))
+test('Test is not valid main address', t => {
+	t.false(utils.validateMinerAddress(mainAddress))
 });
 
-test('Test is valid with payment id', t => {
-	t.true(utils.validateMinerAddress(mainAddress+'.'+paymentID))
+test('Test is not valid with payment id', t => {
+	t.false(utils.validateMinerAddress(mainAddress+'.'+paymentID))
 });
 
-test('Test is valid integrated address', t => {
-	t.true(utils.validateMinerAddress(integratedAddress))
+test('Test is not valid integrated address', t => {
+	t.false(utils.validateMinerAddress(integratedAddress))
 });
 
 
