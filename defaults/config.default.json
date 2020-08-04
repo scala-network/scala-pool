@@ -2,7 +2,7 @@
     "coin": "Scala",
     "symbol": "XLA",
     "coinUnits":100,
-    "coinDifficultyTarget": 600,
+    "coinDifficultyTarget": 120,
     "logging": {
         "files": {
         "enabled":false,
@@ -18,8 +18,8 @@
     "poolServer": {
     	"timeout":1000,
         "enabled": true,
-        "clusterForks": "auto",
-		"poolAddress":"Se4EaQbQt9dWocr5RGWuRqdJcxaatTwydbfio8mBUNWuE5iYeZJzcHC3S5M3Jn5kBQdwB6w7kFE2yC6nrNtvXQ1E2oFPis9fF",
+        "clusterForks": 4,
+	"poolAddress":"Svk1ZQ6mPfjhYR3Nnp3kifZLimjuDcmyMHecLmY6Ek2QbGQi93XzkJFbdFDaQZVdBF2V43q79z2UTirvJcHT3TnC2h988J2hF",
         "blockRefreshInterval": 500,
         "minerTimeout": 750,
         "sslCert": "./cert.pem",
@@ -28,11 +28,33 @@
         "ports": [
             {
                 "port": 3333,
-                "difficulty": 50,
-                "desc": "Low end hardware (1 ~ 100H/s) diff: 4000",
-				"donation":0
+                "difficulty": 10000,
+                "desc": "Props Low end hardware diff: 10000",
+		"poolType":"props",
+		"donation":0
+            },
+	    {
+    		"port": 5555,
+                "difficulty": 100000,
+                "desc": "Props Mid end hardware diff: 100000",
+                "poolType":"props",
+                "donation":0
+            },
+	    {
+                "port": 7777,
+                "difficulty": 5000000,
+                "desc": "Props High end hardware diff: 1000000",
+		"poolType":"props",
+		"donation":0
+            },
+	    {
+                "port":8888,
+                "difficulty": 250000,
+                "desc": "Solo Miner",
+                "poolType":"solo",
+                "donation":0
             }
-		],
+	],
         "varDiff": {
             "minDiff": 100,
             "maxDiff": 100000000,
@@ -50,9 +72,10 @@
             "addressSeparator": "+"
         },
         "donations":{
-			"enabled": true,
-			"addressSeparator":"%",
-		},
+		"enabled": true,
+		"addressSeparator":"%",
+		"address":"Svk1ZQ6mPfjhYR3Nnp3kifZLimjuDcmyMHecLmY6Ek2QbGQi93XzkJFbdFDaQZVdBF2V43q79z2UTirvJcHT3TnC2h988J2hF"
+	},
         "shareTrust": {
             "enabled": true,
             "min": 10,
@@ -75,37 +98,31 @@
     },
     "payments": {
         "enabled": true,
-        "interval": 900,
+        "interval": 300,
         "maxAddresses": 15,
         "mixin": 1,
         "priority": 0,
         "transferFee": 15,
         "dynamicTransferFee": true,
         "minerPayFee" : true,
-        "minPayment": 1000,
-        "minPaymentSubAddress": 1000,
-		"networkFee":0,
-        "minPaymentExchangeAddress":100000,
+        "minPayment": 10000,
+	"networkFee":0,
+        "minPaymentExchangeAddress":10000,
         "maxTransactionAmount": 1000000,
-        "denomination": 100,
-        "poolFees" : {
-            "props" : 0,
-            "solo" :0
-        }
+        "denomination": 100
     },
     "blockUnlocker": {
         "enabled": true,
-        "interval": 60,
-        "depth": 5,
-       	"reward":0.1
+        "interval": 600,
+        "depth": 60,
+       	"reward":0
     },
-
     "api": {
         "enabled": true,
         "hashrateWindow": 600,
         "updateInterval": 10,
-        "port": 8118,
-		"bindIp":"127.0.0.1",
+        "port": 8001,
+	"bindIp":"0.0.0.0",
         "blocks": 30,
         "payments": 30,
         "password": "password",
@@ -121,19 +138,19 @@
 
     "daemon": {
         "host": "127.0.0.1",
-        "port": 20189
+        "port": 11812
     },
 
     "wallet": {
         "host": "127.0.0.1",
-        "port": 18081
+        "port": 9000
     },
 
     "redis": {
         "host": "127.0.0.1",
         "port": 6379,
         "auth": null,
-		"db":1
+		"db":5
     },
 
     "monitoring": {
@@ -208,3 +225,5 @@
         }
     }
 }
+
+
