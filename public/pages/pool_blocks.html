@@ -596,7 +596,7 @@ function renderBlocks(blocksResults){
         var sumID = pastDae.replace(new RegExp("/","g"),"_");
         var sumRow = document.getElementById("sum"+sumID);
         var td = summaryTD
-			.replace("%REWARD%",parseFloat(getReadableCoins(income, null, true)).toFixed(2))
+			.replace("%REWARD%", getReadableCoins(income, 2, true))
 			.replace("%BLOCK%",blockElementSet.count)
 			.replace("%DATE%",dated);
 		

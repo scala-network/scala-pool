@@ -109,6 +109,7 @@ currentPage = {
     },
     update: function(){
 
+	updateTop10();
     }
 };
 
@@ -151,7 +152,7 @@ function updateTop10() {
 	}
 	
     xhrGetTOP = $.ajax({
-        url: api + '/get_top10',
+        url: window.config.api + '/get_top10',
         data: {
             time: $('#top10_rows').children().last().data('time')
         },
@@ -198,5 +199,4 @@ function updateTop10() {
     });
 
 }
-updateTop10();
 </script>

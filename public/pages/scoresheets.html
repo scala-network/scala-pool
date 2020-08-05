@@ -187,7 +187,7 @@ var renderLockedBlocks = function(data){
 
 function updateScoresheet() {
     var xhrGetTOP = $.ajax({
-        url: api + '/pool_scoresheet',
+        url: window.config.api + '/pool_scoresheet',
         dataType: 'json',
         data:{
         	height:currentSelectedHeight

@@ -126,6 +126,16 @@ function updateTextClasses(className, text){
 }
 
 // Update Text content
+function updateHtml(elementId, text){
+    var el = document.getElementById(elementId);
+    if (el && el.innerHTML !== text){
+        el.innerHTML = text;
+    }
+    return el;
+}
+
+
+// Update Text content
 function updateText(elementId, text){
     var el = document.getElementById(elementId);
     if (el && el.textContent !== text){
@@ -284,7 +294,9 @@ function getDonationSmiley(level) {
 
 // Return pool host
 function getPoolHost() {
-    if (typeof window.config.poolHost !== "undefined") return poolHost;
+    if (typeof window.config.poolHosts !== "undefined") {
+	    return "<ul><li>" + window.config.poolHosts.join("</li><li>") + "</li></ul>"
+    }
     if (lastStats.config.poolHost) return lastStats.config.poolHost;
     else return window.location.hostname;
 }

@@ -234,9 +234,8 @@ currentPage = {
         if (!lastStats.config.donations.enabled) {
             $('#customDonation').hide();
         }
-
-        updateText('miningPoolHost', getPoolHost());
-        updateTextClasses('exampleHost', getPoolHost());
+        updateHtml('miningPoolHost', getPoolHost());
+        updateTextClasses('exampleHost', "mine.scalaproject.io");
         updateText('paymentIdSeparator', lastStats.config.paymentIdSeparator);
         updateText('fixedDiffSeparator', lastStats.config.fixedDiffSeparator);
         if (!lastStats.config.fixedDiffEnabled) $('#fixedDiff').hide();
