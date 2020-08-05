@@ -208,8 +208,8 @@ function parsePayment(time, serializedPayment){
 function getPaymentCells(payment){
     return '<td class="col1">' + formatDate(payment.time) + '</td>' +
            '<td class="col2">' + formatPaymentLink(payment.hash) + '</td>' +
-           '<td class="col3">' + parseFloat(getReadableCoins(payment.amount)).toFixed(2) + '</td>' +
-           '<td class="col4">' + parseFloat(getReadableCoins(payment.fee)).toFixed(2) + '</td>' +
+           '<td class="col3">' + getReadableCoins(payment.amount) + '</td>' +
+           '<td class="col4">' + getReadableCoins(payment.fee) + '</td>' +
            '<td class="col5">' + payment.mixin + '</td>' +
            '<td class="col6">' + payment.recipients + '</td>';
 }

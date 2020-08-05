@@ -99,7 +99,7 @@ function getPayoutLevel(address) {
     if (!address || address == '') return;
     
     getMinerPayoutLevelAjax = $.ajax({
-        url: api + '/get_miner_payout_level',
+        url: window.config.api + '/get_miner_payout_level',
         data: {
             address: address
         },
@@ -116,7 +116,7 @@ var setMinerPayoutLevelAjax;
 // Set payout level
 function setPayoutLevel(address, ip, level) {
     setMinerPayoutLevelAjax = $.ajax({
-        url: api + '/set_miner_payout_level',
+        url: window.config.api + '/set_miner_payout_level',
         data: {
             address: address,
             ip: ip,
@@ -137,7 +137,7 @@ var resetDonationLevelAjax;
 // Set payout level
 function resetDonationLevel(address, ip) {
     resetDonationLevelAjax = $.ajax({
-        url: api + '/reset_donation_level',
+        url: window.config.api + '/reset_donation_level',
         data: {
             address: address,
             ip: ip

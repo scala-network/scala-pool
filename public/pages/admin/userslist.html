@@ -97,7 +97,7 @@ function createUserTable(promptPassword) {
     }
     
     $.ajax({
-        url: api + '/admin_users',
+        url: window.config.api + '/admin_users',
         data: {password: password},
         dataType: 'json',
         cache: false,

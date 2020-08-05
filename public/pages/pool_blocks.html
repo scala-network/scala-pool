@@ -1,60 +1,183 @@
 <!-- Statistics -->
-<div id="blocksStats" class="row">
+<div id='blocksStats' class="row">
 
     <!-- Total Blocks Mined -->
-    <div class="col-lg-3 col-md-4 col-sm-5">
+    <div class="col-xs-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-cubes"></span>
             </div>
             <div class="content">
-                <div class="text"><span tkey="blocksTotal">Total Blocks Mined</span></div>
+                <div class="text"><span tkey="poolBlocksTotal">Pool Total Blocks </span></div>
                 <div class="value"><span id="blocksTotal">N/A</span> <span class="smallText">(<span id="lastBlockFound">Never</span>)</span></div>
             </div>
         </div>
     </div>
 
-    <!-- Maturity Depth Requirement -->
-    <div class="col-lg-3 col-md-4 col-sm-5">
-        <div class="infoBox hoverExpandEffect">
-            <div class="icon">
-                <span class="fa fa-unlock-alt"></span>
-            </div>
-            <div class="content">
-                <div class="text"><span tkey="blocksMaturityCount">Maturity Requirement</span></div>
-                <div class="value"><span id="blocksMaturityCount">N/A</span></div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Average Luck -->
-    <div class="col-lg-3 col-md-4 col-sm-5">
+ <!-- Average Luck -->
+    <div class="col-xs-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
             </div>
             <div class="content">
-                <div class="text"><span tkey="averageLuck">Average Luck</span></div>
+                <div class="text"><span tkey="poolAverageLuck">Pool Average Luck</span></div>
                 <div class="value"><span id="averageLuck">N/A</span></div>
             </div>
         </div>
     </div>
-    
+
      <!-- Current Effort -->
-    <div class="col-lg-3 col-md-4 col-sm-5">
+    <div class="col-xs-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
             </div>
             <div class="content">
-                <div class="text"><span tkey="currentEffort">Current Effort</span></div>
+                <div class="text"><span tkey="poolCurrentEffort">Pool Current Effort</span></div>
                 <div class="value"><span id="currentEffort">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
+
+
+     <!-- Current Effort -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-hashtag"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="poolTotalHashes">Pool Hashes</span></div>
+                <div class="value"><span id="totalHashes">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+
+        <!-- Total Blocks Mined -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-cubes"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="soloBlocksTotal">Solo Total Blocks</span></div>
+                <div class="value"><span id="soloBlocksTotal">N/A</span> <span class="smallText">(<span id="soloLastBlockFound">Never</span>)</span></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Average Luck -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-chart-line"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="soloAverageLuck">Solo Average Luck</span></div>
+                <div class="value"><span id="soloAverageLuck">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Current Effort -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-chart-line"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="soloCurrentEffort">Solo Current Effort</span></div>
+                <div class="value"><span id="soloCurrentEffort">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
+         <!-- Current Effort -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-hashtag"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="soloTotalHashes">Solo Hashes</span></div>
+                <div class="value"><span id="soloTotalHashes">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-cubes"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="propsBlocksTotal">Props Total Blocks</span></div>
+                <div class="value"><span id="propsBlocksTotal">N/A</span> <span class="smallText">(<span id="propsLastBlockFound">Never</span>)</span></div>
+            </div>
+        </div>
+    </div>    
+
+
+
+    <!-- Average Luck -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-chart-line"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="propsAverageLuck">Props Average Luck</span></div>
+                <div class="value"><span id="propsAverageLuck">N/A</span></div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+     <!-- Current Effort -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-chart-line"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="propsCurrentEffort">Props Current Effort</span></div>
+                <div class="value"><span id="propsCurrentEffort">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
+
+         <!-- Current Effort -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-hashtag"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="propsTotalHashes">Props Hashes</span></div>
+                <div class="value"><span id="propsTotalHashes">N/A</span></div>
             </div>
         </div>
     </div>
     
     <!-- Avg Block -->
-    <div class="col-lg-3 col-md-4 col-sm-5">
+    <div class="col-xs-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -67,7 +190,7 @@
     </div>
     
     <!-- Average Income -->
-    <div class="col-lg-3 col-md-4 col-sm-5">
+    <div class="col-xs-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -79,7 +202,21 @@
         </div>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-sm-5">
+
+    <!-- Maturity Depth Requirement -->
+    <div class="col-xs-3">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-unlock-alt"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span tkey="blocksMaturityCount">Maturity</span></div>
+                <div class="value"><span id="blocksMaturityCount">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-trophy"></span>
@@ -92,15 +229,13 @@
     </div>
 
 </div>
-
-<!-- Chart -->
 <div id="blocksChart" class="card padding-15 padding-t-5 padding-b-5">
     <h4 id="blocksChartTitle">Blocks found</h4>
     <div class="chart" style="height:200px;">
         <canvas id="blocksChartObj"></canvas>
         <a class="chart-style"></a>
     </div>
-</div>
+</div>  
 
 <!-- Report -->
 <div class='row'>
@@ -159,13 +294,41 @@ currentPage = {
         }
         updateText('blocksMaturityCount', lastStats.config.depth.toString());
 
-        $('#averageLuck').html(formatLuck(lastStats.pool.totalDiff, lastStats.pool.totalShares));
+        $('#averageLuck').html(formatLuck(lastStats.pool.stats.totalDiff, lastStats.pool.stats.totalShares));
+
+        $('#soloAverageLuck').html(formatLuck(lastStats.pool.stats.totalDiff_solo, lastStats.pool.stats.totalShares_solo));
+
+        updateText('soloCurrentEffort', (lastStats.pool.stats.roundSharessolo / lastStats.network.difficulty * 100).toFixed(1) + '%');
+        updateText('soloBlocksTotal', lastStats.pool.stats.blocksFound_solo || 0);
+        if (lastStats.pool.stats.lastBlockFound_solo) {
+            var d = new Date(parseInt(lastStats.pool.stats.lastBlockFound_solo)).toISOString();
+            $('#soloLastBlockFound').timeago('update', d);
+        }
+
+        $('#propsAverageLuck').html(formatLuck(lastStats.pool.stats.totalDiff_props, lastStats.pool.stats.totalShares_props));
+
+        updateText('propsCurrentEffort', (lastStats.pool.stats.roundSharesprops / lastStats.network.difficulty * 100).toFixed(1) + '%');
+        updateText('propsBlocksTotal', lastStats.pool.stats.blocksFound_props || 0);
+        if (lastStats.pool.stats.lastBlockFound_props) {
+            var d = new Date(parseInt(lastStats.pool.stats.lastBlockFound_props)).toISOString();
+            $('#propsLastBlockFound').timeago('update', d);
+        }
+
+        updateText('totalHashes', formatDifficulty(lastStats.pool.stats.totalShares) || 0);
+        updateText('soloTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_solo) || 0);
+        updateText('propsTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_props) || 0);
+
+
 
         if (lastStats.charts.blocks) {
             generateChart(lastStats.charts.blocks);
         }
+
+
         renderBlocks(lastStats.pool.blocks);
         // $('currentRoundMiners
+        // updateText('soloCurrentEffort', (lastStats.pool.stats.roundSharessolo / lastStats.network.difficulty * 100).toFixed(1) + '%');
+
     }
 };
 
@@ -188,7 +351,9 @@ function generateChart(data) {
     var labels = [];
     var values = [];
 	var avgDay = 0;
+
     for (var key in data) {
+        console.log(key)
         var label = key;
         if (chartDays && chartDays === 1) {
             var keyParts = key.split(' ');
@@ -199,7 +364,13 @@ function generateChart(data) {
         values.push(value);
         avgDay+=value;
     }
-    avgDay = Math.round(avgDay / lastStats.config.blocksChartDays);
+    var startDay = new Date("08/01/2020"); 
+    var date2 = Date.now()
+    var Difference_In_Days = (date2 - startDay.getTime()) / (1000 * 3600 * 24);
+    if(Difference_In_Days > lastStats.config.blocksChartDays) {
+        Difference_In_Days = lastStats.config.blocksChartDays
+    }
+    avgDay = Math.round(avgDay / Difference_In_Days);
 	updateText('averageBlockDay',avgDay);
     var $chart = $('#blocksChartObj');
     var bgcolor = null, bordercolor = null, borderwidth = null;
@@ -315,7 +486,7 @@ function parseBlock(height, serializedBlock){
 	   block.miner= "xxxxxxx....xxxxxx";
     }
 
-    block.donated = parseFloat(block.reward * (block.donations / block.shares)).toFixed(2);
+    block.donated = getReadableCoins(block.reward * (block.donations / block.shares));
     return block;
 }
 
@@ -343,7 +514,7 @@ function getBlockRowElement(block, jsonString){
         reward = "Waiting...";
     }
     else{
-        reward = parseFloat(getReadableCoins(block.reward, null, true)).toFixed(2);
+        reward = getReadableCoins(block.reward);
     }
     
     var columns =
@@ -450,7 +621,7 @@ function renderBlocks(blocksResults){
     	incomeValue+=v;
     }
 	
-    updateText("averageIncomeDay",parseFloat(getReadableCoins(incomeValue/incomeCount, null, true)).toFixed(2)+" XLA");
+    updateText("averageIncomeDay",getReadableCoins(incomeValue/incomeCount, 2, false));
     updateText("unlockReward",lastStats.config.unlockBlockReward +"%");
 }
 

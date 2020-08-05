@@ -64,7 +64,7 @@ function createPortsTable(promptPassword) {
     }
 
     $.ajax({
-        url: api + '/admin_ports',
+        url: window.config.api + '/admin_ports',
         data: {password: password},
         cache: false,
         dataType: 'json',

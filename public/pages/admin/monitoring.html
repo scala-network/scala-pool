@@ -105,7 +105,7 @@ function monitoringInfoParse(data) {
         properData['logs'] = data['logs'];
         for(var log in data['logs']) {
             data['logs'][log].changed = formatDate(data['logs'][log].changed);
-            data['logs'][log].link = api + '/admin_log?file=' + log + '&password=' + docCookies.getItem('password');
+            data['logs'][log].link = window.config.api + '/admin_log?file=' + log + '&password=' + docCookies.getItem('password');
         }
     }
     properData['monitoringDaemon'] = monitoringDaemon;
@@ -122,7 +122,7 @@ function renderLogInfo(promptPassword) {
     }
     
     $.ajax({
-        url: api + '/admin_monitoring',
+        url: window.config.api + '/admin_monitoring',
         data: {password: password},
         dataType: 'json',
         cache: false,

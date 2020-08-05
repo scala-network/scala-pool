@@ -174,7 +174,15 @@ function formatNumber(number, delimiter){
 // Format date
 function formatDate(time){
     if (!time) return '';
-    return new Date(parseInt(time) * 1000).toLocaleString();
+    var m = new Date(parseInt(time) * 1000);
+   var dateString =
+    ("0" + m.getUTCDate()).slice(-2) + "/" +
+    ("0" + (m.getUTCMonth()+1)).slice(-2) + "/" +
+    m.getUTCFullYear() + " " +
+    ("0" + m.getUTCHours()).slice(-2) + ":" +
+    ("0" + m.getUTCMinutes()).slice(-2) + ":" +
+    ("0" + m.getUTCSeconds()).slice(-2);
+    return dateString;
 }
 
 // Format percentage
@@ -212,7 +220,7 @@ function getReadableHashRateString(hashrate){
     var i = 0;
     var byteUnits = [' H', ' kH', ' MH', ' GH', ' TH', ' PH' ];
     if (hashrate > 0) {
-        while (hashrate > 1000){
+        while (hashrate >= 1000){
             hashrate = hashrate / 1000;
             i++;
         }
@@ -230,8 +238,8 @@ function getCoinDecimalPlaces() {
 // Get readable coins
 function getReadableCoins(coins, digits, withoutSymbol){
     var coinDecimalPlaces = getCoinDecimalPlaces();
-    var amount = parseFloat((parseFloat(coins || 0) / lastStats.config.coinUnits).toFixed(digits || coinDecimalPlaces));
-    return amount.toString() + (withoutSymbol ? '' : (' ' + lastStats.config.symbol));
+    var amount = (parseFloat(coins || 0) / lastStats.config.coinUnits).toFixed(digits || coinDecimalPlaces).split('.');
+    return parseInt(amount[0]).toLocaleString() +'.'+ amount[1] + (withoutSymbol ? '' : (' ' + lastStats.config.symbol));
 }
 
 // Format payment link
@@ -276,19 +284,19 @@ function getDonationSmiley(level) {
 
 // Return pool host
 function getPoolHost() {
-    if (typeof poolHost != "undefined") return poolHost;
+    if (typeof window.config.poolHost !== "undefined") return poolHost;
     if (lastStats.config.poolHost) return lastStats.config.poolHost;
     else return window.location.hostname;
 }
 
 // Return transaction URL
 function getTransactionUrl(id) {
-    return transactionExplorer.replace(new RegExp('{symbol}', 'g'), lastStats.config.symbol.toLowerCase()).replace(new RegExp('{id}', 'g'), id);
+    return window.config.transactionExplorer.replace(new RegExp('{symbol}', 'g'), lastStats.config.symbol.toLowerCase()).replace(new RegExp('{id}', 'g'), id);
 }
 
 // Return blockchain explorer URL
 function getBlockchainUrl(id) {
-    return blockchainExplorer.replace(new RegExp('{symbol}', 'g'), lastStats.config.symbol.toLowerCase()).replace(new RegExp('{id}', 'g'), id);    
+    return window.config.blockchainExplorer.replace(new RegExp('{symbol}', 'g'), lastStats.config.symbol.toLowerCase()).replace(new RegExp('{id}', 'g'), id);    
 }
  
 /**

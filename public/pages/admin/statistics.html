@@ -136,7 +136,7 @@ function getStats(promptPassword) {
 
     $('#loading').show();
     $.ajax({
-        url: api + '/admin_stats',
+        url: window.config.api + '/admin_stats',
         data: {password: password},
 	dataType: 'json',
         cache: 'false',

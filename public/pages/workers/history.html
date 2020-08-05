@@ -244,7 +244,7 @@ function renderBlocks(data){
 function fetchAddressStats(longpoll){
 		    
     xhrAddressPoll = $.ajax({
-        url: api + '/stats_address',
+        url: window.config.api + '/stats_address',
         data: {
             address: address,
             longpoll: longpoll
@@ -308,7 +308,7 @@ routeApp = {
 		$('#loadMorePayments').on('click',function(){
 		    if (xhrGetPayments) xhrGetPayments.abort();
 		    xhrGetPayments = $.ajax({
-		        url: api + '/get_payments',
+		        url: window.config.api + '/get_payments',
 		        data: {
 		            time: lastTimeDisplay,
 		            address: address

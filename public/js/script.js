@@ -67,7 +67,7 @@ function updateIndex(){
 
 // Load live statistics
 function loadLiveStats(reload) {
-    var apiURL = api + '/stats';
+    var apiURL = window.config.api + '/stats';
     
     var address = getCurrentAddress();
     if (address) { apiURL = apiURL + '?address=' + encodeURIComponent(address); }
@@ -92,7 +92,7 @@ function fetchLiveStats() {
     if(timerFetchLiveStats && xhrLiveStats){
         return;
     }
-    var apiURL = api + '/live_stats';
+    var apiURL = window.config.api + '/live_stats';
 
     var address = getCurrentAddress();
     if (address) { apiURL = apiURL + '?address=' + encodeURIComponent(address); }

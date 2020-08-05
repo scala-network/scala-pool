@@ -104,10 +104,11 @@
             </div>
             <div class="content">
                 <div class="text"><span tkey="networkLastReward">Last Reward</span></div>
-                <div class="value"><span id="networkLastReward">N/A</span></div>
+                <div class="value"><span id="networkLastReward">N/A</span>(<span id="poolLastReward">N/A</span>)</div>
             </div>
         </div>
     </div>
+
 
     <!-- Connected Miners -->
     <div class="col-lg-2 col-md-3 col-sm-4">
@@ -326,12 +327,20 @@ currentPage = {
         
         updateText('lastHash', lastStats.lastblock.hash).setAttribute('href', getBlockchainUrl(lastStats.lastblock.hash));
      
-	var reward = lastStats.pool.stats.lastblock_lastMinerReward || lastStats.pool.stats.lastblock_lastReward
+	    var reward = lastStats.pool.stats.lastblock_lastReward
         if (lastStats.config.networkFee) {
             var networkFeePercent = lastStats.config.networkFee / 100;
-            updateText('networkLastReward', getReadableCoins(reward - (eward * networkFeePercent)));
+            updateText('networkLastReward', getReadableCoins(reward - (reward * networkFeePercent)));
         } else {
             updateText('networkLastReward', getReadableCoins(reward));
+        }
+
+        reward = lastStats.pool.stats.lastblock_lastMinerReward || lastStats.pool.stats.lastblock_lastReward 
+        if (lastStats.config.networkFee) {
+            var networkFeePercent = lastStats.config.networkFee / 100;
+            updateText('poolLastReward', getReadableCoins(reward - (eward * networkFeePercent)));
+        } else {
+            updateText('poolLastReward', getReadableCoins(reward));
         }
 
         updateText('poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/sec');

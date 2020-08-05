@@ -56,7 +56,7 @@ var renderBlocks = function(data){
 function updateScoresheet() {
 	if (xhrGetTOP) xhrGetTOP.abort();
     xhrGetTOP = $.ajax({
-        url: api + '/miners_scoresheet',
+        url: window.config.api + '/miners_scoresheet',
         dataType: 'json',
         data:{
         	address:address

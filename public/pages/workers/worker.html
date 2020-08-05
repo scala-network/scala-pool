@@ -81,7 +81,7 @@ var fetchAddressTimeout;
 function fetchAddressStats(longpoll){
 		    
     xhrAddressPoll = $.ajax({
-        url: api + '/stats_address',
+        url: window.config.api + '/stats_address',
         data: {
             address: address,
             longpoll: longpoll
