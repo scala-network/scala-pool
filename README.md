@@ -1,7 +1,7 @@
-xtl-nodejs-pool
+scala-pool
 ======================
 
-High performance Node.js (with native C addons) mining pool for Stellite coin. Comes with lightweight example front-end script which uses the pool's AJAX API. Support for Cryptonight Stellite v7 algorithms.
+High performance Node.js (with native C addons) mining pool for Scala coin. Comes with lightweight example front-end script which uses the pool's AJAX API. Support for Cryptonight Scala v9 algorithm, panthera.
 
 
 #### Table of Contents
