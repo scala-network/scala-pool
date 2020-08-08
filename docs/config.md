@@ -257,12 +257,13 @@ Edit the variables in the `website/config.js` file to use your pool's specific c
 
 | Variable Name | Details |
 | ------------- | ------- |
-| api | Must point to the API setup in your config.json file. |
-| poolHost | Pool server host to instruct your miners to point to. |
-| email | Contact email address for support. |
-| telegram | The pool Telegram URL. |
-| discord | The pool Discord URL. |
-| marketCurrencies | The market currencies. |
-| blockchainExplorer | The URL to get details for a block hash. |
-| transactionExplorer | The URL to get details for a transaction hash. |
-| defaultLang | The default pool interface language. |
+| window.config.api | Must point to the API setup in your config.json file. |
+| window.config.poolHosts | Pool mining servers to instruct your miners to point to. Should be in an array |
+| window.config.email | Contact email address for support. |
+| window.config.telegram | The pool Telegram URL. |
+| window.config.discord | The pool Discord URL. |
+| window.config.marketCurrencies | The market currencies. |
+| window.config.blockchainExplorer | The URL to get details for a block hash. |
+| window.config.transactionExplorer | The URL to get details for a transaction hash. |
+| window.config.defaultLang | The default pool interface language. |
+| window.config.themeCss | The css use for pool theme. |
