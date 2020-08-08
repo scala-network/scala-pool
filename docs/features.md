@@ -5,7 +5,7 @@ Features
 * TCP (stratum-like) protocol for server-push based jobs
   * Compared to old HTTP protocol, this has a higher hash rate, lower network/CPU server load, lower orphan
     block percent, and less error prone
-* Support for Cryptonight v8 half algorithms.
+* Support for Scala's Panthera algorithm.
 * IP banning to prevent low-diff share attacks
 * Socket flooding detection
 * Share trust algorithm to reduce share validation hashing CPU load
