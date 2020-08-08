@@ -54,6 +54,10 @@ var routeApp = {
 
 currentPage = {
     destroy: function(){
+        $('#lookUp').off('click');
+        $('.user_navigate').off('click');
+        if(xhrSubRoutePage) xhrSubRoutePage.abort();
+
         routeApp.destroy();
     },
     update: function(){
@@ -63,9 +67,9 @@ currentPage = {
 
 var xhrSubRoutePage = null;
 const subRoutePage = function(page){
+	routeApp.destroy();
 	$('#yourStats').hide();
 	$('#loading').show();
-	
 	xhrSubRoutePage = $.ajax({
         url: 'pages/workers/' + page,
         cache: false,
