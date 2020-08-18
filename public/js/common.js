@@ -259,7 +259,9 @@ function formatPaymentLink(hash){
 
 // Format difficulty
 function formatDifficulty(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    if(!x) return x
+    if(typeof x.toString === 'undefined') return x
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
 }
 
 // Format luck / current effort
