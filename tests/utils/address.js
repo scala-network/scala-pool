@@ -18,7 +18,7 @@ test('Test is not valid with payment id', t => {
 	let address = "Se4FFaA4n89epNPA7bXgzaFBup9a4wDABbYsEQXDWGiFNdbnwgmBoLgjXSX7ZHSnpCcie1uMmEZ7K2xaVbdsyxkc32AEBDr1p";
 	address += ".4d9cb6c83330d8b1";
 
-	t.false(utils.validateMinerAddress(address))
+	t.false(utils.validateMinerAddress(address, '.'))
 });
 
 test('Test is not valid integrated address', t => {
@@ -44,7 +44,7 @@ test('Test is valid main address', t => {
 test('Test is valid with payment id', t => {
 	let address = "Svk1ZQ6mPfjhYR3Nnp3kifZLimjuDcmyMHecLmY6Ek2QbGQi93XzkJFbdFDaQZVdBF2V43q79z2UTirvJcHT3TnC2h988J2hF";
 	address += ".4d9cb6c83330d8b1";
-	t.is(utils.validateMinerAddress(address),2)
+	t.is(utils.validateMinerAddress(address, '.'),2)
 });
 
 test('Test is valid integrated address', t => {
