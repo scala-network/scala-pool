@@ -25,12 +25,8 @@
             <div class="col-sm-6 stats push-up-10">
                 <div><i class="fas fa-money-check-alt"></i> <span tkey="pendingBalance">Pending Balance</span>: <span id="yourPendingBalance"></span></div>
                 <div><i class="fas fa-money-bill-alt"></i> <span tkey="totalPaid">Total Paid</span>: <span id="yourPaid"></span></div>
-                <div><i class="fas fa-star"></i> <span>Donation Level</span>: <span id="yourDonationLevel"></span>%</div>
                 <div><i class="fas fa-star"></i> <span>Minimum Payout Level</span>: <span id="yourMinPayout"></span></div>                
                 <div><i class="fas fa-money-bill-alt"></i> <span tkey="payoutEstimate">Current Payout Estimate</span>: <span id="yourPayoutEstimate"></span></div>
-                <div><i class="fas fa-star"></i> 
-                	<span>Round Share</span>: <span id="yourRoundShareProportion"></span>% <span id="slush_round_info"> (shares), <span id="yourRoundScoreProportion"></span>% (<a target="_blank" href="#payments">score</a>)</span></div>
-
             </div>
             <div class="col-sm-6 userChart">
                 <div class="chart">
@@ -58,6 +54,9 @@
                     <th class="col7 sort"><span tkey="lastShare">Last Share Submitted</span> <i class="fa fa-sort"></i></th>
                     <th class="col8 sort"><span tkey="totalHashes">Total Hashes Submitted</span> <i class="fa fa-sort"></i></th>
                     
+                    <th class="col9 sort"><span tkey="donations">Donations</span> <i class="fa fa-sort"></i></th>
+                    <th class="col10 sort"><span tkey="blockFound">Block Found</span> <i class="fa fa-sort"></i></th>
+                    <th class="col11 sort"><span tkey="poolType">Pool Type</span> <i class="fa fa-sort"></i></th>
                 </tr>
                 </thead>
                 <tbody id="workersReport_rows">
@@ -328,7 +327,10 @@ function getWorkerCells(worker){
            '<td class="col5 avghr" data-sort="' + hashrate6h + '">' + getReadableHashRateString(hashrate6h) + '/s</td>' +
            '<td class="col6 avghr" data-sort="' + hashrate24h + '">' + getReadableHashRateString(hashrate24h) + '/s</td>' +
            '<td class="col8" data-sort="' + lastShare + '">' + (lastShare ? $.timeago(new Date(parseInt(lastShare) * 1000).toISOString()) : 'Never') + '</td>' +
-           '<td class="col7" data-sort="' + hashes + '">' + hashes + '</td>';
+           '<td class="col9" data-sort="' + hashes + '">' + hashes + '</td>' +
+           '<td class="col10" data-sort="' + worker.donations + '">' + worker.donations + '</td>' +
+           '<td class="col10" data-sort="' + worker.block_count + '">' + worker.block_count + '</td>' +
+           '<td class="col11" data-sort="' + worker.pool_type + '">' + worker.pool_type + '</td>';
            
 }
 
