@@ -107,7 +107,6 @@ or running multiple certain module
 [Example screenshot](http://i.imgur.com/SEgrI3b.png) of running the pool in single module mode with tmux.
 
 
-
 To keep your pool up, on operating system with systemd, you can create add your pool software as a service.  
 Use default/service to create the systemd service `/lib/systemd/system/scala-pool.service`
 Then enable and start the service with the following commands : 
@@ -235,21 +234,32 @@ the Node.js modules, and any config files that may have been changed.
 
 #### JSON-RPC
 
-Documentation for JSON-RPC commands can be found here:
-* Daemon https://xtlpool.com/daemon.html
-* Wallet https://wiki.bytecoin.org/wiki/Wallet_JSON_RPC_API
-
-
 Curl can be used to use the JSON-RPC commands from command-line. Here is an example of calling `getblockheaderbyheight` for block 100:
 
 ```bash
 curl 127.0.0.1:20189/json_rpc -d '{"method":"getblockheaderbyheight","params":{"height":100}}'
 ```
 
+To enable wallet rpc you can do as below but make sure rpc-bind-port matches the one in your config
+
+```bash
+./scala-wallet-rpc --wallet-file walletfile --prompt-for-password --rpc-bind-port 9000 --rpc-bind-ip 127.0.0.1  --disable-rpc-login --daemon-address 127.0.0.1:11812
+```
 
 #### Monitoring
 
 * To inspect and make changes to redis I suggest using [redis-commander](https://github.com/joeferner/redis-commander)
 * To monitor server load for CPU, Network, IO, etc - I suggest using [Netdata](https://github.com/firehol/netdata)
 * To keep your pool node script running in background, logging to file, and automatically restarting if it crashes - I suggest using [forever](https://github.com/nodejitsu/forever) or [PM2](https://github.com/Unitech/pm2)
+
+##### Monitoring with PM2
+To start and register your modules seperately via pm2 use the below commands
+```bash
+cd <path_to_pool>
+pm2 start init.js --name=pool -- --module=pool
+pm2 start init.js --name=api -- --module=api,charts
+pm2 start init.js --name=unlocker -- --module=unlocker
+pm2 start init.js --name=payments -- --module=payments
+```
+It will help you to log each module easily by using `pm2 log <module_name>`.
 
