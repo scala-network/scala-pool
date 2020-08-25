@@ -81,41 +81,38 @@ global.redisClient.on('error', function (err) {
 if (cluster.isWorker){
 	switch(process.env.workerType){
 		case 'pool':
-		require('./lib/pool.js');
-		break;
+		require('./lib/pool.js')
+		break
 		case 'workers/pool':
-		require('./lib/workers/pool.js');
-		break;
+		require('./lib/workers/pool.js')
+		break
 		case 'workers/api':
-		require('./lib/workers/api.js');
-		break;
+		require('./lib/workers/api.js')
+		break
 		case 'workers/charts':
-		require('./lib/workers/charts.js');
-		break;
+		require('./lib/workers/charts.js')
+		break
 		case 'listener':
-		break;
+		break
 		case 'unlocker':
-		require('./lib/blockUnlocker.js');
+		require('./lib/blockUnlocker.js')
 		break;
 		case 'payments':
-		require('./lib/paymentProcessor.js');
-		break;
+		require('./lib/paymentProcessor.js')
+		break
 		case 'api':
-		require('./lib/api.js');
-		break;
-		case 'charts':
-		require('./lib/chartsDataCollector.js');
-		break;
+		require('./lib/api.js')
+		break
 		default:
 		console.error(`Invalid worker type ${process.env.workerType}`)
 	}
 	return;
 }
 
-require('./lib/exceptionWriter.js')(logSystem);
+require('./lib/exceptionWriter.js')(logSystem)
 
 // Pool informations
-log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.config.version]);
+log('info', logSystem, 'Starting ScalaPool version %s', [global.config.version]);
 
 
 const createWorker = function(workerType, forkId){

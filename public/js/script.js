@@ -66,21 +66,39 @@ function updateIndex(){
 }
 
 // Load live statistics
-function loadLiveStats(reload) {
+function loadLiveStats(reload, polling) {
+    if(xhrLiveStats && !reload) {
+        return;
+    }
     var apiURL = window.config.api + '/stats';
     
-    var address = getCurrentAddress();
-    if (address) { apiURL = apiURL + '?address=' + encodeURIComponent(address); }
+    if (xhrLiveStats) {
+        xhrLiveStats.abort()
+    }
 
-    if (xhrLiveStats) xhrLiveStats.abort();
-    
-    $.get(apiURL, function(data){        
+    var address = getCurrentAddress();
+
+    let data = {}
+    if(address) {
+        data.address=encodeURIComponent(address);
+    }
+
+    if(polling) {
+        data.polling = true
+    }
+     xhrLiveStats = $.ajax({
+        url: apiURL,
+        data : data,
+        dataType: 'json',
+        cache: false,
+        type: 'get',
+    }).done(function(data){
         updateLiveStats(data);
-        if(typeof disableSidebarRouting === 'undefined' || disableSidebarRouting ===false){
-	        if (!reload){
-	        	routePage(fetchLiveStats);
-	        }
-        }
+    }).always(function(){
+        xhrLiveStats = null;
+        timerFetchLiveStats = setTimeout(function() {
+            loadLiveStats(false,true)
+        },5000);
     });
 }
 
@@ -88,30 +106,17 @@ function loadLiveStats(reload) {
 var xhrLiveStats;
 var timerFetchLiveStats;
 var soundEnabled = true;
-function fetchLiveStats() {
-    if(timerFetchLiveStats && xhrLiveStats){
-        return;
-    }
-    var apiURL = window.config.api + '/live_stats';
 
-    var address = getCurrentAddress();
-    if (address) { apiURL = apiURL + '?address=' + encodeURIComponent(address); }
-    
-    xhrLiveStats = $.ajax({
-        url: apiURL,
-        dataType: 'json',
-        cache: 'false'
-    }).done(function(data){
-        updateLiveStats(data);
-    }).always(function(){
-        xhrLiveStats = null;
-        timerFetchLiveStats = setTimeout(fetchLiveStats,5000);
-    });
-}
 
 // Initialize
 $(function(){
-    
+
+    var urlWalletAddress = location.search.split('wallet=')[1] || false
+    if(urlWalletAddress) {
+        docCookies.setItem('mining_address', urlWalletAddress)
+        window.location.href = "./#worker_stats"
+        return
+    }
     // Add support informations to menu    
     if (typeof telegram !== 'undefined' && telegram) {
         $('#menu-content').append('<li><a target="_new" href="'+telegram+'"><i class="fa fa-telegram"></i> <span tkey="telegram">Telegram group</span></a></li>');
@@ -143,8 +148,13 @@ $(function(){
 
 		if (playbutts) playbutts.then(afterTest).catch(error => {$('#btnBlockAudioAlert').click();});
 		else afterTest();	
-		
+
+
+
 		loadLiveStats();
+        routePage(() => {
+            loadLiveStats(true, true)
+        });
 	});
 	
     

@@ -18,6 +18,7 @@ $('#menu-content').collapse('hide');
 var docCookies = {
     getItem: function (sKey) {
         return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+
     },
     setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
         if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
@@ -40,10 +41,12 @@ var docCookies = {
     },
     removeItem: function (sKey, sPath, sDomain) {
         if (!sKey || !this.hasItem(sKey)) { return false; }
+
         document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
         return true;
     },
     hasItem: function (sKey) {
+
         return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
     }
 };
@@ -56,11 +59,9 @@ var docCookies = {
 var currentPage;
 
 // Handle hash change
-if(typeof disableSidebarRouting == 'undefined' || disableSidebarRouting === false){
-	window.onhashchange = function(){
-	    routePage();
-	};
-}
+window.onhashchange = function(){
+    routePage();
+};
 
 // Route to page
 var xhrPageLoading;
@@ -82,8 +83,6 @@ function routePage(loadedCallback) {
     } else {
         page = "settings.html";
     }
-    
-    
     
     loadTranslations();
 
@@ -259,9 +258,8 @@ function formatPaymentLink(hash){
 
 // Format difficulty
 function formatDifficulty(x) {
-    if(!x) return x
-    if(typeof x.toString === 'undefined') return x
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    if (!x || typeof x.toString === 'undefined') return x
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
 // Format luck / current effort

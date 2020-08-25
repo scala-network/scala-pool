@@ -39,6 +39,9 @@ function renderCells(height,data){
 var blockObjects = {};
 
 var renderBlocks = function(data){
+    if(!data) {
+        return
+    }
     var $scoresheet_rows = $('#scoresheet_rows');
     for(var i =0,il=data.length;i<il;i+=2) {
     	var block = data[i];

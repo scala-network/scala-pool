@@ -3,7 +3,7 @@
 
 <div id="workerStats">
     <div class="input-group">
-    	<input class="form-control" id="yourStatsInput" type="text" tplaceholder="enterYourAddress" placeholder="Enter Your Address">
+    	<input class="form-control" id="yourStatsInput" type="text" tplaceholder="enterYourAddress" placeholder="Enter Your Address" value=''>
         <span class="input-group-btn"><button class="btn btn-default" type="button" id="lookUp">
             <span><i class="fa fa-search"></i> <span tkey="lookup">Lookup</span></span>
             <span><i class="fa fa-refresh fa-spin"></i> <span tkey="searching">Searching...</span></span>
@@ -25,9 +25,9 @@
 	  	</a>	
 	  </li>
 	  <li role="presentation">
-		<a href="#worker_stats" class='user_navigate btn' data-page='scoresheets.html'>
+		<a href="#worker_stats" class='user_navigate btn' data-page='shares.html'>
 	  		<i class="fas fa-futbol"></i>&nbsp;
-	  		<span tkey="scoresheets">Scoresheets</span>
+	  		<span tkey="shares">Shares</span>
 	  	</a>
 	  </li>
 	  
@@ -45,9 +45,8 @@
 
 <!-- Javascript -->
 <script>
-
 var routeApp = {
-	update:function(){},
+	update:function(minerData){},
 	destroy:function(){},
 	init:function(){}
 };
@@ -57,15 +56,15 @@ currentPage = {
         $('#lookUp').off('click');
         $('.user_navigate').off('click');
         if(xhrSubRoutePage) xhrSubRoutePage.abort();
-
         routeApp.destroy();
     },
     update: function(){
-    	routeApp.update();
+        if(lastStats && lastStats.miner) routeApp.update(lastStats.miner);
     }
 }
 
 var xhrSubRoutePage = null;
+
 const subRoutePage = function(page){
 	routeApp.destroy();
 	$('#yourStats').hide();
@@ -77,6 +76,7 @@ const subRoutePage = function(page){
             $('#yourStats').show().html(data);
             loadTranslations();
 	    	routeApp.init();
+            currentPage.update()
         }
     });
 }
@@ -84,21 +84,17 @@ const subRoutePage = function(page){
 $('#lookUp').click(function(){
     var address = $('#yourStatsInput').val().trim();
     
-    if (getCurrentAddress() != address) {
-        docCookies.setItem('mining_address', address, Infinity);
-    
+    if (getCurrentAddress() !== address) {
         var urlWalletAddress = location.search.split('wallet=')[1] || 0;
         if (urlWalletAddress){
             window.location.href = "/#worker_stats";
             return ;
         }
-        else {
-            docCookies.setItem('mining_address', address, Infinity);
-            loadLiveStats(true);
-        }
+        
+        docCookies.setItem('mining_address', address, Infinity);
+        loadLiveStats(true);
     }
 
-    
     if (!address){
         $('#yourStatsInput').focus();
         return;
@@ -108,7 +104,6 @@ $('#lookUp').click(function(){
     subRoutePage('worker.html');
     
 });
-
 // Lookup if current address is known
 var address = getCurrentAddress();
 if (address){
@@ -131,6 +126,7 @@ $('.user_navigate').on('click',function(e){
 	$(this).parent('li').addClass('active');
 	subRoutePage(page);
 });
+
 
 </script>
 

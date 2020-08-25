@@ -40,9 +40,10 @@
                 <th class="text-center"><span tkey="reward">Reward</span></th>
                 <th class="text-center"><span tkey="difficulty">Difficulty</span></th>
                 <th class="text-center"><span tkey="blockHash">Block Hash</span></th>
-		<th class="text-center"><span tkey="score">Score</span></th>
-		<th class="text-center"><span tkey="totalScore">Total Score</span></th>
+		<th class="text-center"><span tkey="score">Shares</span></th>
+		<th class="text-center"><span tkey="totalScore">Total Shares</span></th>
                 <th class="text-center"><span tkey="percent">Percent</span></th>
+                <th class="text-center"><span tkey="poolType">Pool Type</span></th>
             </tr>
             </thead>
             <tbody id="blocksReport_rows">
@@ -137,17 +138,19 @@ function getBlockRowElement(block){
     var row = document.createElement('tr');
     row.setAttribute('id', id);
                 
-    var reward = parseFloat(getReadableCoins(block.reward, null, true)).toFixed(2);
+    var reward = getReadableCoins(block.reward, 5, true);
     var percent = parseFloat( 100 * block.shares / block.totalShares).toFixed(5);
+    var poolType = block.poolType
     var columns =
     	'<td class="col1">' + block.height + '</td>' +
         '<td class="col2">' + formatDate(block.time) + '</td>' +
         '<td class="col3">' + reward + '</td>' +
         '<td class="col4">' + block.difficulty + '</td>' +
         '<td class="col5">' + formatBlockLink(block.hash) + '</td>' +
-	'<td class="col6">' + block.score + '</td>' +
-	'<td class="col6">' + block.totalScore + '</td>' +
-        '<td class="col6" title="' + percent + ' shares">' + percent + '</td>';
+    	'<td class="col6">' + block.shares + '</td>' +
+    	'<td class="col6">' + block.totalShares + '</td>' +
+        '<td class="col6" title="' + percent + ' shares">' + percent + '</td>' +
+        '<td class="col6">' + poolType + '</td>';
     row.innerHTML = columns;
     
     return row;
@@ -241,60 +244,30 @@ function renderBlocks(data){
 	}
 }
 
-function fetchAddressStats(longpoll){
-		    
-    xhrAddressPoll = $.ajax({
-        url: window.config.api + '/stats_address',
-        data: {
-            address: address,
-            longpoll: longpoll
-        },
-        dataType: 'json',
-        cache: 'false',
-        success: function(data){                    
-            if (!data.stats){
-                $('.yourStats, .yourWorkers, .userChart').hide();
-                $('#addressError').text(data.error).show();
-                docCookies.setItem('mining_address', '', Infinity);
-                loadLiveStats(true);
-                return;
-            }
-			updateText('1wpaid', getReadableCoins(data.stats.payments_7d));
-			updateText('24hrpaid', getReadableCoins(data.stats.payments_24h));
-			
-            $('#addressError').hide();
-	    
-            $('.yourStats').show();
-		    
-		    renderPayments(data.payments);
-			renderBlocks(data.unconfirmed);
-			
-	    	$('#user_navigator').show();
-	    	$('#loading').hide();
-	    	
-	    	
-	    	fetchAddressTimeout = setTimeout(function(){
-	    		fetchAddressStats(true);	
-	    	},10000);
-        },
-        error: function(e){
-            if (e.statusText === 'abort') return;
-            $('#addressError').text('Connection error').show();
-        
-            if (addressTimeout) clearTimeout(addressTimeout);
-            addressTimeout = setTimeout(function(){
-                fetchAddressStats(false);
-            }, 2000);
-        }
-    });
-}
 // Load more payments button
 var xhrGetPayments;
 
 routeApp = {
-	update:function(){
-		
-		
+	update:function(data){
+		if (!data.stats){
+            $('.yourStats, .yourWorkers, .userChart').hide();
+            $('#addressError').text(data.error).show();
+            docCookies.setItem('mining_address', '', Infinity);
+            loadLiveStats(true);
+            return;
+        }
+        updateText('1wpaid', getReadableCoins(data.stats.payments_7d));
+        updateText('24hrpaid', getReadableCoins(data.stats.payments_24h));
+        
+        $('#addressError').hide();
+
+        $('.yourStats').show();
+        
+        renderPayments(data.payments);
+        renderBlocks(data.unconfirmed);
+        
+        $('#user_navigator').show();
+        $('#loading').hide();
 	},
 	destroy:function(){
 		if (xhrGetPayments) 
@@ -304,7 +277,6 @@ routeApp = {
 		$('#loadMorePayments').off('click');
 	},
 	init:function(){
-		fetchAddressStats(false);
 		$('#loadMorePayments').on('click',function(){
 		    if (xhrGetPayments) xhrGetPayments.abort();
 		    xhrGetPayments = $.ajax({
