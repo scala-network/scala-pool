@@ -127,34 +127,37 @@ const createWorker = function(workerType, forkId){
 		setTimeout(function(){
 			createWorker(workerType, forkId);
 		}, global.config.poolServer.timeout || 2000);
-	}).on('message', function(msg){
-		switch(msg.type){
-			case 'collectStats':
-			Object.keys(cluster.workers).forEach(function(id) {
-				if (!!~['api','workers/charts'].indexOf(cluster.workers[id].workerType)){
-					cluster.workers[id].send(msg);
+	})
+	worker.on('message', function(msg){
+		Object.keys(cluster.workers).forEach(function(id) {
+			const w = cluster.workers[id]
+			switch(msg.type){
+				case 'apiStats':
+				if (w.workerType === 'api'){
+					w.send(msg);
 				}
-			});	
-			break
-			case 'connectedMiners':
-			case 'disconnectedMiners':
-			case 'jobRefresh':
-			Object.keys(cluster.workers).forEach(function(id) {
-				if (cluster.workers[id].workerType === 'workers/pool'){
-					cluster.workers[id].send(msg)
+				break
+				case 'apiStatsRefresh':
+				if (w.workerType === 'workers/api'){
+					w.send(msg);
 				}
-			})
-			break
-			case 'banIP':
-			case 'banIPs':
-			case 'blockTemplate':
-			Object.keys(cluster.workers).forEach(function(id) {
-				if (cluster.workers[id].workerType === 'pool'){
-					cluster.workers[id].send(msg)
+				break
+				case 'connectedMiners':
+				case 'disconnectedMiners':
+				case 'jobRefresh':
+				if (w.workerType === 'workers/pool'){
+					w.send(msg)
 				}
-			});
-			break
-		}
+				break
+				case 'banIP':
+				case 'banIPs':
+				case 'blockTemplate':
+				if (w.workerType === 'pool'){
+					w.send(msg)
+				}
+				break
+			}
+		});	
 	});
 };
 /**
@@ -221,18 +224,18 @@ const createWorker = function(workerType, forkId){
 	 	}
 
 	 	let i = 0
-	 	// createWorker('workers/charts', 0)
-	 	createWorker('workers/api', 0)
+
 	 	setTimeout(() => {
 	 		let spawnInterval = setInterval(function(){
 	 			i++;
 	 			if (i -1 === numForks){
 	 				log('info', logSystem, 'Api spawned on %d thread(s)', [numForks]);
 	 				clearInterval(spawnInterval);
+	 				createWorker('workers/api', 0)
 	 				return;
 	 			}
 	 			createWorker('api', i.toString());
-	 		}, 10);
+	 		}, 10 * i);
 	 	},20)
 	 }
 

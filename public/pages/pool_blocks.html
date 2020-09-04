@@ -283,7 +283,8 @@ currentPage = {
         if (xhrGetBlocks) xhrGetBlocks.abort();
     },
     update: function(){
-    	updateText('currentEffort', (lastStats.pool.stats.roundShares / lastStats.network.difficulty * 100).toFixed(1) + '%');
+        updateHtml('currentEffort', formatLuck(lastStats.network.difficulty, lastStats.pool.stats.roundShares));
+
         updateText('blocksTotal', lastStats.pool.stats.blocksFound.toString());
         if (lastStats.pool.stats.lastBlockFound) {
             var d = new Date(parseInt(lastStats.pool.stats.lastBlockFound)).toISOString();
@@ -298,7 +299,8 @@ currentPage = {
 
         $('#soloAverageLuck').html(formatLuck(lastStats.pool.stats.totalDiff_solo, lastStats.pool.stats.totalShares_solo));
 
-        updateText('soloCurrentEffort', (lastStats.pool.stats.roundSharessolo / lastStats.network.difficulty * 100).toFixed(1) + '%');
+        updateHtml('soloCurrentEffort', formatLuck(lastStats.network.difficulty, lastStats.pool.stats.roundSharessolo));
+
         updateText('soloBlocksTotal', lastStats.pool.stats.blocksFound_solo || 0);
         if (lastStats.pool.stats.lastBlockFound_solo) {
             var d = new Date(parseInt(lastStats.pool.stats.lastBlockFound_solo)).toISOString();
@@ -307,16 +309,17 @@ currentPage = {
 
         $('#propsAverageLuck').html(formatLuck(lastStats.pool.stats.totalDiff_props, lastStats.pool.stats.totalShares_props));
 
-        updateText('propsCurrentEffort', (lastStats.pool.stats.roundSharesprops / lastStats.network.difficulty * 100).toFixed(1) + '%');
+        updateHtml('propsCurrentEffort', formatLuck(lastStats.network.difficulty, lastStats.pool.stats.roundSharesprops));
+
         updateText('propsBlocksTotal', lastStats.pool.stats.blocksFound_props || 0);
         if (lastStats.pool.stats.lastBlockFound_props) {
             var d = new Date(parseInt(lastStats.pool.stats.lastBlockFound_props)).toISOString();
             $('#propsLastBlockFound').timeago('update', d);
         }
 
-        updateText('totalHashes', formatDifficulty(lastStats.pool.stats.totalShares) || 0);
-        updateText('soloTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_solo) || 0);
-        updateText('propsTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_props) || 0);
+        updateText('totalHashes', formatDifficulty(lastStats.pool.stats.totalShares || 0));
+        updateText('soloTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_solo || 0));
+        updateText('propsTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_props || 0));
 
 
 

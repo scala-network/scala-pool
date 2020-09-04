@@ -17,7 +17,8 @@
         "cryptonight-hashing": "git+https://github.com/scala-network/scala-hashing.git#e7ff439815457f3f0cba174d0243ca038d833a59",
         "dateformat": "*",
         "read-package-json": "^2.1.1",
-        "redis": "*"
+        "redis": "*",
+        "zeromq": "^5.2.0"
     },
     "engines": {
         "node": ">=12.0"

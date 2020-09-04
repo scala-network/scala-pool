@@ -301,9 +301,9 @@ currentPage = {
         updateText('networkDifficulty', formatNumber(lastStats.network.difficulty.toString(), ' '));
         updateText('blockchainHeight', formatNumber(lastStats.network.height.toString(), ' '));
         
-        const poolLoad = parseFloat(lastStats.system.load[0] * 100 / lastStats.system.number_cores);
+        // const poolLoad = parseFloat(lastStats.system.load[0] * 100 / lastStats.system.number_cores);
         
-        updateText('poolLoad', (poolLoad).toFixed(2)+"%");
+        // updateText('poolLoad', (poolLoad).toFixed(2)+"%");
         
         const poolLoadIcon=$("#poolLoadIcon");
         poolLoadIcon.removeClass();
