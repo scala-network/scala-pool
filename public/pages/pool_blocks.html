@@ -544,6 +544,7 @@ function renderBlocks(blocksResults){
     for (var i = 0; i < blocksResults.length; i++){
     	
         var block = parseBlock(blocksResults[i], blocksResults[i]);
+				 if(block.hash === "") continue;
     	var dIndex = formatDate(block.time).split(",")[0];
         var blockJson = JSON.stringify(block);
     	if(!blockElementSets[dIndex]){
