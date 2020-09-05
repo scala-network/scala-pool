@@ -5,15 +5,20 @@
     <p><span tkey="soundNotificationInfo">Enable sound notification for each block by pool.</span></p>
     <div>
       <div id="action_update_message" role="alert" ></div>
-    </div>
-   
-    <div class="row push-down-5">
-        <!-- Rounded switch -->
+  </div>
+
+  <div class="row push-down-5">
+    <!-- Rounded switch -->
+    <div class="col-md-6">
         <label class="switch">
           <input type="checkbox" id='soundNotification'>
           <span class="slider round"></span>
-        </label>
-    </div>
+      </label>
+  </div>
+  <div class="col-md-6">
+    <div id="qrcode" class="pull-right"></div>
+  </div>
+</div>
 </div>
 
 <!-- Verification fields -->
@@ -23,14 +28,14 @@
     <p><span tkey="minerVerification">In order to get a little more confidence that the wallet address is yours we ask you to give one of the IP addresses that is used by your miner.</span></p>
     <div>
       <div id="action_update_message" role="alert" ></div>
+  </div>
+
+  <div class="row push-down-5">
+    <label class="col-lg-2 col-sm-3 col-form-label col-form-label-lg" for="yourIP"><span tkey="minerIP">Miner IP address</span>:</label>
+    <div class="col-md-4 col-sm-5">
+        <input class="form-control" id="yourIP" type="text" tkey="enterYourMinerIP" placeholder="An IP address your miners use (any)">
     </div>
-   
-    <div class="row push-down-5">
-        <label class="col-lg-2 col-sm-3 col-form-label col-form-label-lg" for="yourIP"><span tkey="minerIP">Miner IP address</span>:</label>
-        <div class="col-md-4 col-sm-5">
-            <input class="form-control" id="yourIP" type="text" tkey="enterYourMinerIP" placeholder="An IP address your miners use (any)">
-        </div>
-    </div>
+</div>
 </div>
 <!-- Minimum payout level -->
 <h3><span tkey="setMinimumPayout">Reset Donation Level</span></h3>
@@ -52,13 +57,13 @@
         <label class="col-lg-2 col-sm-3 col-form-label col-form-label-lg" for="yourPayoutRate"><span tkey="minimumPayout">Minimum payout</span>:</label>
         <div class="col-sm-2 push-down-5">
           <input class="form-control" id="yourPayoutRate" type="number" value="">
-        </div>
-        <div class="col-sm-4 push-down-5">
-            <button class="btn btn-default" type="button" id="payoutSetButton">
-                <span><i class="fa fa-check"></i>&nbsp; <span tkey="set">Set</span></span>
-            </button>
-        </div>
+      </div>
+      <div class="col-sm-4 push-down-5">
+        <button class="btn btn-default" type="button" id="payoutSetButton">
+            <span><i class="fa fa-check"></i>&nbsp; <span tkey="set">Set</span></span>
+        </button>
     </div>
+</div>
 </div>
 
 
@@ -73,7 +78,7 @@ if (address){
 /**
  * Error Message
  **/
-function showError(id, message, extra) {
+ function showError(id, message, extra) {
     if (getTranslation(id)) message = getTranslation(id);
     message = message.trim();
     if (extra) message += ' ' + extra;
@@ -84,7 +89,7 @@ function showError(id, message, extra) {
 /**
  * Success Message
  **/
-function showSuccess(id, message) {
+ function showSuccess(id, message) {
     if (getTranslation(id)) message = getTranslation(id);
     $('#action_update_message').text(message);
     $('#action_update_message').removeClass().addClass('alert alert-success');
@@ -93,7 +98,7 @@ function showSuccess(id, message) {
 /**
  * Payout level
  **/
-var getMinerPayoutLevelAjax;
+ var getMinerPayoutLevelAjax;
 // Get current payout level
 function getPayoutLevel(address) {
     if (!address || address == '') return;
@@ -160,59 +165,69 @@ routeApp = {
     	$('#payoutSetButton').off('click');
     	$('#resetDonationButton').off('click');
         $('#soundNotification').off('change');
-    	if(resetDonationLevelAjax){
-    		resetDonationLevelAjax.abort();
-    	}
-    	if(setMinerPayoutLevelAjax){
-    		setMinerPayoutLevelAjax.abort();
-    	}
-    	if(getMinerPayoutLevelAjax){
-    		getMinerPayoutLevelAjax.abort();
-    	}
-    },
-    update: function(){},
-    init:function(){
-    	$('#resetDonationButton').on('click',function(e){
-		    e.preventDefault();
-		    var address = $('#yourStatsInput').val().trim();
-		    if (!address || address == '') {
-		        showError('noMinerAddress', 'No miner address specified');
-		        return;
-		    }
-		
-		    var ip = $('#yourIP').val().trim();
-		    if (!ip || ip == '') {
-		        showError('noMinerIP', 'No miner IP address specified');
-		        return;
-		    }
-		
-		
-		    resetDonationLevel(address, ip);
-		});
+        if(resetDonationLevelAjax){
+          resetDonationLevelAjax.abort();
+      }
+      if(setMinerPayoutLevelAjax){
+          setMinerPayoutLevelAjax.abort();
+      }
+      if(getMinerPayoutLevelAjax){
+          getMinerPayoutLevelAjax.abort();
+      }
+  },
+  update: function(){},
+  init:function(){
+
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: 'scala:'+getCurrentAddress(),
+        width: 128,
+        height: 128,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+
+    $('#resetDonationButton').on('click',function(e){
+      e.preventDefault();
+      var address = $('#yourStatsInput').val().trim();
+      if (!address || address == '') {
+          showError('noMinerAddress', 'No miner address specified');
+          return;
+      }
+
+      var ip = $('#yourIP').val().trim();
+      if (!ip || ip == '') {
+          showError('noMinerIP', 'No miner IP address specified');
+          return;
+      }
+
+
+      resetDonationLevel(address, ip);
+  });
 
 		// Handle click on Set button
 		$('#payoutSetButton').on('click',function(e){
-		    e.preventDefault();
-		    var address = $('#yourStatsInput').val().trim();
-		    if (!address || address == '') {
-		        showError('noMinerAddress', 'No miner address specified');
-		        return;
-		    }
-		
-		    var ip = $('#yourIP').val().trim();
-		    if (!ip || ip == '') {
-		        showError('noMinerIP', 'No miner IP address specified');
-		        return;
-		    }
-		
-		    var level = $('#yourPayoutRate').val().trim();
-		    if (!level || level < 0) {
-		        showError('noPayoutLevel', 'No payout level specified');
-		        return;
-		    }
-		
-		    setPayoutLevel(address, ip, level);
-		});	
+          e.preventDefault();
+          var address = $('#yourStatsInput').val().trim();
+          if (!address || address == '') {
+              showError('noMinerAddress', 'No miner address specified');
+              return;
+          }
+
+          var ip = $('#yourIP').val().trim();
+          if (!ip || ip == '') {
+              showError('noMinerIP', 'No miner IP address specified');
+              return;
+          }
+
+          var level = $('#yourPayoutRate').val().trim();
+          if (!level || level < 0) {
+              showError('noPayoutLevel', 'No payout level specified');
+              return;
+          }
+
+          setPayoutLevel(address, ip, level);
+      });	
 		
 		$('#loading').hide();
 		
@@ -231,3 +246,4 @@ routeApp = {
     }
 };
 </script>
+
