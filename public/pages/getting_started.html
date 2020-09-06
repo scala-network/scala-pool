@@ -176,14 +176,40 @@
                 </td>
             </tr>
 
-
-
         <!-- XMRig -->
             <tr class="appInfo">
                 <td class="miningAppTitle">Scala Mobile Miner</td>
                 <td>CPU</td>
                 <td>Ligthweight but powerful Android Mining App</td>
                 <td><a class="btn btn-success" target="_blank" href="https://github.com/scala-network/MobileMiner/releases"><span tkey="download">Download</span></a></td>
+            </tr>
+
+
+
+            <tr class="appInfo">
+                <td class="miningAppTitle">xmrigCC</td>
+                <td>CPU</td>
+                <td>High performance RandomX, CryptoNight, Argon2 and AstroBWT CPU miner for support for Windows, Linux and MacOS.</td>
+                <td><a class="btn btn-success" target="_blank" href="https://github.com/Bendr0id/xmrigCC/releases"><span tkey="download">Download</span></a></td>
+                <td><a class="btn btn-default" role="button" data-toggle="collapse" href="#xmrigCC" aria-expanded="true" aria-controls="collapseExample"><span tkey="showConfig">See more</span></a></td>
+            </tr>
+            <tr class="appConfig">
+                <td colspan="5">
+                    <div class="collapse" id="xmrigCC">
+        
+<pre><code>"pools": [
+    {
+        "url": "<span class="exampleHost">POOL_HOST</span>:<span class="examplePort">PORT</span>",
+        "user": "<span class="exampleLogin">YOUR_WALLET_ADDRESS</span>",
+        "pass": "<span class="examplePassword">YOUR_WORKER_NAME</span>",
+        "keepalive": true,
+        "nicehash": false,
+        "algo": "panthera"
+    }
+],</code></pre>
+
+                    </div>
+                </td>
             </tr>
             
             </tbody>
@@ -276,3 +302,4 @@ $('#generateConf').click(function() {
     updateTextClasses('examplePassword', password);    
 });
 </script>
+

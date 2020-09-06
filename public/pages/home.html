@@ -361,16 +361,6 @@ currentPage = {
         updateText('poolWorkers', lastStats.pool.workers.toString());
 
         var totalFee = 0;
-        /*
-if (Object.keys(lastStats.config.contributions).length) {
-            var totalDonation = 0;
-            for(var i in lastStats.config.contributions) {
-                totalDonation += lastStats.config.contributions[i].percent;
-            }
-            totalFee += totalDonation;
-        }
-        updateText('poolContributions', (totalFee > 0 && totalFee != 100 ? floatToString(totalFee) : (totalFee == 100 ? '100' : '0')) + '%');
-*/
         updateText('paymentsInterval', getReadableTime(lastStats.config.paymentsInterval));
         updateText('paymentsMinimum', getReadableCoins(lastStats.config.minPaymentThreshold));
 
