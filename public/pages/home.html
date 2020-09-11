@@ -209,7 +209,7 @@
 
 <!-- Pool Charts -->
 <div class="row">
-    <div class="col-sm-4 poolChart">
+    <div class="hidden-xs col-md-2 col-sm-4 poolChart">
         <div class="card">
             <h4><span tkey="hashRate">Hash Rate</span></h4>
             <div class="chart">
@@ -218,7 +218,7 @@
             </div> 
         </div>        
     </div>
-    <div class="col-sm-4 poolChart">
+    <div class="hidden-xs col-sm-4 col-md-2 poolChart">
         <div class="card">
             <h4><span tkey="difficulty">Difficulty</span></h4>
             <div class="chart">
@@ -227,7 +227,7 @@
             </div> 
         </div>
     </div>
-    <div class="col-sm-4 poolChart">
+    <div class="hidden-xs col-md-2 col-sm-4 poolChart">
         <div class="card">
             <h4><span tkey="miners">Miners</span></h4>
             <div class="chart">
@@ -236,7 +236,7 @@
             </div> 
         </div> 
     </div>    
-    <div class="col-sm-4 poolChart">
+    <div class="hidden-xs col-sm-4 col-md-2 poolChart">
         <div class="card">
             <h4><span tkey="workers">Workers</span></h4>
             <div class="chart">
@@ -245,7 +245,7 @@
             </div> 
         </div> 
     </div>  
-    <div class="col-sm-4 poolChart">
+    <div class="hidden-xs col-sm-4 col-md-2 poolChart">
         <div class="card">
             <h4><span tkey="blockEfforts">Block Efforts</span></h4>
             <div class="chart">
@@ -254,7 +254,7 @@
             </div>
         </div>        
     </div>
-    <div class="col-sm-4 poolChart">
+    <div class="hidden-xs col-sm-4 col-md-2 poolChart">
         <div class="card">
             <h4><span tkey="priceIn">Price in</span> <span id="priceChartCurrency">USD</span></h4>
             <div class="chart">
@@ -263,7 +263,7 @@
             </div>
         </div>        
     </div>
-    <div class="col-sm-4 poolChart">
+    <div class="hidden-xs col-sm-4 col-md-2 poolChart">
         <div class="card">
             <h4><span tkey="hashPer">Hash/</span>
             <span id="profitChartCurrency">USD</span> 
@@ -390,23 +390,58 @@ function createCharts() {
     	 return ;	
     }
     var data = lastStats.charts;
-    
+    var properties = [
+		'height',
+		'hash',
+		'timestamp',
+		'difficulty',
+		'shares',
+		'donations',
+		'reward',
+		'miner',
+		'poolType',
+		'orphaned',
+		'unlocked'
+   ]; 
 	var blocks = [];
-	
+var difficulties = []	
     for(var i = 0;i<lastStats.pool.blocks.length;i+=2){
-		var block = lastStats.pool.blocks[i].split(':');
-		var difficulty = parseInt(block[2]);
-		var shares = parseInt(block[3]);
+	var parts = lastStats.pool.blocks[i].split(':');
+	var block = {};
+	for(var a =0;a<properties.length;a++) {
+	   var property = properties[a];
+       		switch(property) {
+	            case 'unlocked':
+        	    block[property] = (parts[a] === true || parts[a] === 'true');
+	            break;
+        	    case 'orphaned':
+	            case 'height':
+        	    case 'timestamp':
+	            case 'difficulty':
+        	    case 'shares':
+	            case 'donations':
+	            case 'reward':
+        	    case 'orphaned':
+	            block[property] = parseInt(parts[a])
+        	    break;
+	            default:
+	            block[property] = parts[a]
+        	    break;
+        	}
+	}	
 
-		var percent = Math.round(shares / difficulty * 100);
-		var s = [];
-		s.push(parseInt(block[1]));
-		s.push(percent);
-		blocks.push(s);
-	}
+	var percent = Math.round(block.shares / block.difficulty * 100);
+	var s = [];
+	s.push(block.timestamp);
+	s.push(percent);
+	blocks.push(s);
+
+	difficulties.push([block.timestamp,block.difficulty]);
+    }
+
     var graphData = {
         hashrate: getGraphData(data.hashrate),
-        diff: getGraphData(data.difficulty),
+        diff: getGraphData(difficulties.reverse()),
         miners: getGraphData(data.miners),
         workers: getGraphData(data.workers),
         price: getGraphData(data.price),

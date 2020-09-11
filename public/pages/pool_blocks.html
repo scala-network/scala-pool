@@ -2,7 +2,7 @@
 <div id='blocksStats' class="row">
 
     <!-- Total Blocks Mined -->
-    <div class="col-xs-3">
+    <div class="col-sm-6 hidden-xs col-md-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-cubes"></span>
@@ -16,7 +16,7 @@
 
 
  <!-- Average Luck -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-sm hidden-xs">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -29,7 +29,7 @@
     </div>
 
      <!-- Current Effort -->
-    <div class="col-xs-3">
+    <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -44,7 +44,7 @@
 
 
      <!-- Current Effort -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-sm hidden-xs">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-hashtag"></span>
@@ -61,7 +61,7 @@
 
 
         <!-- Total Blocks Mined -->
-    <div class="col-xs-3">
+    <div class="col-sm-6 hidden-xs col-md-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-cubes"></span>
@@ -76,7 +76,7 @@
 
 
     <!-- Average Luck -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-sm hidden-xs">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -90,7 +90,7 @@
 
 
      <!-- Current Effort -->
-    <div class="col-xs-3">
+    <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -103,7 +103,7 @@
     </div>
 
          <!-- Current Effort -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-sm hidden-xs">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-hashtag"></span>
@@ -118,7 +118,7 @@
 
 
 
-    <div class="col-xs-3">
+    <div class="col-sm-6 hidden-xs col-md-3">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-cubes"></span>
@@ -133,7 +133,7 @@
 
 
     <!-- Average Luck -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-sm hidden-xs">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -150,7 +150,7 @@
 
 
      <!-- Current Effort -->
-    <div class="col-xs-3">
+    <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -164,7 +164,7 @@
 
 
          <!-- Current Effort -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-sm hidden-xs">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-hashtag"></span>
@@ -177,7 +177,7 @@
     </div>
     
     <!-- Avg Block -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-xs hidden-sm">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -190,7 +190,7 @@
     </div>
     
     <!-- Average Income -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-xs hidden-sm">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-chart-line"></span>
@@ -204,7 +204,7 @@
 
 
     <!-- Maturity Depth Requirement -->
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-xs hidden-sm">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-unlock-alt"></span>
@@ -216,7 +216,7 @@
         </div>
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-md-3 hidden-xs hidden-sm">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-trophy"></span>
@@ -314,9 +314,9 @@ currentPage = {
             $('#propsLastBlockFound').timeago('update', d);
         }
 
-        updateText('totalHashes', formatDifficulty(lastStats.pool.stats.totalShares) || 0);
-        updateText('soloTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_solo) || 0);
-        updateText('propsTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_props) || 0);
+        updateText('totalHashes', formatDifficulty(lastStats.pool.stats.totalShares || 0));
+        updateText('soloTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_solo || 0));
+        updateText('propsTotalHashes', formatDifficulty(lastStats.pool.stats.totalShares_props || 0));
 
 
 
@@ -353,7 +353,6 @@ function generateChart(data) {
 	var avgDay = 0;
 
     for (var key in data) {
-        console.log(key)
         var label = key;
         if (chartDays && chartDays === 1) {
             var keyParts = key.split(' ');
@@ -545,11 +544,13 @@ function renderBlocks(blocksResults){
     	
         var block = parseBlock(blocksResults[i], blocksResults[i]);
 				 if(block.hash === "") continue;
-    	var dIndex = formatDate(block.time).split(",")[0];
+	var dIndex = formatDate(block.timestamp).split(" ")[0];
+	    console.log(dIndex)
         var blockJson = JSON.stringify(block);
     	if(!blockElementSets[dIndex]){
     		blockElementSets[dIndex] = {
     			incomes:0,
+			donations:0,
     			elements:[],
     			count:0
     		};
@@ -557,6 +558,7 @@ function renderBlocks(blocksResults){
     	
     	if(block.orphaned == 0){
         	blockElementSets[dIndex].incomes+=parseFloat(block.reward);
+        	blockElementSets[dIndex].donations+=parseFloat(block.reward * block.donations / block.shares);
         }
         
         var existingRow = document.getElementById('blockRow' + block.height);
@@ -583,7 +585,7 @@ function renderBlocks(blocksResults){
     }
     
     const summaryTR = "<tr style='font-weight:900;text-align:center;background:#e9dff1;' id='sum%ID%'>%TD%</tr>";
-	const summaryTD = "<td colspan='11' style='background:#e9dff1 !important;'>%DATE% we have mined %BLOCK% block(s) total reward of %REWARD% XTL</td>";
+	const summaryTD = "<td colspan='11' style='background:#e9dff1 !important;'>%DATE% we have mined %BLOCK% block(s) total reward of %REWARD% XLA and total donations %DONATION%</td>";
 	var incomes = [];
 	
     for(var pastDae in blockElementSets){
@@ -599,7 +601,8 @@ function renderBlocks(blocksResults){
         var td = summaryTD
 			.replace("%REWARD%", getReadableCoins(income, 2, true))
 			.replace("%BLOCK%",blockElementSet.count)
-			.replace("%DATE%",dated);
+			.replace("%DATE%",dated)
+			.replace("%DONATION%",getReadableCoins(blockElementSet.donations));
 		
 		if(sumRow){
 			sumRow.innerHTML = td;
