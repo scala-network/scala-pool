@@ -235,7 +235,6 @@ test('Payment Process With max address', t => {
         }
     }
 
-            // console.log(payee)
     if(payee.amount > 0) {
         queue.push(payee)
     }
@@ -244,7 +243,6 @@ test('Payment Process With max address', t => {
     for(let x in queue) {
         tt+=queue[x].amount
     }
-    // console.log(queue)
     t.is(queue.length,4)
     t.is(tt,3891)
 
