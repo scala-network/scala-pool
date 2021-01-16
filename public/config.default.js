@@ -18,7 +18,7 @@ window.config = {
 	discord:"https://discord.gg/zng9k2D",
 	marketCurrencies:["{symbol}-BTC","{symbol}-USD","{symbol}-EUR","{symbol}-CAD"],
 	blockchainExplorer:"https://explorer.scalaproject.io/block?block_info={id}",
-	transactionExplorer:"https://explorer.scalaproject.io/tx?tx_hash={id}",
+	transactionExplorer:"https://explorer.scalaproject.io/tx?tx_info={id}",
 	themeCss:"themes/dark.css"
 }
 
