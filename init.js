@@ -107,7 +107,7 @@ if (cluster.isWorker){
 require('./lib/exceptionWriter.js')(logSystem);
 
 // Pool informations
-log('info', logSystem, 'Starting Stellite Node.JS pool version %s', [global.config.version]);
+log('info', logSystem, 'Starting Scala Node.JS pool version %s', [global.config.version]);
 
 
 const createWorker = function(workerType, forkId){
