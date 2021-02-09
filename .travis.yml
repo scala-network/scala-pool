@@ -7,6 +7,7 @@ nodejs:
   - 14
 
 matrix:
+  fast_finish: true
   include:
     - env: COMPILER=g++-6 BUILD=Debug STANDARD=14
       compiler: gcc
@@ -17,32 +18,14 @@ matrix:
             - sourceline: 'ppa:mhier/libboost-latest'
             - ubuntu-toolchain-r-test
           packages:
-            - g++-6
-            - boost1.67
-    - env: COMPILER=g++-6 BUILD=Release STANDARD=14
-      compiler: gcc
-      addons:
-        apt:
-          update: true
-          sources:
-            - sourceline: 'ppa:mhier/libboost-latest'
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-            - boost1.67
-
+            - g++-7
+            - libboost-all-dev
+    
 
 services:
   - redis
 
-cache:
-  npm
-
-matrix:
-  fast_finish: true
-
-  include:
-    
+cache: npm  
 
 before_install:
     - "npm install -g npm@latest"
