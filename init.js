@@ -35,7 +35,7 @@ require('./lib/logger.js');
 const em = require('./lib/event_manager');
 global.EventManager = new em();
 
-const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts','rpcbalancer'];
+const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts','rpcbalancer','web'];
 //,'rpcbalancer'];
 
 global.redisClient = require('redis').createClient((function(){
@@ -98,6 +98,9 @@ if (cluster.isWorker){
         case 'charts':
             require('./lib/chartsDataCollector.js');
             break;
+	case 'web':
+	    require('./lib/web.js');
+	    break;
         default:
         	console.error(`Invalid worker type ${process.env.workerType}`)
     }
@@ -295,7 +298,31 @@ const createWorker = function(workerType, forkId){
 	        }, 2000);
 	    });
 	}
+		
+	/**
+	 * Spawn web service module
+	 **/
+	function spawnWeb(){
+	    const port = config.web || 80;
 	
+	    var worker = cluster.fork({
+	        workerType: 'web'
+	    });
+	    worker.on('exit', function(code, signal){
+//o	        log('error', logSystem, `web died, spawning replacement ${signal} : ${code}...`);
+		    if (signal) {
+			console.log(`worker was killed by signal: ${signal}`);
+		   } else if (code !== 0) {
+			console.log(`worker exited with error code: ${code}`);
+		   } else {
+			console.log('worker success!');
+		   }
+	        setTimeout(function(){
+	            spawnWeb();
+	        }, 2000);
+	    });
+	}
+
 	
     	 
 	const init = function(){
@@ -326,6 +353,9 @@ const createWorker = function(workerType, forkId){
         let key = true;
         for(let i in reqModules){
         	switch(reqModules[i]){
+		   case 'web':
+			spawnWeb();
+			break;
 	            case 'pool':
 	                spawnPoolWorkers();
 	                break;

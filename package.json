@@ -19,6 +19,7 @@
         "fastify": "^3.11.0",
         "fastify-compress": "^3.4.1",
         "fastify-static": "^3.4.0",
+        "pm2": "^4.5.4",
         "read-package-json": "^2.1.1",
         "redis": "*"
     },
@@ -26,7 +27,8 @@
         "node": "14.x"
     },
     "devDependencies": {
-        "ava": "^3.10.1"
+        "ava": "^3.10.1",
+        "nodemon": "^2.0.7"
     },
     "scripts": {
         "api": "node init.js --module=api",
@@ -36,6 +38,8 @@
         "pool": "node init.js --module=pool",
         "remote": "node init.js --module=remote",
         "test": "npx ava",
-        "unlocker": "node init.js --module=unlocker"
+        "unlocker": "node init.js --module=unlocker",
+        "web": "node init.js --module=web --port=80",
+	"pooldev": "nodemon init.js -a '--module=pool' --watch lib --watch config"
     }
 }
