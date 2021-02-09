@@ -3,13 +3,13 @@ sudo: false
 os: linux
 dist: bionic
 
-nodejs:
+node_js:
   - 14
 
 env:
   - CXX=g++-7
 
-matrix:
+jobs:
   fast_finish: true
   include:
     - env: COMPILER=g++-7 BUILD=Debug STANDARD=14
@@ -21,6 +21,7 @@ matrix:
             - sourceline: 'ppa:mhier/libboost-latest'
             - ubuntu-toolchain-r-test
           packages:
+            - build-essential
             - g++-7
             - libboost-all-dev
     
@@ -28,7 +29,7 @@ matrix:
 services:
   - redis
 
-cache: npm  
+cache: false  
 
 before_install:
     - "npm install -g npm@latest"
