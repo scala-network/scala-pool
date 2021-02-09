@@ -1,0 +1,31 @@
+language: node_js
+
+nodejs:
+  - 14
+
+dist: bionic
+
+services:
+  - redis
+
+cache:
+  npm
+
+matrix:
+  fast_finish: true
+
+  include:
+    
+
+before_install:
+    - "npm install -g npm@latest"
+
+install:
+    - npm install
+    - cp defaults/config.travis.json config.json
+
+script:
+  - npm run tests
+
+notifications:
+  email: false
