@@ -6,10 +6,13 @@ dist: bionic
 nodejs:
   - 14
 
+env:
+  - CXX=g++-7
+
 matrix:
   fast_finish: true
   include:
-    - env: COMPILER=g++-6 BUILD=Debug STANDARD=14
+    - env: COMPILER=g++-7 BUILD=Debug STANDARD=14
       compiler: gcc
       addons:
         apt:
@@ -29,6 +32,7 @@ cache: npm
 
 before_install:
     - "npm install -g npm@latest"
+    - npm install -g node-gyp
 
 install:
     - npm install
