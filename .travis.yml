@@ -1,5 +1,5 @@
 language: node_js
-sudo: false
+
 os: linux
 dist: bionic
 
@@ -24,7 +24,18 @@ jobs:
             - build-essential
             - g++-7
             - libboost-all-dev
-    
+            - cmake 
+            - pkg-config 
+            - libboost-all-dev 
+            - libssl-dev 
+            - libzmq3-dev 
+            - libunbound-dev 
+            - libsodium-dev 
+            - libunwind8-dev 
+            - liblzma-dev 
+            - libreadline6-dev 
+            - libldns-dev 
+            - libexpat1-dev
 
 services:
   - redis
