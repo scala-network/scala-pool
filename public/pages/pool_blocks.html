@@ -277,10 +277,14 @@
 // Hide blocks chart on load
 // $('#blocksChart').hide();
 
+// Load more blocks button
+var xhrGetBlocks;
+
 // Update current page
 currentPage = {
     destroy: function(){
         if (xhrGetBlocks) xhrGetBlocks.abort();
+        $('#loadMoreBlocks').off('click');
     },
     update: function(){
     	updateText('currentEffort', (lastStats.pool.stats.roundShares / lastStats.network.difficulty * 100).toFixed(1) + '%');
@@ -326,9 +330,20 @@ currentPage = {
 
 
         renderBlocks(lastStats.pool.blocks);
-        // $('currentRoundMiners
-        // updateText('soloCurrentEffort', (lastStats.pool.stats.roundSharessolo / lastStats.network.difficulty * 100).toFixed(1) + '%');
-
+        $('#loadMoreBlocks').on('click',function(){
+            if (xhrGetBlocks) xhrGetBlocks.abort();
+            xhrGetBlocks = $.ajax({
+                url: window.config.api + '/get_blocks',
+                data: {
+                    height: $('#blocksReport_rows').children().last().data('height')
+                },
+                dataType: 'json',
+                cache: 'false',
+                success: function(data){
+                    renderBlocks(data);
+                }
+            });
+        });
     }
 };
 
@@ -629,20 +644,4 @@ function renderBlocks(blocksResults){
     updateText("unlockReward",lastStats.config.unlockBlockReward +"%");
 }
 
-// Load more blocks button
-var xhrGetBlocks;
-$('#loadMoreBlocks').click(function(){
-    if (xhrGetBlocks) xhrGetBlocks.abort();
-    xhrGetBlocks = $.ajax({
-        url: api + '/get_blocks',
-        data: {
-            height: $('#blocksReport_rows').children().last().data('height')
-        },
-        dataType: 'json',
-        cache: 'false',
-        success: function(data){
-            renderBlocks(data);
-        }
-    });
-});
 </script>
