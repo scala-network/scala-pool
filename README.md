@@ -1,3 +1,5 @@
+https://travis-ci.com/scala-network/scala-pool.svg?branch=master
+
 scala-pool
 ======================
 
