@@ -144,9 +144,11 @@
 <!-- Javascript -->
 <script>
 // Update current page
+var xhrGetPayments;
 currentPage = {
     destroy: function(){
         if (xhrGetPayments) xhrGetPayments.abort();
+	    $('#loadMorePayments').off('click');
     },
     update: function(){
     	
@@ -165,6 +167,21 @@ currentPage = {
         if (!lastStats.config.slushMiningEnabled)
             $('#slush_description').hide()
         renderPayments(lastStats.pool.payments);
+$('#loadMorePayments').on('click',function(){
+    if (xhrGetPayments) xhrGetPayments.abort();
+    xhrGetPayments = $.ajax({
+        url: window.config.api + '/get_payments',
+        data: {
+            time: $('#paymentsReport_rows').children().last().data('time')
+        },
+        dataType: 'json',
+        cache: 'false',
+        success: function(data){
+            renderPayments(data);
+        }
+    });
+});
+
     }
 };
 
@@ -257,19 +274,5 @@ function renderPayments(paymentsResults){
 }
 
 // Load more payments button
-var xhrGetPayments;
-$('#loadMorePayments').click(function(){
-    if (xhrGetPayments) xhrGetPayments.abort();
-    xhrGetPayments = $.ajax({
-        url: api + '/get_payments',
-        data: {
-            time: $('#paymentsReport_rows').children().last().data('time')
-        },
-        dataType: 'json',
-        cache: 'false',
-        success: function(data){
-            renderPayments(data);
-        }
-    });
-});
+
 </script>
