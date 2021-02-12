@@ -1,4 +1,7 @@
-https://travis-ci.com/scala-network/scala-pool.svg?branch=master
+[![Master Build Status](https://travis-ci.com/scala-network/scala-pool.svg?branch=master)](https://travis-ci.com/scala-network/scala-pool)
+
+[![Dev Build Status](https://travis-ci.com/scala-network/scala-pool.svg?branch=development)](https://travis-ci.com/scala-network/scala-pool)
+
 
 scala-pool
 ======================
