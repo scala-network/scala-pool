@@ -1,5 +1,5 @@
-const test = require('ava')
-const Payee = require('../lib/model/Payee')
+const test = require('ava');
+const Payee = require('../../lib/model/Payee');
 
 const maxTransactionAmount = 3000
 
