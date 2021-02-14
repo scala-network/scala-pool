@@ -14,7 +14,7 @@
         "bignum": "*",
         "cli-color": "*",
         "cryptoforknote-util": "git+https://github.com/scala-network/node-cryptoforknote-util#ced6084d73553751851d8a89b8eee9e45f1fbfb7",
-        "cryptonight-hashing": "git+https://github.com/scala-network/scala-hashing.git#e7ff439815457f3f0cba174d0243ca038d833a59",
+        "cryptonight-hashing": "git+https://github.com/scala-network/scala-hashing.git#df402f5eb01e2c39713fd3dd1fb3c37da00ae3a7",
         "dateformat": "*",
         "fastify": "^3.11.0",
         "fastify-compress": "^3.4.1",
