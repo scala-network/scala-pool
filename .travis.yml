@@ -29,8 +29,6 @@ addons:
       - libldns-dev 
       - libexpat1-dev
 
-language: node_js
-
 env:
   - CXX=g++-7 COMPILER=g++-7 BUILD=Debug STANDARD=14
 
@@ -40,7 +38,7 @@ jobs:
 services:
   - redis
 
-cache: false  
+cache: npm  
 
 before_install:
     - "npm install -g npm@latest"

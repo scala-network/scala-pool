@@ -7,14 +7,14 @@ Type=forking
 GuessMainPID=no
 ExecStart=/home/scala/Scala/build/release/bin/scalad \
 --rpc-bind-ip 127.0.0.1 \
---rpc-bind-port 20189 \
+--rpc-bind-port 11812 \
 --p2p-bind-ip 0.0.0.0 \
---p2p-bind-port 20188 \
+--p2p-bind-port 11811 \
 --rpc-bind-ip 127.0.0.1 \
 --confirm-external-bind --detach
 
 Restart=always
-User=stellite
+User=scalad
 
 [Install]
 WantedBy=multi-user.target

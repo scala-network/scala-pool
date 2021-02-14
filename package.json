@@ -24,7 +24,7 @@
         "redis": "*"
     },
     "engines": {
-        "node": "14.x"
+        "node": ">=14.0.0 <16.0.0"
     },
     "devDependencies": {
         "ava": "^3.10.1",

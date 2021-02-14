@@ -19,7 +19,7 @@
     	"timeout":1000,
         "enabled": true,
         "clusterForks": 4,
-	"poolAddress":"Svk1ZQ6mPfjhYR3Nnp3kifZLimjuDcmyMHecLmY6Ek2QbGQi93XzkJFbdFDaQZVdBF2V43q79z2UTirvJcHT3TnC2h988J2hF",
+	    "poolAddress":"Svk1ZQ6mPfjhYR3Nnp3kifZLimjuDcmyMHecLmY6Ek2QbGQi93XzkJFbdFDaQZVdBF2V43q79z2UTirvJcHT3TnC2h988J2hF",
         "blockRefreshInterval": 500,
         "minerTimeout": 750,
         "sslCert": "./cert.pem",
@@ -30,8 +30,8 @@
                 "port": 3333,
                 "difficulty": 10000,
                 "desc": "Props Low end hardware diff: 10000",
-		"poolType":"props",
-		"donation":0
+        		"poolType":"props",
+        		"donation":0
             },
 	    {
     		"port": 5555,
@@ -44,8 +44,8 @@
                 "port": 7777,
                 "difficulty": 5000000,
                 "desc": "Props High end hardware diff: 1000000",
-		"poolType":"props",
-		"donation":0
+        		"poolType":"props",
+        		"donation":0
             },
 	    {
                 "port":8888,

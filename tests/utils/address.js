@@ -70,13 +70,14 @@ test("Benchmark Address Validations", t => {
 	let start = process.hrtime.bigint();
 	for(let i =0;i<10000;i++) r.test(address)
 	let end = process.hrtime.bigint();
-    console.log('Regex time taken ' + utils.readableSI(Number(end - start)," ", "nsecs", true));
+
+    // console.log('Regex time taken ' + utils.readableSI(Number(end - start)," ", "nsecs", true));
 	
 
 	start = process.hrtime.bigint();
 	for(let i =0;i<10000;i++) utils.getAddressPrefix(address) === 155
 	end = process.hrtime.bigint();
-    console.log('Utils time taken ' + utils.readableSI(Number(end - start)," ", "nsecs", true));
+    // console.log('Utils time taken ' + utils.readableSI(Number(end - start)," ", "nsecs", true));
 
 	t.pass()
 })
