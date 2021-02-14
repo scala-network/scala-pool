@@ -1,0 +1,295 @@
+<div class="row card padding-t-10 padding-b-10 padding-15" id='scoresheet'>
+	<h2 class='col-sm-12'><span tkey="scoresheet">Shares</span> <small>Look at shares for each block height</small></h2>
+	<div class='col-sm-12' style='margin-bottom:10px;'>
+		<div class="box box-widget widget-user-2">
+         <!-- Add the bg color to the header using any of the bg-* classes -->
+
+         <div class="box-footer no-padding">
+            <select class="form-control form-control-sm" id='height_lists'></select>
+        </div>
+    </div>		
+</div>
+<div class='col-sm-12 col-md-6'>
+  <h3> Props </h3>
+  <div class="card"  id="currentScores">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center"><span tkey="miner">Miner</span></th>
+                    <th class="text-center"><span tkey="hashRate">Hash Rate</span></th>
+                    <th class="text-center"><span tkey="totalHashes">Total Hashes Submitted</span></th>
+                    <th class="text-center"><span tkey="roundShare">Round Shares (%)</span></th>
+                </tr>
+            </thead>
+            <tbody id="current_rows_props"></tbody>
+        </table>
+    </div>
+</div>
+</div>
+<div class='col-sm-12 col-md-6'>
+  <h3> Solo </h3>
+  <div class="card"  id="currentScores">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center"><span tkey="miner">Miner</span></th>
+                    <th class="text-center"><span tkey="hashRate">Hash Rate</span></th>
+                    <th class="text-center"><span tkey="totalHashes">Total Hashes Submitted</span></th>
+                    <th class="text-center"><span tkey="roundShare">Effort (%)</span></th>
+                </tr>
+            </thead>
+            <tbody id="current_rows_solo"></tbody>
+        </table>
+    </div>
+</div>
+</div>
+<!-- <div class="card" id="scoresheetCard" >
+  <div class="table-responsive">
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                <th class="text-center"><span>#</span></th>
+                <th class="text-center"><span tkey="miner">Miner</span></th>
+                <th class="text-center"><span tkey="hashes">Unlock Reward</span></th>
+                <th class="text-center"><span tkey="donations">Credited</span></th>
+                <th class="text-center"><span tkey="donationLevel">Total Hashes Submitted</span></th>
+                <th class="text-center"><span tkey="totalBlocks">Round Shares (%)</span></th>
+            </tr>
+            <tr>
+                <th colspan="6" class="text-center" id='tableSummary' style="background-color: #db2867;color:#FFF"></th>
+            </tr>
+        </thead>
+        <tbody id="scoresheet_rows"></tbody>
+    </table> -->
+</div>
+</div>
+</div>
+</div>
+<!-- Javascript -->
+<script>
+
+
+    var varTop10 = false;
+    var xhrGetTOP;
+// Update current page
+currentPage = {
+    destroy: function(){
+    	
+    	if(xhrGetTOP){
+    		xhrGetTOP.abort();
+    	}
+    	clearTimeout(varTop10);
+    },
+    update: function(){
+        var heights  = [];
+        for(var i = 0,il = lastStats.pool.blocks.length;i<il;i+=2){
+         var height = lastStats.pool.blocks[i+1];
+         heights.push(height);
+     }
+
+     renderHeights(heights);
+	//console.log(lastStats.pool.blocks[1]);
+}
+};
+
+
+
+// function renderCells(p,data){
+//     return  '<tr><td class="col1 text-center" >' + p + '</td>' +
+//     '<td class="col2 text-center" >' + data.miner + '</td>' +
+//     '<td class="col4 text-center">' + getReadableCoins(data.bonus,5,true) + '</td>'+
+//     '<td class="col5 text-center">' + getReadableCoins(data.earn,5,true) + '</td>'+
+//     '<td class="col3 text-center">' + formatDifficulty(data.score) + '</td>'+
+//     '<td class="col6 text-center">' + parseFloat(data.percent).toFixed(9) + '%</td></tr>';
+// }
+
+// Update top10 miners report
+function renderHeights(heights) {
+	var _d =[];
+    var hL = heights.length;
+
+    for(var i =0;i<hL;i++) {
+    	var height = heights[i];
+    	var ot = "<option value='"+height+"'";
+    	
+    	if(currentSelectedHeight === height){
+    		ot+=" selected";
+    	}
+    	ot +=">"+height+"</option>";
+       _d[height]=ot;
+   }
+   _d.reverse();
+   _d.unshift("<option value='Current'>Current</option>");
+
+   $('#height_lists').html(_d.join(''));   
+   $('select#height_lists').on('change',function(e){
+    e.preventDefault();
+
+    var id = $(this).val();
+    if(id !== currentSelectedHeight){
+        currentSelectedHeight = id;
+        updateScoresheet();
+    }
+});
+}
+var currentSelectedHeight;
+
+var renderCurrentRoundMiners = function(data){
+
+    var tr = $("#current_rows_props");
+    var tr_solo = $("#current_rows_solo");
+    var html = [];
+    var html2 = [];
+    var row =
+    '<tr style="text-align:center;"><td class="col1 font12">%ID%</td>' +
+    '<td class="col2 font12">%MINER%</td>' +
+    '<td class="col3 font12">%HASHRATE%</td>' +
+    '<td class="col4 font12">%HASHES%</td>' +
+    '<td class="col5 font12">%PERCENT%</td></tr>';
+    
+    for(var i in data){
+
+        if(data[i].roundHashes.props) {
+            html.push({
+                html:row
+                // 
+                .replace("%MINER%",data[i].miner)
+                .replace("%HASHRATE%",data[i].hashrate)
+                .replace("%HASHES%",formatDifficulty(data[i].roundHashes.props))
+                .replace("%PERCENT%",data[i].roundShares.props),
+                hashes:data[i].roundHashes.props
+            });
+        }
+
+        if(data[i].roundHashes.solo) {
+            html2.push({
+                html:row
+                // .replace("%ID%",parseInt(html.length)+1)
+                .replace("%MINER%",data[i].miner)
+                .replace("%HASHRATE%",data[i].hashrate)
+                .replace("%HASHES%",formatDifficulty(data[i].roundHashes.solo))
+                .replace("%PERCENT%",data[i].roundShares.solo),
+                hashes:data[i].roundHashes.solo
+            });
+        }
+    }
+   ;
+    tr.html( html.sort(function(a, b){return b.hashes - a.hashes}).map((c,d) => c.html.replace("%ID%",d+1)).join(''));
+    tr_solo.html( html2.sort(function(a, b){return b.hashes - a.hashes}).map((c,d) => c.html.replace("%ID%",d+1)).join(''));
+};
+
+// var renderLockedBlocks = function(data){
+//     var tr = $("#current_rows");
+//     var html = "";
+//     var row =
+//         '<tr style="text-align:center;"><td class="col1 font12">%ID%</td>' +
+//         '<td class="col2 font12">%MINER%</td>' +
+//         '<td class="col3 font12">%HASHRATE%</td>' +
+//         '<td class="col4 font12">%HASHES%</td>' +
+//         '<td class="col5 font12">%PERCENT%</td></tr>';
+
+//     var miners = Object.keys(data);
+//     var totalHashes = 0;
+//     miners.map(function(miner){
+//         totalHashes+= parseInt(data[miner]);
+//     });
+//     var dataminers = [];
+//     for(var i in miners){
+//         var miner = miners[i];
+//         var score = data[miner];
+//         var scorePercent = (score / totalHashes) *100;
+//         dataminers.push({
+//             score:score,
+//             html: row
+//                 .replace("%MINER%",miner)
+//                 .replace("%HASHRATE%","-")
+//                 .replace("%HASHES%",formatDifficulty(score))
+//                 .replace("%PERCENT%",scorePercent.toFixed(5))
+//         });
+//     }
+//     dataminers.sort(function(a,b){
+//         var v1 = a.score ? parseInt(a.score) : 0;
+//         var v2 = b.score ? parseInt(b.score) : 0;
+//         if (v1 > v2) return -1;
+//         if (v1 < v2) return 1;
+//         return 0;   
+//     });
+//     for(var i in dataminers){
+//         html+=dataminers[i].html.replace("%ID%",parseInt(i)+1);
+//     }
+//     tr.html(html);
+// };
+
+function updateScoresheet() {
+    var xhrGetTOP = $.ajax({
+        url: window.config.api + '/pool_scoresheet',
+        dataType: 'json',
+        data:{
+        	height:currentSelectedHeight
+        },
+        cache: 'false',
+        success: function(data){
+            if (!data) {
+            	return;
+            }
+            if(data.height.toLowerCase() === 'current' ){
+                renderCurrentRoundMiners(data.data);
+                $('#currentScores').show();
+                $('#scoresheetCard').hide();
+                return;
+            }
+
+            var html = "";
+            var miners = data.data;
+
+            if(!miners.hasOwnProperty('Info')){
+                renderLockedBlocks(miners);
+                $('#currentScores').show();
+                $('#scoresheetCard').hide();
+                return;
+            }
+            var i = 0;
+            let dataminers = [];
+            for(var miner in miners){
+                var data = miners[miner];
+
+                if(miner == "Info"){
+                    var block = data.split(":");
+                    var sum = "<b>HEIGHT:</b> %HEIGHT% <b>TIME:</b> %TIME% <b>TOTAL HASHES:</b> %TOTAL_HASHES% <b>DIFFICULTY:</b> %DIFFICULTY% <b>REWARD:</b> %REWARD% <b>UNLOCKER:</b> %UNLOCKER%";
+                    sum = sum.replace("%HEIGHT%",currentSelectedHeight);
+                    sum = sum.replace("%TIME%",formatDate(block[1]));
+                    sum = sum.replace("%TOTAL_HASHES%",formatDifficulty(block[3]));
+                    sum = sum.replace("%DIFFICULTY%",formatDifficulty(block[2]));
+                    sum = sum.replace("%REWARD%",getReadableCoins(block[5]));
+                    sum = sum.replace("%UNLOCKER%",block[6]);
+                    $('#tableSummary').html(sum);
+                    continue;
+                }
+
+                data.miner = miner;
+                dataminers.push(data);
+            }
+            dataminers = dataminers.sort(function(a,b){
+                var v1 = a.score ? parseInt(a.score) : 0;
+                var v2 = b.score ? parseInt(b.score) : 0;
+                if (v1 > v2) return -1;
+                if (v1 < v2) return 1;
+                return 0;
+            });
+            for(var i =0;i<dataminers.length;i++){
+
+                html+=renderCells(i+1,dataminers[i]);
+            }
+            $('#scoresheet_rows').html(html);
+            $('#currentScores').hide();
+            $('#scoresheetCard').show();
+        }
+    });
+}
+
+updateScoresheet();
+</script>
