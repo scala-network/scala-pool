@@ -9,7 +9,8 @@
 	        </div>
 	      </div>		
 	</div>
-	<div class='col-sm-12'>
+	<div class='col-sm-12 col-md-6'>
+		<h3> Props </h3>
 		<div class="card"  id="currentScores">
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -166,7 +167,7 @@ var renderLockedBlocks = function(data){
         dataminers.push({
             score:score,
             html: row
-                                .replace("%MINER%",miner)
+                .replace("%MINER%",miner)
                 .replace("%HASHRATE%","-")
                 .replace("%HASHES%",formatDifficulty(score))
                 .replace("%PERCENT%",scorePercent.toFixed(5))
