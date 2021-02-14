@@ -1,36 +1,34 @@
-const http = require("http"),
-    url = require("url"),
-    path = require("path"),
-    fs = require("fs"),
-    port = process.argv[2] || 80;
+const http = require('http')
+const url = require('url')
+const path = require('path')
+const fs = require('fs')
+const port = process.argv[2] || 80
 
 const fastify = require('fastify')()
 const fastifyStatic = require('fastify-static')
-const fastifyCompress = require('fastify-compress');
-
+const fastifyCompress = require('fastify-compress')
 
 fastify.get('/', async (request, res) => {
-  return res.sendFile('index.html');
+  return res.sendFile('index.html')
 })
 
 fastify
-	.register(fastifyCompress, {threshold:0})
-	.register(fastifyStatic, {
-		root: path.join(__dirname, 'public')
-	})
+  .register(fastifyCompress, { threshold: 0 })
+  .register(fastifyStatic, {
+    root: path.join(__dirname, 'public')
+  })
 
 // this will work with fastify-static and send ./static/index.html
 fastify.setNotFoundHandler((req, res) => {
-  res.sendFile('index.html');
-});
+  res.sendFile('index.html')
+})
 
 //
-
 
 // Run the server!
 const start = async () => {
   try {
-    await fastify.listen(port, "0.0.0.0")
+    await fastify.listen(port, '0.0.0.0')
   } catch (err) {
     fastddify.log.error(err)
 
@@ -39,6 +37,6 @@ const start = async () => {
   }
 
   console.log(`server listening on ${port}`)
-};
+}
 
-start();
+start()

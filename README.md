@@ -1,4 +1,5 @@
 [![Master Build Status](https://travis-ci.com/scala-network/scala-pool.svg?branch=master)](https://travis-ci.com/scala-network/scala-pool?branch=master)
+[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/standard/semistandard)
 
 scala-pool
 ======================

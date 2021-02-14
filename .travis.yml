@@ -41,7 +41,7 @@ services:
 cache: npm  
 
 before_install:
-    - "npm install -g npm@latest"
+    - npm install -g npm@latest
     - npm install -g node-gyp
 
 install:
