@@ -47,7 +47,7 @@
         "remote": "node init.js --module=remote",
         "unlocker": "node init.js --module=unlocker",
         "web": "node init.js --module=web --port=80",
-        "pooldev": "nodemon init.js -a '--module=pool' --watch lib --watch config",
+        "pooldev": "npx nodemon init.js -a '--module=pool' --watch lib --watch config",
         "test": "npx ava",
         "lint": "npx semistandard lib/* --verbose | npx snazzy",
         "lint_md": "npx semistandard --plugin markdown '**/*.md' --verbose | npx snazzy",
