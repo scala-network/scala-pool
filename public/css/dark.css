@@ -467,7 +467,7 @@ table th.sort:hover{
   cursor: default;
   position: relative;
   overflow: hidden;
-  margin-bottom: 30px;
+  /*margin-bottom: 30px;*/
   border-radius: 3px;
 }
 @media (max-width: 767px){
@@ -1277,7 +1277,7 @@ footer a{
 }
 
 .infoBox{
-	margin-bottom: 15px !important;
+	margin-bottom: 5px !important;
 	border-radius: 0px !important;
 }
 
