@@ -406,7 +406,12 @@ function createCharts() {
     blocks.push(s);
     difficulties.push([block.timestamp,block.difficulty]);
 }
-
+if(solo_effort.length < 2) {
+    solo_effort.push([1612137600, 0]);
+}
+if(props_effort.length < 2) {
+    props_effort.push([1612137600, 0]);
+}
 var graphData = {
     hashrate: getGraphData(data.hashrate),
     diff: getGraphData(difficulties.reverse()),
