@@ -369,8 +369,9 @@ function createCharts() {
   var blocks = [];
   var solo_effort = [];
   var props_effort = [];
-  var difficulties = []	
+  var difficulties = [];
   for(var i = 0;i<lastStats.pool.blocks.length;i+=2){
+  for(var i = 0;i<lastStats.pool.blocks.length;i++){
    var parts = lastStats.pool.blocks[i].split(':');
    var block = {};
    for(var a =0;a<properties.length;a++) {
@@ -404,7 +405,6 @@ function createCharts() {
         props_effort.push(s);
     }
     blocks.push(s);
-
     difficulties.push([block.timestamp,block.difficulty]);
 }
 
