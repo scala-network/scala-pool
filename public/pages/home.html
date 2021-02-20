@@ -406,11 +406,17 @@ function createCharts() {
     blocks.push(s);
     difficulties.push([block.timestamp,block.difficulty]);
 }
-if(solo_effort.length < 2) {
+if(solo_effort.length === 0) {
     solo_effort.push([1612137600, 0]);
 }
-if(props_effort.length < 2) {
+if(props_effort.length === 0) {
     props_effort.push([1612137600, 0]);
+}
+if(solo_effort.length === 1) {
+    solo_effort.push(solo_effort[0]);
+}
+if(props_effort.length === 0) {
+    props_effort.push(props_effort[0]);
 }
 var graphData = {
     hashrate: getGraphData(data.hashrate),
