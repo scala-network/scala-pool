@@ -1,7 +1,10 @@
+'use strict'
+
 const readline = require("readline");
 const fs = require("fs"); // Or `import fs from "fs";` with ESM
 
 class Cli {
+	#_rl = null;
 
 	constructor() {
 		const rl = readline.createInterface({
@@ -134,4 +137,4 @@ class Cli {
 
 }
 
-new Cli();
+module.exports = Cli;
