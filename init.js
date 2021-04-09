@@ -30,50 +30,16 @@ const logSystem = 'init';
  **/
 const args = require("args-parser")(process.argv);
 
-global.config = require('./lib/bootstrap')(args.config || 'config.json');
-require('./lib/logger.js');
-const em = require('./lib/event_manager');
+global.config = require('./lib/core/bootstrap')(args.config || 'config.json');
+global.log = require('./lib/core/logger');
+const em = require('./lib/core/event_manager');
 global.EventManager = new em();
+const Redis = require('./lib/datasource/redis');
+global.redisClient = new Redis(global.config.redis);
 
 const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts','rpcbalancer','web'];
 //,'rpcbalancer'];
 
-global.redisClient = require('redis').createClient((function(){
-	const options = { 
-		host:global.config.redis.host || "127.0.0.1",
-		socket_keepalive:true,
-		port:global.config.redis.port || 6379, 
-		retry_strategy: function (options) {
-	        if (options.error && options.error.code === 'ECONNREFUSED') {
-	            // End reconnecting on a specific error and flush all commands with
-	            // a individual error
-	        	log('error', logSystem,'The server refused the connection');
-				return;
-	        }
-	        if (options.total_retry_time > 1000 * 60 * 60) {
-	            // End reconnecting after a specific timeout and flush all commands
-	            // with a individual error
-	            return new Error('Retry time exhausted');
-	        }
-	        if (options.attempt > 10) {
-	            // End reconnecting with built in error
-	            return undefined;
-	        }
-	        // reconnect after
-	        return Math.min(options.attempt * 100, 3000);
-	    },
-		db: config.redis.db || 0,
-	};
-	
-	if(config.redis.auth){
-		options.auth_pass= config.redis.auth;
-	}
-	return options;
-})());
-
-global.redisClient.on('error', function (err) {
-    log('error', logSystem, "Error on redis with code : %s",[err.code]);
-});
 
 // Load pool modules
 if (cluster.isWorker){
@@ -303,6 +269,8 @@ const createWorker = function(workerType, forkId){
 	 * Spawn web service module
 	 **/
 	function spawnWeb(){
+	    if (!config.web||!config.web.enabled) return;
+
 	    const port = config.web || 80;
 	
 	    var worker = cluster.fork({
@@ -385,34 +353,5 @@ const createWorker = function(workerType, forkId){
     
     };
     
-    /**
-	 * Check redis database version
-	 **/
-	redisClient.info(function(error, response){
-        if (error){
-            log('error', logSystem, 'Redis version check failed');
-            return;
-        }
-        var parts = response.split('\r\n');
-        var version;
-        var versionString;
-        for (var i = 0; i < parts.length; i++){
-            if (parts[i].indexOf(':') !== -1){
-                var valParts = parts[i].split(':');
-                if (valParts[0] === 'redis_version'){
-                    versionString = valParts[1];
-                    version = parseFloat(versionString);
-                    break;
-                }
-            }
-        }
-        
-        if (!version){
-            log('error', logSystem, 'Could not detect redis version - must be super old or broken');
-        } else if (version < 2.6){
-            log('error', logSystem, "You're using redis version %s the minimum required version is 2.6. Follow the damn usage instructions...", [versionString]);
-        } else {
-        	init();
-        }
-    });
+   init();
 })();

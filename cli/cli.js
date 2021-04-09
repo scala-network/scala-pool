@@ -117,6 +117,21 @@ class Cli {
 		return false;
 	}
 
+	#_countries = null;
+	getCountries() {
+		if(!this.#_countries) {
+			let rawdata = fs.readFileSync('./countries.json');
+			this.#_countries = JSON.parse(rawdata);
+		}
+		return this.#_countries;
+	}
+
+	
+	getContinents() {
+		return ["africa", "antarctica", "asia", "europe", "north_america", "oceania", "south_america"];
+	}
+
+
 }
 
 new Cli();
