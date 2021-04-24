@@ -436,6 +436,9 @@ function generateChart(data) {
 
 // Parse block data
 function parseBlock(height, serializedBlock){
+	if(!serializedBlock) {
+		return;
+	}
     var parts = serializedBlock.split(':');
     var properties = [
 		'height',
@@ -560,7 +563,6 @@ function renderBlocks(blocksResults){
         var block = parseBlock(blocksResults[i], blocksResults[i]);
 				 if(block.hash === "") continue;
 	var dIndex = formatDate(block.timestamp).split(" ")[0];
-	    console.log(dIndex)
         var blockJson = JSON.stringify(block);
     	if(!blockElementSets[dIndex]){
     		blockElementSets[dIndex] = {
