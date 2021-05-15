@@ -2,7 +2,7 @@ const test = require('ava')
 const args = require("args-parser")(process.argv);
 
 test.before(t => {
-	global.config = require('../../lib/bootstrap')(args.config || process.cwd() + '/defaults/config.test.json');
+	global.config = require( process.cwd() + '/lib/core/bootstrap')(args.config || process.cwd() + '/defaults/config.test.json');
  })
 
 
