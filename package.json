@@ -25,7 +25,7 @@
         "semistandard": "^16.0.0"
     },
     "engines": {
-        "node": ">=14.0.0 <16.0.0"
+        "node": ">=14.0.0 <17.0.0"
     },
     "devDependencies": {
         "ava": "^3.10.1",

@@ -82,4 +82,10 @@ test("Benchmark Address Validations", t => {
 	t.pass()
 })
 
+test('Test is not a valid address with chars', t => {
+	let address = "Svk1ZQ6mPfjhYR3Nnp3kifZLimjuDcmyMHecLmY6Ek2QbGQi93XzkJFbdFDaQZVdBF2V43q79z2UTirvJcHT3TnC2h988J2hF,";
+	t.is(utils.validateMinerAddress(address),false)
+});
+
+
 //not valid Siz7KzWmiNWSRTjZBAt5qqWC5PPYLVGvQdxfDPsyMXpUMkRuzwKNLEbfevN4Eoh76gTvxPeszEj5R7GmJMnkHDD8Ms7Peb4xquq1GrcSbe7rL
