@@ -1,4 +1,5 @@
-/* Stellite Nodejs Pool
+/* 
+ * Scala Project Nodejs Pool
  * Copyright StelliteCoin	<https://github.com/stellitecoin/cryptonote-stellite-pool>
  * Copyright Ahmyi			<https://github.com/ahmyi/cryptonote-stellite-pool>
  * Copyright Dvandal    	<https://github.com/dvandal/cryptonote-nodejs-pool>
@@ -35,8 +36,8 @@ global.log = require('./lib/core/logger');
 const em = require('./lib/core/event_manager');
 global.EventManager = new em();
 const Redis = require('./lib/datasource/redis');
-global.redisClient = new Redis(global.config.redis);
-
+const redis = new Redis(global.config.redis);
+global.redisClient = redis.client;
 const validModules = ['pool', 'api', 'unlocker', 'payments', 'charts','rpcbalancer','web'];
 //,'rpcbalancer'];
 
@@ -64,9 +65,9 @@ if (cluster.isWorker){
         case 'charts':
             require('./lib/chartsDataCollector.js');
             break;
-	case 'web':
-	    require('./lib/web.js');
-	    break;
+		case 'web':
+			require('./lib/web.js');
+		break;
         default:
         	console.error(`Invalid worker type ${process.env.workerType}`)
     }
@@ -85,7 +86,7 @@ const createWorker = function(workerType, forkId){
         forkId: forkId
     });
     worker.forkId = forkId;
-    worker.type = 'pool';
+    worker.type = workerType;
     worker.on('exit', function(code, signal){
         log('error', logSystem, '%s fork %s died, spawning replacement worker...', [workerType, forkId]);
         setTimeout(function(){
@@ -269,7 +270,10 @@ const createWorker = function(workerType, forkId){
 	 * Spawn web service module
 	 **/
 	function spawnWeb(){
-	    if (!config.web||!config.web.enabled) return;
+	    if (!global.config.web||!global.config.web.enabled) {
+			log('info', logSystem,'Web service not enabled!');
+	    	return;
+	    }
 
 	    const port = config.web || 80;
 	
@@ -277,13 +281,10 @@ const createWorker = function(workerType, forkId){
 	        workerType: 'web'
 	    });
 	    worker.on('exit', function(code, signal){
-//o	        log('error', logSystem, `web died, spawning replacement ${signal} : ${code}...`);
-		    if (signal) {
-			console.log(`worker was killed by signal: ${signal}`);
-		   } else if (code !== 0) {
-			console.log(`worker exited with error code: ${code}`);
+		   if (!signal || code === 0) {
+			log('info', logSystem,'Worker spawn success!');
 		   } else {
-			console.log('worker success!');
+	        log('error', logSystem, `worker was killed by signal: ${signal} : ${code}...`);
 		   }
 	        setTimeout(function(){
 	            spawnWeb();
@@ -318,12 +319,11 @@ const createWorker = function(workerType, forkId){
         }
 
         const listenersKey = [];
-        let key = true;
         for(let i in reqModules){
         	switch(reqModules[i]){
-		   case 'web':
-			spawnWeb();
-			break;
+				case 'web':
+					spawnWeb();
+				break;
 	            case 'pool':
 	                spawnPoolWorkers();
 	                break;
@@ -340,15 +340,12 @@ const createWorker = function(workerType, forkId){
 	                spawnChartsDataCollector();
 	                break;
 	            default:
-	            	key = false;
-	            	break;
+	            	continue;
 	        }
-	        if(key) {
-	        	listenersKey.push(reqModules[i]);
-	        }
+	        listenersKey.push(reqModules[i]);
         }
         
-	global.config.listenerKey = listenersKey;
+		global.config.listenerKey = listenersKey;
 
     
     };

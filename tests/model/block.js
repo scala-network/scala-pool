@@ -70,6 +70,5 @@ test('Actual tests', t => {
 	t.is(block.miner, 'Svm53weUtA3djXbYuivzoWMjaen1RVgnacL8qRQTXnEt3ehjxomifH35sKjNAnvoJoby4epKw77FHX4Q4vkPFpkW1tKDLBvZZ')
 	t.is(block.poolType, 'pps')
 	t.is(block.orphaned, 0)
-	t.is(block.unlocked, false
-		)
+	t.is(block.unlocked, false)
 })
