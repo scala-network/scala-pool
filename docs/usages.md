@@ -16,15 +16,15 @@ Usage
 
 #### Requirements
 * Coin daemon(s) (find the coin's repo and build latest version from source)
-* [Node.js](http://nodejs.org/) v8.0+
+* [Node.js](http://nodejs.org/) v14.0+
   * For Ubuntu: 
  ```
 	sudo apt-get update
 	sudo apt-get install build-essential libssl-dev
-	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh | bash
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | bash
 	source ~/.profile
-	nvm install stable
-	nvm alias default stable
+	nvm install 14
+	nvm alias default 14
 	nvm use default
 ```
 * [Redis](http://redis.io/) key-value store v2.6+ 
@@ -34,7 +34,7 @@ Usage
 	sudo apt-get update
 	sudo apt-get install redis-server
  ```
-* libssl required for the node-multi-hashing module
+* libssl required for the hashing module
   * For Ubuntu: `sudo apt-get install libssl-dev`
 
 * Boost is required for the cryptoforknote-util module
@@ -125,36 +125,31 @@ Edit the variables in the `public/config.js` file to use your pool's specific co
 Variable explanations:
 
 ```javascript
-
-/* Must point to the API setup in your config.json file. */
-var api = "http://poolhost:8117";
-
-/* Pool server host to instruct your miners to point to (override daemon setting if set) */
-var poolHost = "poolhost.com";
+window.config = {
+	/* Must point to the API setup in your config.json file. */
+	api:"http://mine.scalaproject.io:8001",
+	/* Pool server host to instruct your miners to point to (override daemon setting if set) */
+	poolHosts:[
+		"mine.scalaproject.io"
+	],
+	/* Contact email address. */
+	email:"support@scalaproject.io",
+	/* Pool Telegram URL. */
+	telegram:"",
+	/* Pool Discord URL */
+	discord:"https://discord.gg/zng9k2D",
+	/* Market stat display params from https://www.cryptonator.com/widget */
+	marketCurrencies:["{symbol}-BTC","{symbol}-USD","{symbol}-EUR","{symbol}-CAD"],
+	/* Used for front-end block links. */
+	blockchainExplorer:"https://explorer.scalaproject.io/block?block_info={id}",
+	/* Used by front-end transaction links. */
+	transactionExplorer:"https://explorer.scalaproject.io/tx?tx_info={id}",
+	/* Any custom CSS theme for pool frontend */
+	themeCss:"themes/dark.css"
+}
 
 /* Number of coin decimals places (override daemon setting if set) */
 "coinDecimalPlaces": 4,
-
-/* Contact email address. */
-var email = "support@poolhost.com";
-
-/* Pool Telegram URL. */
-var telegram = "https://t.me/YourPool";
-
-/* Pool Discord URL */
-var discord = "https://discordapp.com/invite/YourPool";
-
-/* Market stat display params from https://www.cryptonator.com/widget */
-var marketCurrencies = ["{symbol}-BTC", "{symbol}-USD", "{symbol}-EUR", "{symbol}-CAD"];
-
-/* Used for front-end block links. */
-var blockchainExplorer = "http://chainradar.com/{symbol}/block/{id}";
-
-/* Used by front-end transaction links. */
-var transactionExplorer = "http://chainradar.com/{symbol}/transaction/{id}";
-
-/* Any custom CSS theme for pool frontend */
-var themeCss = "themes/light.css";
 
 /* Default language */
 var defaultLang = 'en';
@@ -178,7 +173,7 @@ You can configure the API to be accessible via SSL using various methods. Find a
 * Using SSL api in `config.json`:
 
 By using this you will need to update your `api` variable in the `website_example/config.js`. For example:  
-`var api = "https://poolhost:8119";`
+`window.config.api = "https://poolhost:8119";`
 
 * Inside your SSL Listener, add the following:
 
@@ -190,11 +185,11 @@ location ~ ^/api/(.*) {
 ```
 
 By adding this you will need to update your `api` variable in the `website_example/config.js` to include the /api. For example:  
-`var api = "http://poolhost/api";`
+`window.config.api = "http://poolhost/api";`
 
 You no longer need to include the port in the variable because of the proxy connection.
 
-* Using his own subdomain, for example `api.poolhost.com`:
+* Using own subdomain, for example `https://api.poolhost.com`:
 
 ```bash
 server {
@@ -219,7 +214,7 @@ server {
 ```
 
 By adding this you will need to update your `api` variable in the `website_example/config.js`. For example:  
-`var api = "//api.poolhost.com";`
+`window.config.api = "https://api.poolhost.com";`
 
 You no longer need to include the port in the variable because of the proxy connection.
 
@@ -237,7 +232,7 @@ the Node.js modules, and any config files that may have been changed.
 Curl can be used to use the JSON-RPC commands from command-line. Here is an example of calling `getblockheaderbyheight` for block 100:
 
 ```bash
-curl 127.0.0.1:20189/json_rpc -d '{"method":"getblockheaderbyheight","params":{"height":100}}'
+curl 127.0.0.1:11812/json_rpc -d '{"method":"getblockheaderbyheight","params":{"height":1000}}'
 ```
 
 To enable wallet rpc you can do as below but make sure rpc-bind-port matches the one in your config
