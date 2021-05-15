@@ -19,7 +19,7 @@
     	"timeout":1000,
         "enabled": true,
         "clusterForks": 4,
-	"poolAddress":"Svk1ZQ6mPfjhYR3Nnp3kifZLimjuDcmyMHecLmY6Ek2QbGQi93XzkJFbdFDaQZVdBF2V43q79z2UTirvJcHT3TnC2h988J2hF",
+	   "poolAddress":"Svk1ZQ6mPfjhYR3Nnp3kifZLimjuDcmyMHecLmY6Ek2QbGQi93XzkJFbdFDaQZVdBF2V43q79z2UTirvJcHT3TnC2h988J2hF",
         "blockRefreshInterval": 500,
         "minerTimeout": 750,
         "sslCert": "./cert.pem",
@@ -106,7 +106,7 @@
         "dynamicTransferFee": true,
         "minerPayFee" : true,
         "minPayment": 10000,
-	"networkFee":0,
+	   "networkFee":0,
         "minPaymentExchangeAddress":10000,
         "maxTransactionAmount": 1000000,
         "denomination": 100
