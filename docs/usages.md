@@ -66,7 +66,7 @@ Clone the repository and run `npm update` for all the dependencies to be install
 
 #### 2) Configuration
 
-Copy the `default/config.default.json` file of your choice to `config.json` then overview each options and change any to match your preferred setup. To see avaliable config go to [table](config.md).
+Copy the `default/config.default.json` file of your choice to `config.json` then overview each options and change any to match your preferred setup. To see avaliable config go to [table](config.md). Configuration now can be setup via CLI. To see cli usages go to [cli docs](cli.md)
 
 
 #### 3) Start the pool

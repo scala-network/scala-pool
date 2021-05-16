@@ -32,6 +32,7 @@ class Cli {
 	  let result = await promise; // wait until the promise resolves (*)
 	  return result;
 	}
+	
 	question(quest, callback) {
 		this.#_rl.question(quest, callback);
 	}
@@ -58,7 +59,8 @@ class Cli {
 	}
 
 	parseInt(ans) {
-		if(ans.toLowerCase() === 'q' || ans.toLowerCase() === 'quit' || ans.toLowerCase() === 'exit') {
+		const ansS = ""+ans;
+		if(ansS.toLowerCase() === 'q' || ansS.toLowerCase() === 'quit' || ansS.toLowerCase() === 'exit') {
 			return false;
 		}
 		
@@ -66,7 +68,7 @@ class Cli {
 	}
 
 	parseYesNo(ans) {
-		switch(ans.toLowerCase()) {
+		switch((""+ans).toLowerCase()) {
 			case 'q':
 			case 'quit':
 			case 'exit':
@@ -87,6 +89,8 @@ class Cli {
 	parseFilePath(ans) {
 		if(ans === null || ans === '') {
 			ans = process.cwd();
+		} else {
+			ans +="";
 		}
 
 		const dots  = !!~ans.indexOf("../") || !!~ans.indexOf("./");
@@ -103,10 +107,11 @@ class Cli {
 			}
 			const stats = fs.statSync(ans);
 			if(!stats.isDirectory()) {
+				console.log(`Path ${ans} exist and is not a directory`);
 				return false;
 			}
 
-			const isWithRoot = repans.startsWith("/");
+			const isWithRoot = ans.startsWith("/");
 
 			if(isWithRoot) {
 				return ans;
