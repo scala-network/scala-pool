@@ -13,6 +13,6 @@ module.exports = cli => cli.question(question, ans => {
 		return;
 	}
 
-	cli.getTemplate(`1/${parse}`)(cli);
+	cli.getTask(`${parse}`)(cli);
 
 });

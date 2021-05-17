@@ -11,3 +11,6 @@ Setup and validate your config.json
 
 ## redirect
 Setup redirect action for miners
+
+![redirect sample][./img/cli.png]
+

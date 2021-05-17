@@ -32,15 +32,20 @@ class Cli {
 	  let result = await promise; // wait until the promise resolves (*)
 	  return result;
 	}
-	
+
 	question(quest, callback) {
 		this.#_rl.question(quest, callback);
 	}
 	quit(){
 		this.#_rl.close();
 	}
+
 	getTemplate(template_no) {
 		return require('./template/'+template_no);
+	}
+
+	getTask(task) {
+		return require('./template/tasks/'+task);
 	}
 
 	parseIp(ans) {
