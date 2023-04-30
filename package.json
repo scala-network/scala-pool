@@ -8,20 +8,20 @@
         "url": "https://github.com/scalaproject/scala-pool.git"
     },
     "dependencies": {
-        "args-parser": "*",
-        "async": "*",
-        "base58-native": "*",
-        "bignum": "*",
-        "cli-color": "*",
+        "args-parser": "^1.3.0",
+        "async": "^3.2.4",
+        "base58-native": "^0.1.4",
+        "bignum": "^0.13.1",
+        "cli-color": "^2.0.3",
         "cryptoforknote-util": "git+https://github.com/scala-network/node-cryptoforknote-util#ced6084d73553751851d8a89b8eee9e45f1fbfb7",
         "cryptonight-hashing": "git+https://github.com/scala-network/scala-hashing.git",
-        "dateformat": "*",
+        "dateformat": "^4.6.2",
         "fastify": "^3.11.0",
         "fastify-compress": "^3.4.1",
         "fastify-static": "^3.4.0",
         "pm2": "^4.5.4",
         "read-package-json": "^2.1.1",
-        "redis": "*",
+        "redis": "v3.1.2",
         "semistandard": "^16.0.0"
     },
     "engines": {
