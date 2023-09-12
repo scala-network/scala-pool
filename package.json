@@ -13,7 +13,7 @@
         "base58-native": "^0.1.4",
         "bignum": "^0.13.1",
         "cli-color": "^2.0.3",
-        "cryptoforknote-util": "git+https://github.com/scala-network/node-cryptoforknote-util#ced6084d73553751851d8a89b8eee9e45f1fbfb7",
+        "cryptoforknote-util": "git+https://github.com/scala-network/node-cryptoforknote-util#feff41dcbc673f433468d78ac045c257f36216f9",
         "cryptonight-hashing": "git+https://github.com/scala-network/scala-hashing.git",
         "dateformat": "^4.6.2",
         "fastify": "^3.11.0",
